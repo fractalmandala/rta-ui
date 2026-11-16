@@ -1,0 +1,23 @@
+@layer moduix.components {
+  .root {
+    display: block;
+    border-radius: var(--moduix-image-radius, var(--moduix-radius-md));
+  }
+
+  /* Layout presets replace the CDN transforms another library used to supply. */
+  .root[data-layout='fixed'],
+  .root[data-layout='constrained'],
+  .root[data-layout='fullWidth'] {
+    height: auto;
+  }
+
+  .root[data-layout='constrained'] {
+    max-width: min(100%, var(--moduix-image-max-width, 75rem));
+    object-fit: cover;
+  }
+
+  .root[data-layout='fullWidth'] {
+    width: 100%;
+    object-fit: cover;
+  }
+}

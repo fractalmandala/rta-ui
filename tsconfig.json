@@ -1,0 +1,18 @@
+{
+  "extends": "$app/tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "types": [
+      "$app/types",
+      "vitest/globals"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "tests/**/*.ts",
+    "tests/**/*.svelte",
+    "vite.config.ts"
+  ]
+}

@@ -1,0 +1,8 @@
+<script lang="ts">
+  import '../lib/styles/style.css';
+  import '../lib/styles/reset.css';
+
+  let { children } = $props();
+</script>
+
+{@render children?.()}
