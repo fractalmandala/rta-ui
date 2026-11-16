@@ -55,16 +55,17 @@ on the composed element:
 <Button {asChild}>Docs</Button>
 ```
 
-## Components (49)
+## Components (61)
 
 **Pure:** alert, aspect-ratio, avatar, badge, bleed, breadcrumbs, button, card, close-button,
 container, empty, heading, highlight, image, input, input-group, kbd, list, marquee,
 progress-circular, progress-linear, separator, simple-grid, skeleton, spinner, stack, swap, table,
 tag, text, textarea, typeset.
 
-**Behavioral:** accordion, checkbox, clipboard, collapsible, pagination, qr-code, radio-group,
-rating-group, scroll-area, segment-group, splitter, steps, switch, tabs, timer, toggle,
-toggle-group.
+**Behavioral:** accordion, angle-slider, checkbox, clipboard, collapsible, editable, field,
+fieldset, native-select, number-input, pagination, password-input, pin-input, qr-code,
+radio-group, rating-group, scroll-area, segment-group, signature-pad, slider, splitter, steps,
+switch, tabs, tags-input, timer, toggle, toggle-group.
 
 Plus the internal `Element` primitive behind all of them.
 

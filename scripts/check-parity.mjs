@@ -39,10 +39,30 @@ const ACCEPTED = {
     reason:
       'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
   },
+  'angle-slider': {
+    added: ['slot:angle-slider-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
+  },
   'segment-group': {
     added: ['slot:segment-group-item-control', 'slot:segment-group-item-hidden-input'],
     reason:
       'the item control and hidden input are Ark internals upstream; here they are public parts so native radio semantics stay reachable',
+  },
+  'pin-input': {
+    added: ['slot:pin-input-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
+  },
+  'signature-pad': {
+    added: ['slot:signature-pad-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so the exported value can be submitted with a form',
+  },
+  slider: {
+    added: ['slot:slider-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
   },
   timer: {
     added: ['slot:timer-item-label', 'slot:timer-item-value'],

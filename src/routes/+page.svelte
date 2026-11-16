@@ -7,7 +7,18 @@
   import ButtonDemo from './demos/Button.svelte';
   import CardDemo from './demos/Card.svelte';
   import CloseButtonDemo from './demos/CloseButton.svelte';
+  import AngleSliderDemo from './demos/AngleSlider.svelte';
+  import EditableDemo from './demos/Editable.svelte';
   import EmptyDemo from './demos/Empty.svelte';
+  import FieldDemo from './demos/Field.svelte';
+  import FieldsetDemo from './demos/Fieldset.svelte';
+  import NativeSelectDemo from './demos/NativeSelect.svelte';
+  import NumberInputDemo from './demos/NumberInput.svelte';
+  import PasswordInputDemo from './demos/PasswordInput.svelte';
+  import PinInputDemo from './demos/PinInput.svelte';
+  import SignaturePadDemo from './demos/SignaturePad.svelte';
+  import SliderDemo from './demos/Slider.svelte';
+  import TagsInputDemo from './demos/TagsInput.svelte';
   import ImageDemo from './demos/Image.svelte';
   import InputDemo from './demos/Input.svelte';
   import InputGroupDemo from './demos/InputGroup.svelte';
@@ -16,29 +27,29 @@
   import ListDemo from './demos/List.svelte';
   import SeparatorDemo from './demos/Separator.svelte';
   import SkeletonDemo from './demos/Skeleton.svelte';
-import AccordionDemo from './demos/Accordion.svelte';
-import AvatarDemo from './demos/Avatar.svelte';
-import CheckboxDemo from './demos/Checkbox.svelte';
-import ClipboardDemo from './demos/Clipboard.svelte';
-import CollapsibleDemo from './demos/Collapsible.svelte';
-import HighlightDemo from './demos/Highlight.svelte';
-import MarqueeDemo from './demos/Marquee.svelte';
-import PaginationDemo from './demos/Pagination.svelte';
-import ProgressCircularDemo from './demos/ProgressCircular.svelte';
-import ProgressLinearDemo from './demos/ProgressLinear.svelte';
-import QrCodeDemo from './demos/QrCode.svelte';
-import RadioGroupDemo from './demos/RadioGroup.svelte';
-import RatingGroupDemo from './demos/RatingGroup.svelte';
-import ScrollAreaDemo from './demos/ScrollArea.svelte';
-import SegmentGroupDemo from './demos/SegmentGroup.svelte';
-import SplitterDemo from './demos/Splitter.svelte';
-import SwapDemo from './demos/Swap.svelte';
-import SwitchDemo from './demos/Switch.svelte';
-import StepsDemo from './demos/Steps.svelte';
-import TabsDemo from './demos/Tabs.svelte';
-import TimerDemo from './demos/Timer.svelte';
-import ToggleDemo from './demos/Toggle.svelte';
-import ToggleGroupDemo from './demos/ToggleGroup.svelte';
+  import AccordionDemo from './demos/Accordion.svelte';
+  import AvatarDemo from './demos/Avatar.svelte';
+  import CheckboxDemo from './demos/Checkbox.svelte';
+  import ClipboardDemo from './demos/Clipboard.svelte';
+  import CollapsibleDemo from './demos/Collapsible.svelte';
+  import HighlightDemo from './demos/Highlight.svelte';
+  import MarqueeDemo from './demos/Marquee.svelte';
+  import PaginationDemo from './demos/Pagination.svelte';
+  import ProgressCircularDemo from './demos/ProgressCircular.svelte';
+  import ProgressLinearDemo from './demos/ProgressLinear.svelte';
+  import QrCodeDemo from './demos/QrCode.svelte';
+  import RadioGroupDemo from './demos/RadioGroup.svelte';
+  import RatingGroupDemo from './demos/RatingGroup.svelte';
+  import ScrollAreaDemo from './demos/ScrollArea.svelte';
+  import SegmentGroupDemo from './demos/SegmentGroup.svelte';
+  import SplitterDemo from './demos/Splitter.svelte';
+  import SwapDemo from './demos/Swap.svelte';
+  import SwitchDemo from './demos/Switch.svelte';
+  import StepsDemo from './demos/Steps.svelte';
+  import TabsDemo from './demos/Tabs.svelte';
+  import TimerDemo from './demos/Timer.svelte';
+  import ToggleDemo from './demos/Toggle.svelte';
+  import ToggleGroupDemo from './demos/ToggleGroup.svelte';
   import SpinnerDemo from './demos/Spinner.svelte';
   import TableDemo from './demos/Table.svelte';
   import TagDemo from './demos/Tag.svelte';
@@ -104,6 +115,17 @@ import ToggleGroupDemo from './demos/ToggleGroup.svelte';
         { name: 'Switch', note: 'A labelled binary control with a thumb.', component: SwitchDemo },
         { name: 'Checkbox', note: 'Checked, indeterminate and labelled states.', component: CheckboxDemo },
         { name: 'RadioGroup', note: 'Options sharing one roving radio group.', component: RadioGroupDemo },
+        { name: 'Field', note: 'Label, helper and error text wired to a control.', component: FieldDemo },
+        { name: 'Fieldset', note: 'A grouped legend with nested fields.', component: FieldsetDemo },
+        { name: 'NativeSelect', note: 'The platform select with single or multiple values.', component: NativeSelectDemo },
+        { name: 'Editable', note: 'Inline preview-to-edit with Enter, blur and Escape modes.', component: EditableDemo },
+        { name: 'NumberInput', note: 'Steppers, scrubber, wheel and locale formatting.', component: NumberInputDemo },
+        { name: 'PinInput', note: 'One cell per character with OTP and mask modes.', component: PinInputDemo },
+        { name: 'PasswordInput', note: 'A visibility toggle wired into its field.', component: PasswordInputDemo },
+        { name: 'TagsInput', note: 'Compose a value list with a validating input.', component: TagsInputDemo },
+        { name: 'Slider', note: 'Single and multi-thumb values with markers.', component: SliderDemo },
+        { name: 'AngleSlider', note: 'A circular dial with step markers.', component: AngleSliderDemo },
+        { name: 'SignaturePad', note: 'Pointer-drawn paths exported as a data URL.', component: SignaturePadDemo },
       ],
     },
     {
@@ -134,7 +156,7 @@ import ToggleGroupDemo from './demos/ToggleGroup.svelte';
 <main>
   <header>
     <h1>rta ui</h1>
-    <p>Forty-nine dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
+    <p>Sixty-one dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
   </header>
 
   <nav>
