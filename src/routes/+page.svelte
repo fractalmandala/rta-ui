@@ -50,6 +50,28 @@
   import TimerDemo from './demos/Timer.svelte';
   import ToggleDemo from './demos/Toggle.svelte';
   import ToggleGroupDemo from './demos/ToggleGroup.svelte';
+  import ComboboxDemo from './demos/Combobox.svelte';
+  import HoverCardDemo from './demos/HoverCard.svelte';
+  import MenuDemo from './demos/Menu.svelte';
+  import PopoverDemo from './demos/Popover.svelte';
+  import SplitButtonDemo from './demos/SplitButton.svelte';
+  import TooltipDemo from './demos/Tooltip.svelte';
+  import DialogDemo from './demos/Dialog.svelte';
+  import DrawerDemo from './demos/Drawer.svelte';
+  import ListboxDemo from './demos/Listbox.svelte';
+  import SelectDemo from './demos/Select.svelte';
+  import TreeViewDemo from './demos/TreeView.svelte';
+  import JsonTreeViewDemo from './demos/JsonTreeView.svelte';
+  import TocDemo from './demos/Toc.svelte';
+  import CarouselDemo from './demos/Carousel.svelte';
+  import DatePickerDemo from './demos/DatePicker.svelte';
+  import DateInputDemo from './demos/DateInput.svelte';
+  import ColorPickerDemo from './demos/ColorPicker.svelte';
+  import ChartDemo from './demos/Chart.svelte';
+  import FloatingPanelDemo from './demos/FloatingPanel.svelte';
+  import CommandPaletteDemo from './demos/CommandPalette.svelte';
+  import ToastDemo from './demos/Toast.svelte';
+  import TourDemo from './demos/Tour.svelte';
   import SpinnerDemo from './demos/Spinner.svelte';
   import TableDemo from './demos/Table.svelte';
   import TagDemo from './demos/Tag.svelte';
@@ -92,6 +114,8 @@
     {
       title: 'Content',
       demos: [
+        { name: 'Carousel', note: 'Slides with autoplay, loops and swipe.', component: CarouselDemo },
+        { name: 'Chart', note: 'Line, bar and area marks with axes and a tooltip.', component: ChartDemo },
         { name: 'Card', note: 'Header, action, media, body and footer parts.', component: CardDemo },
         { name: 'List', note: 'Ordered, unordered and muted lists with indicators.', component: ListDemo },
         { name: 'Table', note: 'Caption, header, body, footer and a scroll area.', component: TableDemo },
@@ -109,6 +133,9 @@
     {
       title: 'Forms',
       demos: [
+        { name: 'DatePicker', note: 'A calendar with ranges and month paging.', component: DatePickerDemo },
+        { name: 'DateInput', note: 'A segmented date field with arrow navigation.', component: DateInputDemo },
+        { name: 'ColorPicker', note: 'Area, channel sliders and format switching.', component: ColorPickerDemo },
         { name: 'Input', note: 'Text field with token sizing and two-way binding.', component: InputDemo },
         { name: 'InputGroup', note: 'Addons, text and a clear trigger around an input.', component: InputGroupDemo },
         { name: 'Tag', note: 'Labels with start elements and close triggers.', component: TagDemo },
@@ -129,6 +156,32 @@
       ],
     },
     {
+      title: 'Overlays',
+      demos: [
+        { name: 'Toast', note: 'A toast store with stacking, timers and progress.', component: ToastDemo },
+        { name: 'Tour', note: 'A spotlight walkthrough with sequenced steps.', component: TourDemo },
+        { name: 'Dialog', note: 'A modal or non-modal dialog with focus trapping.', component: DialogDemo },
+        { name: 'Drawer', note: 'A sheet with snap points and swipe to dismiss.', component: DrawerDemo },
+        { name: 'FloatingPanel', note: 'A draggable, resizable panel in a stage.', component: FloatingPanelDemo },
+        { name: 'CommandPalette', note: 'A searchable command surface over a dialog.', component: CommandPaletteDemo },
+        { name: 'Popover', note: 'An anchored dialog with arrow and focus management.', component: PopoverDemo },
+        { name: 'Tooltip', note: 'Delayed hints wired through aria-describedby.', component: TooltipDemo },
+        { name: 'HoverCard', note: 'Rich previews revealed on hover with a grace period.', component: HoverCardDemo },
+        { name: 'Menu', note: 'Checkbox, radio and nested menus with typeahead.', component: MenuDemo },
+        { name: 'SplitButton', note: 'A primary action beside its own menu.', component: SplitButtonDemo },
+      ],
+    },
+    {
+      title: 'Collections',
+      demos: [
+        { name: 'Listbox', note: 'Single or multiple selection with typeahead.', component: ListboxDemo },
+        { name: 'Select', note: 'A listbox in a popover with a native select mirror.', component: SelectDemo },
+        { name: 'TreeView', note: 'Nested nodes with expansion and checkbox tri-state.', component: TreeViewDemo },
+        { name: 'JsonTreeView', note: 'Inspect arbitrary JSON as an expandable tree.', component: JsonTreeViewDemo },
+        { name: 'Combobox', note: 'Filter as you type, single or multiple values.', component: ComboboxDemo },
+      ],
+    },
+    {
       title: 'Feedback',
       demos: [
         { name: 'Alert', note: 'Four statuses with a matching data attribute.', component: AlertDemo },
@@ -142,6 +195,7 @@
     {
       title: 'Navigation',
       demos: [
+        { name: 'Toc', note: 'A table of contents tracking the visible heading.', component: TocDemo },
         { name: 'Breadcrumbs', note: 'Composed trail plus a data-driven path.', component: BreadcrumbsDemo },
         { name: 'Tabs', note: 'Animated indicator, roving tabindex, disabled tabs.', component: TabsDemo },
         { name: 'Pagination', note: 'Boundary and sibling pages around ellipses.', component: PaginationDemo },
@@ -156,7 +210,7 @@
 <main>
   <header>
     <h1>rta ui</h1>
-    <p>Sixty-one dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
+    <p>Eighty-eight dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
   </header>
 
   <nav>

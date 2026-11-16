@@ -55,24 +55,29 @@ on the composed element:
 <Button {asChild}>Docs</Button>
 ```
 
-## Components (61)
+## Components (88)
 
-**Pure:** alert, aspect-ratio, avatar, badge, bleed, breadcrumbs, button, card, close-button,
-container, empty, heading, highlight, image, input, input-group, kbd, list, marquee,
-progress-circular, progress-linear, separator, simple-grid, skeleton, spinner, stack, swap, table,
-tag, text, textarea, typeset.
+**Pure:** alert, aspect-ratio, avatar, badge, bleed, breadcrumbs, button, card, close-button, container,
+empty, heading, highlight, image, input, input-group, kbd, list, marquee, progress-circular,
+progress-linear, separator, simple-grid, skeleton, spinner, stack, swap, table, tag, text,
+textarea, typeset
 
-**Behavioral:** accordion, angle-slider, checkbox, clipboard, collapsible, editable, field,
-fieldset, native-select, number-input, pagination, password-input, pin-input, qr-code,
-radio-group, rating-group, scroll-area, segment-group, signature-pad, slider, splitter, steps,
-switch, tabs, tags-input, timer, toggle, toggle-group.
+**Behavioral:** accordion, angle-slider, checkbox, clipboard, collapsible, editable, field, fieldset, native-
+select, number-input, pagination, password-input, pin-input, qr-code, radio-group, rating-
+group, scroll-area, segment-group, signature-pad, slider, splitter, steps, switch, tabs, tags-
+input, timer, toggle, toggle-group
 
-Plus the internal `Element` primitive behind all of them.
+**Overlays:** command-palette, dialog, drawer, floating-panel, hover-card, lightbox, menu, navigation-menu,
+popover, sidebar, split-button, toast, tooltip, tour
 
-Known gaps: `Splitter` has no registry/iframe mode, so a splitter cannot be composed across
-documents; its drag path is covered by a synthetic pointer test, not a real-layout one.
-`ScrollArea` measures through `ResizeObserver` and pointer drags, so its tests stub layout metrics
-rather than exercising a real scrollbar.
+**Collections:** combobox, json-tree-view, listbox, select, toc, tree-view
+
+**Data and media:** carousel, chart, color-picker, date-input, date-picker, file-upload, image-cropper
+
+Plus the internal `Element` primitive behind all of them, and the shared `src/lib/internal`
+foundation they build on: positioning (`position.ts`, `positioning.svelte.ts`), presence, portal,
+overlay layers (escape, outside dismissal, focus scope, scroll lock, aria-hidden), collections and
+typeahead, and civil-date arithmetic.
 
 ## Structure
 
@@ -113,3 +118,16 @@ pnpm parity      # data-scope/part/slot parity against the sibling moduix checko
 ```sh
 pnpm check && pnpm test && pnpm parity && pnpm build && pnpm build:docs
 ```
+
+## Known gaps
+
+- **`chart`** keeps moduix's public parts but has its own mark set (`lineY`, `barY`, `areaY`,
+  `point`) and scales. It is not a port of the TanStack mark DSL: no stacked transforms, polar
+  marks, brushing or focus strategies, and `motion` is accepted without animating.
+- **`date-picker` / `date-input`** support the Gregorian calendar and the runtime time zone only.
+- **`drawer`** does not implement nested drawers, so the `--nested-drawers` CSS blocks stay inert.
+- **`carousel`** translates a clipped track instead of using native scroll snapping, so `snapType`
+  is emitted for parity but has no scroll container to act on.
+- The committed tests are jsdom. Overlay placement, flip, escape ordering, modal scroll locking and
+  the native select mirror were additionally verified by hand against a real browser during
+  development; there is no committed browser suite yet.

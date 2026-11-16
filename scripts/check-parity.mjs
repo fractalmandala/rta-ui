@@ -44,6 +44,21 @@ const ACCEPTED = {
     reason:
       'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
   },
+  'color-picker': {
+    added: ['slot:color-picker-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
+  },
+  'date-input': {
+    added: ['slot:date-input-hidden-input'],
+    reason:
+      'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
+  },
+  'carousel': {
+    added: ['slot:carousel-spinner'],
+    reason:
+      'upstream renders the carousel spinner inside the control; here it is a public part so a loading state can be placed explicitly',
+  },
   'segment-group': {
     added: ['slot:segment-group-item-control', 'slot:segment-group-item-hidden-input'],
     reason:
@@ -63,6 +78,46 @@ const ACCEPTED = {
     added: ['slot:slider-hidden-input'],
     reason:
       'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
+  },
+  chart: {
+    removed: ['slot:chart-tooltip-text'],
+    reason:
+      'the tooltip body is always structured rows here, so there is no plain-text tooltip slot to emit',
+  },
+  lightbox: {
+    added: [
+      'slot:lightbox-caption',
+      'slot:lightbox-counter',
+      'slot:lightbox-download-trigger',
+      'slot:lightbox-next-trigger',
+      'slot:lightbox-prev-trigger',
+      'slot:lightbox-thumbnail',
+      'slot:lightbox-thumbnail-item',
+      'slot:lightbox-thumbnails',
+      'slot:lightbox-viewport',
+      'slot:lightbox-zoom-trigger',
+    ],
+    reason:
+      'upstream relies on the carousel for navigation chrome; here the gallery navigation, thumbnails and zoom are public parts of the lightbox itself',
+  },
+  sidebar: {
+    added: [
+      'slot:sidebar-input',
+      'slot:sidebar-rail',
+      'slot:sidebar-separator',
+    ],
+    reason:
+      'the cookie input, the edge rail and the separator are upstream internals; here they are public parts so a sidebar can be composed explicitly',
+  },
+  toast: {
+    added: ['slot:toast-icon', 'slot:toast-progress', 'slot:toast-progress-bar', 'slot:toast-viewport'],
+    reason:
+      'upstream keeps the icon, progress and viewport inside the toaster; here they are public parts so a toast can be laid out explicitly',
+  },
+  tour: {
+    added: ['slot:tour-progress-bar', 'slot:tour-progress-bar-fill'],
+    reason:
+      'upstream only ships a progress label; here a progress bar is a public part so a step indicator can be rendered',
   },
   timer: {
     added: ['slot:timer-item-label', 'slot:timer-item-value'],
