@@ -17,10 +17,22 @@ const violations = async () => {
   return results.violations.map((violation) => `${violation.id}: ${violation.nodes.length} node(s)`);
 };
 
-test('every gallery group is free of accessibility violations', async () => {
+// Rendering all 87 families and running axe over each group takes well over five seconds, which is
+// the vitest default; the timeout is raised rather than the coverage cut.
+test('every gallery group is free of accessibility violations', { timeout: 60_000 }, async () => {
   render(Docs, {});
 
-  const groups = ['Actions', 'Typography', 'Layout', 'Content', 'Forms', 'Feedback', 'Navigation'];
+  const groups = [
+    'Actions',
+    'Typography',
+    'Layout',
+    'Content',
+    'Forms',
+    'Overlays',
+    'Collections',
+    'Feedback',
+    'Navigation',
+  ];
   const found: Record<string, string[]> = {};
 
   for (const group of groups) {

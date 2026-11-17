@@ -79,6 +79,25 @@ foundation they build on: positioning (`position.ts`, `positioning.svelte.ts`), 
 overlay layers (escape, outside dismissal, focus scope, scroll lock, aria-hidden), collections and
 typeahead, and civil-date arithmetic.
 
+## Documentation
+
+Every component has a page under [`docs/components`](./docs/components), with an index in
+[`docs/components/README.md`](./docs/components/README.md). A page carries the purpose, the exported
+parts, every prop with its type and default (including props inherited from the family's `Use*Props`
+interface), the `data-scope`/`data-part`/`data-slot` hooks, the generated ids, the custom properties
+its CSS Module reads, the gallery demo verbatim, and the behaviours the tests assert.
+
+The pages are generated from the source, the demo and the tests, so they cannot drift:
+
+```sh
+pnpm docs        # regenerate docs/components/*
+pnpm docs:check  # fail if any committed page is stale
+```
+
+`tests/docs-coverage.test.ts` fails when a family has no page, when a page misses a part its barrel
+exports, or when a page has lost its styling-hook or parity section; `pnpm docs:check` proves the
+pages are byte-identical to what the current source generates.
+
 ## Structure
 
 ```
@@ -110,13 +129,15 @@ pnpm preview     # serve build/
 pnpm check       # svelte-check, warnings fail
 pnpm test        # vitest + jsdom
 pnpm parity      # data-scope/part/slot parity against the sibling moduix checkout
+pnpm docs        # regenerate the per-component pages from source, demos and tests
+pnpm docs:check  # fail when a committed page no longer matches its source
                  # (set RTA_PARITY_REFERENCE to point elsewhere; exits 2 if it is missing)
 ```
 
 ## Verification in this repository
 
 ```sh
-pnpm check && pnpm test && pnpm parity && pnpm build && pnpm build:docs
+pnpm check && pnpm test && pnpm docs:check && pnpm parity && pnpm build && pnpm build:docs
 ```
 
 ## Known gaps

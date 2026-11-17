@@ -1,0 +1,139 @@
+---
+title: Tooltip
+component: tooltip
+description: Give a control a short hint that shows on hover or focus.
+---
+
+# Tooltip
+
+Give a control a short hint that shows on hover or focus.
+
+Port of `moduix/packages/svelte/src/components/tooltip` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
+
+## Parts
+
+| export | file |
+| --- | --- |
+| `Tooltip` | `Tooltip.svelte` |
+| `TooltipArrow` | `TooltipArrow.svelte` |
+| `TooltipArrowTip` | `TooltipArrowTip.svelte` |
+| `TooltipBody` | `TooltipBody.svelte` |
+| `TooltipContent` | `TooltipContent.svelte` |
+| `TooltipDisabledTrigger` | `TooltipDisabledTrigger.svelte` |
+| `TooltipPositioner` | `TooltipPositioner.svelte` |
+| `TooltipRootProvider` | `TooltipRootProvider.svelte` |
+| `TooltipTrigger` | `TooltipTrigger.svelte` |
+
+`Tooltip`, `TooltipRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+## Props
+
+### `Tooltip` — `TooltipRootProps`
+adds to `UseTooltipProps`.
+
+| prop | type | default | notes |
+| --- | --- | --- | --- |
+| `id` | `string \| null` | — | from `UseTooltipProps` |
+| `ids` | `TooltipElementIds` | — | from `UseTooltipProps` |
+| `openDelay` | `number` | — | from `UseTooltipProps` |
+| `closeDelay` | `number` | — | from `UseTooltipProps` |
+| `closeOnPointerDown` | `boolean` | — | from `UseTooltipProps` |
+| `closeOnClick` | `boolean` | — | from `UseTooltipProps` |
+| `closeOnEscape` | `boolean` | — | from `UseTooltipProps` |
+| `closeOnScroll` | `boolean` | — | from `UseTooltipProps` |
+| `interactive` | `boolean` | — | from `UseTooltipProps` |
+| `disabled` | `boolean` | — | from `UseTooltipProps` |
+| `portalled` | `boolean` | — | from `UseTooltipProps` |
+| `portalRef` | `TooltipPortalRef` | — | from `UseTooltipProps` |
+| `open` | `boolean` | — | bindable from `UseTooltipProps` |
+| `defaultOpen` | `boolean` | — | from `UseTooltipProps` |
+| `onOpenChange` | `(details: TooltipOpenChangeDetails) => void` | — | from `UseTooltipProps` |
+| `triggerValue` | `string \| null` | — | bindable from `UseTooltipProps` |
+| `defaultTriggerValue` | `string \| null` | — | from `UseTooltipProps` |
+| `onTriggerValueChange` | `(details: TooltipTriggerValueChangeDetails) => void` | — | from `UseTooltipProps` |
+| `aria-label` | `string` | — | from `UseTooltipProps` |
+| `positioning` | `PositionOptions` | — | from `UseTooltipProps` |
+| `dir` | `'ltr' \| 'rtl' \| 'auto' \| null` | — | from `UseTooltipProps` |
+| `lazyMount` | `boolean` | — | from `UseTooltipProps` |
+| `unmountOnExit` | `boolean` | — | from `UseTooltipProps` |
+| `onExitComplete` | `() => void` | — | from `UseTooltipProps` |
+| `children` | `Snippet` | — |  |
+
+### `TooltipRootProvider` — `TooltipRootProviderProps`
+| prop | type | default | notes |
+| --- | --- | --- | --- |
+| `value` | `TooltipApi` | — |  |
+| `children` | `Snippet` | — |  |
+
+### `TooltipTrigger` — `TooltipTriggerProps`
+accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`, `RefAttribute`.
+
+| prop | type | default | notes |
+| --- | --- | --- | --- |
+| `value` | `string` | — |  |
+
+
+## Styling hooks
+
+| part file | `data-scope` | `data-part` | `data-slot` |
+| --- | --- | --- | --- |
+| `TooltipArrow` | `tooltip` | `arrow` | `tooltip-arrow` |
+| `TooltipArrowTip` | `tooltip` | `arrow-tip` | `tooltip-arrow-tip` |
+| `TooltipContent` | `tooltip` | `content` | `tooltip-content` |
+| `TooltipDisabledTrigger` | `—` | `—` | `tooltip-disabled-trigger` |
+| `TooltipPositioner` | `tooltip` | `positioner` | `tooltip-positioner` |
+| `TooltipTrigger` | `tooltip` | `trigger` | `tooltip-trigger` |
+
+## Generated ids
+
+- `tooltip:${id}:arrow`
+- `tooltip:${id}:content`
+- `tooltip:${id}:popper`
+- `tooltip:${id}:trigger`
+- `tooltip:${id}:trigger:${id}`
+
+Every id is overridable through the `ids` prop.
+
+## Usage
+
+The gallery demo, verbatim:
+
+```svelte
+<script lang="ts">
+	import {
+		Tooltip,
+		TooltipArrow,
+		TooltipContent,
+		TooltipPositioner,
+		TooltipTrigger
+	} from 'rta-ui';
+</script>
+
+<Tooltip openDelay={200} closeDelay={100} positioning={{ placement: 'top' }}>
+	<TooltipTrigger>Hover me</TooltipTrigger>
+	<TooltipPositioner>
+		<TooltipContent>
+			<TooltipArrow />
+			Tooltips sit above the trigger and delay on purpose.
+		</TooltipContent>
+	</TooltipPositioner>
+</Tooltip>
+```
+
+## Behaviour covered by tests
+
+- renders the ark contract while closed
+- opens after the open delay on hover and links the content through aria-describedby
+- closes after the close delay when the pointer leaves
+- keeps an interactive tooltip open when the pointer moves onto the content
+- closes on Escape and on pointerdown, and cleans up aria-describedby
+- follows the active trigger value while open
+- renders the composed body and the disabled trigger wrapper
+
+## Notes
+
+- **Parity:** `data-slot` hooks match moduix exactly (`pnpm parity`).
+
+---
+
+Generated by `pnpm docs` from the component source, its gallery demo and its tests. Edit the source, not this file.

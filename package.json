@@ -24,6 +24,7 @@
   },
   "files": [
     "dist",
+    "docs",
     "THIRD_PARTY_NOTICES.md"
   ],
   "sideEffects": [
@@ -39,7 +40,9 @@
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "parity": "node scripts/check-parity.mjs"
+    "parity": "node scripts/check-parity.mjs",
+    "docs": "node scripts/gen-docs.mjs",
+    "docs:check": "node scripts/gen-docs.mjs --check"
   },
   "peerDependencies": {
     "svelte": "^5.29.0"
