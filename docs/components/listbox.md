@@ -10,24 +10,41 @@ Show a visible list of options for picking one or many.
 
 Port of `moduix/packages/svelte/src/components/listbox` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Listbox` | `Listbox.svelte` |
-| `ListboxClearTrigger` | `ListboxClearTrigger.svelte` |
-| `ListboxContent` | `ListboxContent.svelte` |
-| `ListboxEmpty` | `ListboxEmpty.svelte` |
-| `ListboxFilter` | `ListboxFilter.svelte` |
-| `ListboxInput` | `ListboxInput.svelte` |
-| `ListboxItem` | `ListboxItem.svelte` |
-| `ListboxItemGroup` | `ListboxItemGroup.svelte` |
-| `ListboxItemGroupLabel` | `ListboxItemGroupLabel.svelte` |
-| `ListboxItemIndicator` | `ListboxItemIndicator.svelte` |
-| `ListboxItemText` | `ListboxItemText.svelte` |
-| `ListboxLabel` | `ListboxLabel.svelte` |
-| `ListboxRootProvider` | `ListboxRootProvider.svelte` |
-| `ListboxValueText` | `ListboxValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Listbox } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Listbox` | `Listbox.svelte` | `—` |
+| `ListboxClearTrigger` | `ListboxClearTrigger.svelte` | `—` |
+| `ListboxContent` | `ListboxContent.svelte` | `—` |
+| `ListboxEmpty` | `ListboxEmpty.svelte` | `presentation` |
+| `ListboxFilter` | `ListboxFilter.svelte` | `none (aria-hidden)` |
+| `ListboxInput` | `ListboxInput.svelte` | `—` |
+| `ListboxItem` | `ListboxItem.svelte` | `—` |
+| `ListboxItemGroup` | `ListboxItemGroup.svelte` | `—` |
+| `ListboxItemGroupLabel` | `ListboxItemGroupLabel.svelte` | `—` |
+| `ListboxItemIndicator` | `ListboxItemIndicator.svelte` | `—` |
+| `ListboxItemText` | `ListboxItemText.svelte` | `—` |
+| `ListboxLabel` | `ListboxLabel.svelte` | `—` |
+| `ListboxRootProvider` | `ListboxRootProvider.svelte` | `—` |
+| `ListboxValueText` | `ListboxValueText.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`, `listbox`, `option`, `presentation`.
 
 ## Props
 
@@ -80,10 +97,16 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`.
 | `ListboxRootProvider` | `listbox` | `root` | `listbox-root-provider` |
 | `ListboxValueText` | `listbox` | `value-text` | `listbox-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-listbox-content-max-height`
-- `--moduix-listbox-width`
+| variable | default |
+| --- | --- |
+| `--moduix-listbox-content-max-height` | `14rem` |
+| `--moduix-listbox-width` | `16rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Escape`, `Home`, `Space`, `a`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -96,9 +119,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

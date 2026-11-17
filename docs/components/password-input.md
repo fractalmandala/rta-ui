@@ -10,18 +10,33 @@ Enter a password with a button that shows or hides it.
 
 Port of `moduix/packages/svelte/src/components/password-input` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `PasswordInput` | `PasswordInput.svelte` |
-| `PasswordInputControl` | `PasswordInputControl.svelte` |
-| `PasswordInputField` | `PasswordInputField.svelte` |
-| `PasswordInputIndicator` | `PasswordInputIndicator.svelte` |
-| `PasswordInputInput` | `PasswordInputInput.svelte` |
-| `PasswordInputLabel` | `PasswordInputLabel.svelte` |
-| `PasswordInputRootProvider` | `PasswordInputRootProvider.svelte` |
-| `PasswordInputVisibilityTrigger` | `PasswordInputVisibilityTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { PasswordInput } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `PasswordInput` | `PasswordInput.svelte` | `—` |
+| `PasswordInputControl` | `PasswordInputControl.svelte` | `—` |
+| `PasswordInputField` | `PasswordInputField.svelte` | `—` |
+| `PasswordInputIndicator` | `PasswordInputIndicator.svelte` | `none (aria-hidden)` |
+| `PasswordInputInput` | `PasswordInputInput.svelte` | `—` |
+| `PasswordInputLabel` | `PasswordInputLabel.svelte` | `—` |
+| `PasswordInputRootProvider` | `PasswordInputRootProvider.svelte` | `—` |
+| `PasswordInputVisibilityTrigger` | `PasswordInputVisibilityTrigger.svelte` | `—` |
 
 ## Props
 
@@ -75,15 +90,21 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `PasswordInputRootProvider` | `password-input` | `root` | `password-input-root-provider` |
 | `PasswordInputVisibilityTrigger` | `password-input` | `visibility-trigger` | `password-input-visibility-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-password-input-height`
-- `--moduix-password-input-radius`
-- `--moduix-password-input-width`
+| variable | default |
+| --- | --- |
+| `--moduix-password-input-height` | `var(--_password-input-height)` |
+| `--moduix-password-input-radius` | `var(--moduix-radius-md)` |
+| `--moduix-password-input-width` | `100%` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

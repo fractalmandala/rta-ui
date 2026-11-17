@@ -1,0 +1,445 @@
+{
+	"accordion": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"avatar": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"badge": [
+		{
+			"prop": "size",
+			"values": [
+				"sm",
+				"md",
+				"lg"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"default",
+				"secondary",
+				"destructive",
+				"outline",
+				"ghost",
+				"link"
+			]
+		}
+	],
+	"button": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl",
+				"icon-sm",
+				"icon-md",
+				"icon-lg"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"default",
+				"outline",
+				"secondary",
+				"destructive",
+				"destructive-outline",
+				"ghost",
+				"link"
+			]
+		}
+	],
+	"card": [
+		{
+			"prop": "size",
+			"values": [
+				"sm",
+				"md",
+				"lg"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"elevated",
+				"outline",
+				"subtle"
+			]
+		}
+	],
+	"checkbox": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"container": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl",
+				"full"
+			]
+		}
+	],
+	"heading": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl",
+				"2xl"
+			]
+		}
+	],
+	"input": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"list": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		},
+		{
+			"prop": "tone",
+			"values": [
+				"default",
+				"muted",
+				"primary",
+				"destructive"
+			]
+		}
+	],
+	"navigation-menu": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"number-input": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"password-input": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"pin-input": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"radio-group": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		},
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"rating-group": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"scroll-area": [
+		{
+			"prop": "variant",
+			"values": [
+				"hover",
+				"always"
+			]
+		}
+	],
+	"segment-group": [
+		{
+			"prop": "size",
+			"values": [
+				"sm",
+				"md",
+				"lg"
+			]
+		}
+	],
+	"separator": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		},
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg"
+			]
+		}
+	],
+	"skeleton": [
+		{
+			"prop": "variant",
+			"values": [
+				"pulse",
+				"none"
+			]
+		}
+	],
+	"slider": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"spinner": [
+		{
+			"prop": "size",
+			"values": [
+				"inherit",
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"split-button": [
+		{
+			"prop": "size",
+			"values": [
+				"icon-sm",
+				"icon-md",
+				"icon-lg"
+			]
+		}
+	],
+	"steps": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"switch": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"table": [
+		{
+			"prop": "size",
+			"values": [
+				"sm",
+				"md",
+				"lg"
+			]
+		}
+	],
+	"tabs": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"default",
+				"line"
+			]
+		}
+	],
+	"tag": [
+		{
+			"prop": "size",
+			"values": [
+				"sm",
+				"md",
+				"lg"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"default",
+				"secondary",
+				"outline",
+				"ghost",
+				"destructive"
+			]
+		}
+	],
+	"text": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		},
+		{
+			"prop": "tone",
+			"values": [
+				"default",
+				"muted",
+				"primary",
+				"destructive"
+			]
+		}
+	],
+	"textarea": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"xl"
+			]
+		}
+	],
+	"toggle": [
+		{
+			"prop": "size",
+			"values": [
+				"xs",
+				"sm",
+				"md",
+				"lg",
+				"icon-sm",
+				"icon-md",
+				"icon-lg"
+			]
+		},
+		{
+			"prop": "variant",
+			"values": [
+				"default",
+				"outline",
+				"ghost"
+			]
+		}
+	],
+	"toggle-group": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	]
+}

@@ -10,19 +10,36 @@ Choose exactly one option from a short visible list.
 
 Port of `moduix/packages/svelte/src/components/radio-group` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `RadioGroup` | `RadioGroup.svelte` |
-| `RadioGroupIndicator` | `RadioGroupIndicator.svelte` |
-| `RadioGroupItem` | `RadioGroupItem.svelte` |
-| `RadioGroupItemControl` | `RadioGroupItemControl.svelte` |
-| `RadioGroupItemHiddenInput` | `RadioGroupItemHiddenInput.svelte` |
-| `RadioGroupItemText` | `RadioGroupItemText.svelte` |
-| `RadioGroupLabel` | `RadioGroupLabel.svelte` |
-| `RadioGroupOption` | `RadioGroupOption.svelte` |
-| `RadioGroupRootProvider` | `RadioGroupRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { RadioGroup } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `RadioGroup` | `RadioGroup.svelte` | `radiogroup` |
+| `RadioGroupIndicator` | `RadioGroupIndicator.svelte` | `—` |
+| `RadioGroupItem` | `RadioGroupItem.svelte` | `—` |
+| `RadioGroupItemControl` | `RadioGroupItemControl.svelte` | `—` |
+| `RadioGroupItemHiddenInput` | `RadioGroupItemHiddenInput.svelte` | `—` |
+| `RadioGroupItemText` | `RadioGroupItemText.svelte` | `—` |
+| `RadioGroupLabel` | `RadioGroupLabel.svelte` | `—` |
+| `RadioGroupOption` | `RadioGroupOption.svelte` | `—` |
+| `RadioGroupRootProvider` | `RadioGroupRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `radiogroup`.
 
 ## Props
 
@@ -122,15 +139,19 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `RadioGroupLabel` | `radio-group` | `label` | `radio-group-label` |
 | `RadioGroupRootProvider` | `radio-group` | `root` | `radio-group-root-provider` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `radio-group:${id}`
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

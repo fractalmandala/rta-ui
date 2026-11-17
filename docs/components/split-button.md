@@ -10,15 +10,32 @@ Run a primary action or pick a related one from an attached menu.
 
 Port of `moduix/packages/svelte/src/components/split-button` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `SplitButton` | `SplitButton.svelte` |
-| `SplitButtonAction` | `SplitButtonAction.svelte` |
-| `SplitButtonTrigger` | `SplitButtonTrigger.svelte` |
-| `SplitButtonPositioner` | `SplitButtonPositioner.svelte` |
-| `SplitButtonContent` | `SplitButtonContent.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { SplitButton } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `SplitButton` | `SplitButton.svelte` | `group` |
+| `SplitButtonAction` | `SplitButtonAction.svelte` | `—` |
+| `SplitButtonTrigger` | `SplitButtonTrigger.svelte` | `none (aria-hidden)` |
+| `SplitButtonPositioner` | `SplitButtonPositioner.svelte` | `—` |
+| `SplitButtonContent` | `SplitButtonContent.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`.
 
 ## Props
 
@@ -61,13 +78,19 @@ adds to `Omit<MenuTriggerProps, 'asChild'>`.
 | `SplitButtonPositioner` | `—` | `—` | `split-button-positioner` |
 | `SplitButtonTrigger` | `—` | `—` | `split-button-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-split-button-separator-color`
+| variable | default |
+| --- | --- |
+| `--moduix-split-button-separator-color` | `color-mix(in srgb, currentColor 16%, transparent)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,21 +10,36 @@ Edit a short text in place and save or cancel the change.
 
 Port of `moduix/packages/svelte/src/components/editable` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Editable` | `Editable.svelte` |
-| `EditableArea` | `EditableArea.svelte` |
-| `EditableCancelTrigger` | `EditableCancelTrigger.svelte` |
-| `EditableControl` | `EditableControl.svelte` |
-| `EditableControls` | `EditableControls.svelte` |
-| `EditableEditTrigger` | `EditableEditTrigger.svelte` |
-| `EditableInput` | `EditableInput.svelte` |
-| `EditableLabel` | `EditableLabel.svelte` |
-| `EditablePreview` | `EditablePreview.svelte` |
-| `EditableRootProvider` | `EditableRootProvider.svelte` |
-| `EditableSubmitTrigger` | `EditableSubmitTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Editable } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Editable` | `Editable.svelte` | `—` |
+| `EditableArea` | `EditableArea.svelte` | `—` |
+| `EditableCancelTrigger` | `EditableCancelTrigger.svelte` | `none (aria-hidden)` |
+| `EditableControl` | `EditableControl.svelte` | `—` |
+| `EditableControls` | `EditableControls.svelte` | `—` |
+| `EditableEditTrigger` | `EditableEditTrigger.svelte` | `none (aria-hidden)` |
+| `EditableInput` | `EditableInput.svelte` | `—` |
+| `EditableLabel` | `EditableLabel.svelte` | `—` |
+| `EditablePreview` | `EditablePreview.svelte` | `—` |
+| `EditableRootProvider` | `EditableRootProvider.svelte` | `—` |
+| `EditableSubmitTrigger` | `EditableSubmitTrigger.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -85,9 +100,15 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `EditableRootProvider` | `editable` | `root-provider` | `editable-root-provider` |
 | `EditableSubmitTrigger` | `editable` | `submit-trigger` | `editable-submit-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-editable-area-height`
+| variable | default |
+| --- | --- |
+| `--moduix-editable-area-height` | `var(--moduix-size-md)` |
+
+## Keyboard
+
+Keys handled by this family: `Escape`.
 
 ## Generated ids
 
@@ -104,9 +125,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

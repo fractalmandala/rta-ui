@@ -10,11 +10,26 @@ Draw a line between related sections, horizontal or vertical.
 
 Port of `moduix/packages/svelte/src/components/separator` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Separator` | `Separator.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Separator } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Separator` | `Separator.svelte` | `—` |
 
 ## Props
 
@@ -34,14 +49,20 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | --- | --- | --- | --- |
 | `Separator` | `separator` | `root` | `separator-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-separator-color`
-- `--moduix-separator-thickness`
+| variable | default |
+| --- | --- |
+| `--moduix-separator-color` | `var(--moduix-border)` |
+| `--moduix-separator-thickness` | `var(--_separator-thickness)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

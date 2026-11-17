@@ -10,22 +10,39 @@ Walk users through a multi-step task with progress and validation.
 
 Port of `moduix/packages/svelte/src/components/steps` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Steps` | `Steps.svelte` |
-| `StepsCompletedContent` | `StepsCompletedContent.svelte` |
-| `StepsContent` | `StepsContent.svelte` |
-| `StepsIndicator` | `StepsIndicator.svelte` |
-| `StepsItem` | `StepsItem.svelte` |
-| `StepsList` | `StepsList.svelte` |
-| `StepsNextTrigger` | `StepsNextTrigger.svelte` |
-| `StepsPrevTrigger` | `StepsPrevTrigger.svelte` |
-| `StepsProgress` | `StepsProgress.svelte` |
-| `StepsRootProvider` | `StepsRootProvider.svelte` |
-| `StepsSeparator` | `StepsSeparator.svelte` |
-| `StepsTrigger` | `StepsTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Steps } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Steps` | `Steps.svelte` | `—` |
+| `StepsCompletedContent` | `StepsCompletedContent.svelte` | `—` |
+| `StepsContent` | `StepsContent.svelte` | `—` |
+| `StepsIndicator` | `StepsIndicator.svelte` | `—` |
+| `StepsItem` | `StepsItem.svelte` | `—` |
+| `StepsList` | `StepsList.svelte` | `—` |
+| `StepsNextTrigger` | `StepsNextTrigger.svelte` | `—` |
+| `StepsPrevTrigger` | `StepsPrevTrigger.svelte` | `—` |
+| `StepsProgress` | `StepsProgress.svelte` | `—` |
+| `StepsRootProvider` | `StepsRootProvider.svelte` | `—` |
+| `StepsSeparator` | `StepsSeparator.svelte` | `—` |
+| `StepsTrigger` | `StepsTrigger.svelte` | `—` |
+
+ARIA roles rendered by this family: `progressbar`, `tab`, `tablist`, `tabpanel`.
 
 ## Props
 
@@ -86,10 +103,16 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `StepsSeparator` | `steps` | `separator` | `steps-separator` |
 | `StepsTrigger` | `steps` | `trigger` | `steps-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-steps-gap`
-- `--moduix-steps-indicator-size`
+| variable | default |
+| --- | --- |
+| `--moduix-steps-gap` | `var(--moduix-spacing-4)` |
+| `--moduix-steps-indicator-size` | `var(--moduix-spacing-8)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -97,9 +120,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

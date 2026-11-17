@@ -10,34 +10,49 @@ View images in a modal viewer, one at a time or as a gallery.
 
 Port of `moduix/packages/svelte/src/components/lightbox` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Lightbox` | `Lightbox.svelte` |
-| `LightboxBackdrop` | `LightboxBackdrop.svelte` |
-| `LightboxBind` | `LightboxBind.svelte` |
-| `LightboxBody` | `LightboxBody.svelte` |
-| `LightboxCaption` | `LightboxCaption.svelte` |
-| `LightboxCloseIcon` | `LightboxCloseIcon.svelte` |
-| `LightboxCloseTrigger` | `LightboxCloseTrigger.svelte` |
-| `LightboxContent` | `LightboxContent.svelte` |
-| `LightboxCounter` | `LightboxCounter.svelte` |
-| `LightboxDescription` | `LightboxDescription.svelte` |
-| `LightboxDownloadTrigger` | `LightboxDownloadTrigger.svelte` |
-| `LightboxFooter` | `LightboxFooter.svelte` |
-| `LightboxGallery` | `LightboxGallery.svelte` |
-| `LightboxHeader` | `LightboxHeader.svelte` |
-| `LightboxImage` | `LightboxImage.svelte` |
-| `LightboxNextTrigger` | `LightboxNextTrigger.svelte` |
-| `LightboxPositioner` | `LightboxPositioner.svelte` |
-| `LightboxPrevTrigger` | `LightboxPrevTrigger.svelte` |
-| `LightboxRootProvider` | `LightboxRootProvider.svelte` |
-| `LightboxThumbnails` | `LightboxThumbnails.svelte` |
-| `LightboxTitle` | `LightboxTitle.svelte` |
-| `LightboxTrigger` | `LightboxTrigger.svelte` |
-| `LightboxViewport` | `LightboxViewport.svelte` |
-| `LightboxZoomTrigger` | `LightboxZoomTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Lightbox } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Lightbox` | `Lightbox.svelte` | `—` |
+| `LightboxBackdrop` | `LightboxBackdrop.svelte` | `—` |
+| `LightboxBind` | `LightboxBind.svelte` | `—` |
+| `LightboxBody` | `LightboxBody.svelte` | `—` |
+| `LightboxCaption` | `LightboxCaption.svelte` | `—` |
+| `LightboxCloseIcon` | `LightboxCloseIcon.svelte` | `—` |
+| `LightboxCloseTrigger` | `LightboxCloseTrigger.svelte` | `—` |
+| `LightboxContent` | `LightboxContent.svelte` | `—` |
+| `LightboxCounter` | `LightboxCounter.svelte` | `—` |
+| `LightboxDescription` | `LightboxDescription.svelte` | `—` |
+| `LightboxDownloadTrigger` | `LightboxDownloadTrigger.svelte` | `none (aria-hidden)` |
+| `LightboxFooter` | `LightboxFooter.svelte` | `—` |
+| `LightboxGallery` | `LightboxGallery.svelte` | `—` |
+| `LightboxHeader` | `LightboxHeader.svelte` | `—` |
+| `LightboxImage` | `LightboxImage.svelte` | `—` |
+| `LightboxNextTrigger` | `LightboxNextTrigger.svelte` | `none (aria-hidden)` |
+| `LightboxPositioner` | `LightboxPositioner.svelte` | `—` |
+| `LightboxPrevTrigger` | `LightboxPrevTrigger.svelte` | `none (aria-hidden)` |
+| `LightboxRootProvider` | `LightboxRootProvider.svelte` | `—` |
+| `LightboxThumbnails` | `LightboxThumbnails.svelte` | `—` |
+| `LightboxTitle` | `LightboxTitle.svelte` | `—` |
+| `LightboxTrigger` | `LightboxTrigger.svelte` | `—` |
+| `LightboxViewport` | `LightboxViewport.svelte` | `—` |
+| `LightboxZoomTrigger` | `LightboxZoomTrigger.svelte` | `none (aria-hidden)` |
 
 `LightboxBind` renders no element of its own: it creates the state and provides it to the other parts.
 
@@ -130,10 +145,16 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `LightboxViewport` | `lightbox` | `viewport` | `lightbox-viewport` |
 | `LightboxZoomTrigger` | `lightbox` | `zoom-trigger` | `lightbox-zoom-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-lightbox-content-max-height`
-- `--moduix-lightbox-content-max-width`
+| variable | default |
+| --- | --- |
+| `--moduix-lightbox-content-max-height` | `80dvh` |
+| `--moduix-lightbox-content-max-width` | `80vw` |
+
+## Keyboard
+
+Keys handled by this family: `←SpaceArrowLeft`, `→SpaceArrowRight`.
 
 ## Generated ids
 
@@ -141,9 +162,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,17 +10,32 @@ Add prefixes, suffixes, and inline buttons around an input.
 
 Port of `moduix/packages/svelte/src/components/input-group` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `InputGroup` | `InputGroup.svelte` |
-| `InputGroupAddon` | `InputGroupAddon.svelte` |
-| `InputGroupButton` | `InputGroupButton.svelte` |
-| `InputGroupClearTrigger` | `InputGroupClearTrigger.svelte` |
-| `InputGroupInput` | `InputGroupInput.svelte` |
-| `InputGroupText` | `InputGroupText.svelte` |
-| `InputGroupTextarea` | `InputGroupTextarea.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { InputGroup } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `InputGroup` | `InputGroup.svelte` | `—` |
+| `InputGroupAddon` | `InputGroupAddon.svelte` | `—` |
+| `InputGroupButton` | `InputGroupButton.svelte` | `—` |
+| `InputGroupClearTrigger` | `InputGroupClearTrigger.svelte` | `—` |
+| `InputGroupInput` | `InputGroupInput.svelte` | `—` |
+| `InputGroupText` | `InputGroupText.svelte` | `—` |
+| `InputGroupTextarea` | `InputGroupTextarea.svelte` | `—` |
 
 ## Props
 
@@ -63,15 +78,21 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `InputGroupClearTrigger` | `input-group` | `clear-trigger` | `input-group-clear-trigger` |
 | `InputGroupText` | `input-group` | `text` | `input-group-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-input-group-height`
-- `--moduix-input-group-radius`
-- `--moduix-input-group-width`
+| variable | default |
+| --- | --- |
+| `--moduix-input-group-height` | `var(--_input-group-height)` |
+| `--moduix-input-group-radius` | `var(--moduix-radius-md)` |
+| `--moduix-input-group-width` | `100%` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

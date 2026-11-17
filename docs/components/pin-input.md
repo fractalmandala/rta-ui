@@ -10,18 +10,35 @@ Enter a short PIN or one-time code, one character per box.
 
 Port of `moduix/packages/svelte/src/components/pin-input` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `PinInput` | `PinInput.svelte` |
-| `PinInputControl` | `PinInputControl.svelte` |
-| `PinInputHiddenInput` | `PinInputHiddenInput.svelte` |
-| `PinInputInput` | `PinInputInput.svelte` |
-| `PinInputInputs` | `PinInputInputs.svelte` |
-| `PinInputLabel` | `PinInputLabel.svelte` |
-| `PinInputRootProvider` | `PinInputRootProvider.svelte` |
-| `PinInputSeparator` | `PinInputSeparator.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { PinInput } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `PinInput` | `PinInput.svelte` | `—` |
+| `PinInputControl` | `PinInputControl.svelte` | `group` |
+| `PinInputHiddenInput` | `PinInputHiddenInput.svelte` | `—` |
+| `PinInputInput` | `PinInputInput.svelte` | `—` |
+| `PinInputInputs` | `PinInputInputs.svelte` | `—` |
+| `PinInputLabel` | `PinInputLabel.svelte` | `—` |
+| `PinInputRootProvider` | `PinInputRootProvider.svelte` | `—` |
+| `PinInputSeparator` | `PinInputSeparator.svelte` | `none (aria-hidden)` |
+
+ARIA roles rendered by this family: `group`.
 
 ## Props
 
@@ -91,11 +108,17 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `PinInputRootProvider` | `pin-input` | `root` | `pin-input-root-provider` |
 | `PinInputSeparator` | `pin-input` | `separator` | `pin-input-separator` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-pin-input-gap`
-- `--moduix-pin-input-input-size`
-- `--moduix-pin-input-radius`
+| variable | default |
+| --- | --- |
+| `--moduix-pin-input-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-pin-input-input-size` | `var(--_pin-input-input-size)` |
+| `--moduix-pin-input-radius` | `var(--moduix-radius-md)` |
+
+## Keyboard
+
+Keys handled by this family: `←SpaceArrowLeft`, `→SpaceArrowRight`.
 
 ## Generated ids
 
@@ -107,9 +130,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

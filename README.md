@@ -81,16 +81,17 @@ typeahead, and civil-date arithmetic.
 
 ## Documentation
 
-Every component has a page under [`docs/components`](./docs/components), with an index in
-[`docs/components/README.md`](./docs/components/README.md). A page carries the purpose, the exported
-parts, every prop with its type and default (including props inherited from the family's `Use*Props`
-interface), the `data-scope`/`data-part`/`data-slot` hooks, the generated ids, the custom properties
-its CSS Module reads, the gallery demo verbatim, and the behaviours the tests assert.
+There is a docs site at `/docs`: a sidebar of every component, grouped like the gallery, with one
+page per family. Each page opens with **live examples** — the gallery demo rendered in place, then a
+variation grid for every enum prop the root exposes (`variant`, `size`, `orientation`, …) — followed
+by the reference: anatomy and roles, every prop with type and default, styling hooks, CSS variables
+with their defaults, generated ids, keyboard, the example source, and the behaviours the tests
+assert.
 
-The pages are generated from the source, the demo and the tests, so they cannot drift:
+The pages are generated from the source, so they cannot drift:
 
 ```sh
-pnpm docs        # regenerate docs/components/*
+pnpm docs        # regenerate docs/components/* and docs/examples.json
 pnpm docs:check  # fail if any committed page is stale
 ```
 
@@ -129,7 +130,7 @@ pnpm preview     # serve build/
 pnpm check       # svelte-check, warnings fail
 pnpm test        # vitest + jsdom
 pnpm parity      # data-scope/part/slot parity against the sibling moduix checkout
-pnpm docs        # regenerate the per-component pages from source, demos and tests
+pnpm docs        # regenerate the per-component pages and the variation manifest
 pnpm docs:check  # fail when a committed page no longer matches its source
                  # (set RTA_PARITY_REFERENCE to point elsewhere; exits 2 if it is missing)
 ```

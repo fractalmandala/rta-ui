@@ -10,23 +10,40 @@ Pick a value or a range by dragging along a track.
 
 Port of `moduix/packages/svelte/src/components/slider` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Slider` | `Slider.svelte` |
-| `SliderControl` | `SliderControl.svelte` |
-| `SliderDraggingIndicator` | `SliderDraggingIndicator.svelte` |
-| `SliderHiddenInput` | `SliderHiddenInput.svelte` |
-| `SliderLabel` | `SliderLabel.svelte` |
-| `SliderMarker` | `SliderMarker.svelte` |
-| `SliderMarkerGroup` | `SliderMarkerGroup.svelte` |
-| `SliderRange` | `SliderRange.svelte` |
-| `SliderRootProvider` | `SliderRootProvider.svelte` |
-| `SliderThumb` | `SliderThumb.svelte` |
-| `SliderThumbs` | `SliderThumbs.svelte` |
-| `SliderTrack` | `SliderTrack.svelte` |
-| `SliderValueText` | `SliderValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Slider } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Slider` | `Slider.svelte` | `—` |
+| `SliderControl` | `SliderControl.svelte` | `—` |
+| `SliderDraggingIndicator` | `SliderDraggingIndicator.svelte` | `presentation` |
+| `SliderHiddenInput` | `SliderHiddenInput.svelte` | `—` |
+| `SliderLabel` | `SliderLabel.svelte` | `—` |
+| `SliderMarker` | `SliderMarker.svelte` | `presentation` |
+| `SliderMarkerGroup` | `SliderMarkerGroup.svelte` | `presentation` |
+| `SliderRange` | `SliderRange.svelte` | `—` |
+| `SliderRootProvider` | `SliderRootProvider.svelte` | `—` |
+| `SliderThumb` | `SliderThumb.svelte` | `slider` |
+| `SliderThumbs` | `SliderThumbs.svelte` | `—` |
+| `SliderTrack` | `SliderTrack.svelte` | `—` |
+| `SliderValueText` | `SliderValueText.svelte` | `—` |
+
+ARIA roles rendered by this family: `presentation`, `slider`.
 
 ## Props
 
@@ -124,12 +141,18 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `SliderTrack` | `slider` | `track` | `slider-track` |
 | `SliderValueText` | `slider` | `value-text` | `slider-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-slider-range-bg`
-- `--moduix-slider-thumb-size`
-- `--moduix-slider-track-bg`
-- `--moduix-slider-track-size`
+| variable | default |
+| --- | --- |
+| `--moduix-slider-range-bg` | `var(--moduix-primary)` |
+| `--moduix-slider-thumb-size` | `var(--moduix-spacing-4)` |
+| `--moduix-slider-track-bg` | `var(--moduix-muted)` |
+| `--moduix-slider-track-size` | `var(--moduix-spacing-1-5)` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Home`, `PageDown`, `PageUp`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -145,9 +168,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

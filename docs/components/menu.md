@@ -10,34 +10,51 @@ Open a list of actions or options from a button or a right click.
 
 Port of `moduix/packages/svelte/src/components/menu` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Menu` | `Menu.svelte` |
-| `MenuArrow` | `MenuArrow.svelte` |
-| `MenuArrowTip` | `MenuArrowTip.svelte` |
-| `MenuCheckboxItem` | `MenuCheckboxItem.svelte` |
-| `MenuContent` | `MenuContent.svelte` |
-| `MenuContextTrigger` | `MenuContextTrigger.svelte` |
-| `MenuIndicator` | `MenuIndicator.svelte` |
-| `MenuItem` | `MenuItem.svelte` |
-| `MenuItemGroup` | `MenuItemGroup.svelte` |
-| `MenuItemGroupLabel` | `MenuItemGroupLabel.svelte` |
-| `MenuItemIndicator` | `MenuItemIndicator.svelte` |
-| `MenuItemShortcut` | `MenuItemShortcut.svelte` |
-| `MenuItemText` | `MenuItemText.svelte` |
-| `MenuPositioner` | `MenuPositioner.svelte` |
-| `MenuRadioItem` | `MenuRadioItem.svelte` |
-| `MenuRadioItemGroup` | `MenuRadioItemGroup.svelte` |
-| `MenuRootProvider` | `MenuRootProvider.svelte` |
-| `MenuSeparator` | `MenuSeparator.svelte` |
-| `MenuTrigger` | `MenuTrigger.svelte` |
-| `MenuTriggerItem` | `MenuTriggerItem.svelte` |
-| `MenuTriggerItemIcon` | `MenuTriggerItemIcon.svelte` |
-| `MenuViewport` | `MenuViewport.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Menu } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Menu` | `Menu.svelte` | `—` |
+| `MenuArrow` | `MenuArrow.svelte` | `—` |
+| `MenuArrowTip` | `MenuArrowTip.svelte` | `—` |
+| `MenuCheckboxItem` | `MenuCheckboxItem.svelte` | `—` |
+| `MenuContent` | `MenuContent.svelte` | `—` |
+| `MenuContextTrigger` | `MenuContextTrigger.svelte` | `—` |
+| `MenuIndicator` | `MenuIndicator.svelte` | `none (aria-hidden)` |
+| `MenuItem` | `MenuItem.svelte` | `—` |
+| `MenuItemGroup` | `MenuItemGroup.svelte` | `—` |
+| `MenuItemGroupLabel` | `MenuItemGroupLabel.svelte` | `—` |
+| `MenuItemIndicator` | `MenuItemIndicator.svelte` | `none (aria-hidden)` |
+| `MenuItemShortcut` | `MenuItemShortcut.svelte` | `—` |
+| `MenuItemText` | `MenuItemText.svelte` | `—` |
+| `MenuPositioner` | `MenuPositioner.svelte` | `—` |
+| `MenuRadioItem` | `MenuRadioItem.svelte` | `—` |
+| `MenuRadioItemGroup` | `MenuRadioItemGroup.svelte` | `—` |
+| `MenuRootProvider` | `MenuRootProvider.svelte` | `—` |
+| `MenuSeparator` | `MenuSeparator.svelte` | `—` |
+| `MenuTrigger` | `MenuTrigger.svelte` | `—` |
+| `MenuTriggerItem` | `MenuTriggerItem.svelte` | `—` |
+| `MenuTriggerItemIcon` | `MenuTriggerItemIcon.svelte` | `none (aria-hidden)` |
+| `MenuViewport` | `MenuViewport.svelte` | `—` |
 
 `Menu`, `MenuRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `group`, `menu`, `menuitem`, `separator`.
 
 ## Props
 
@@ -190,11 +207,17 @@ accepts the native props of `Omit<HTMLProps<'button'>, 'type'>`, `PolymorphicPro
 | `MenuTriggerItemIcon` | `—` | `—` | `menu-trigger-item-icon` |
 | `MenuViewport` | `menu` | `viewport` | `menu-viewport` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-menu-popup-max-height`
-- `--moduix-menu-popup-max-width`
-- `--moduix-menu-popup-min-width`
+| variable | default |
+| --- | --- |
+| `--moduix-menu-popup-max-height` | `24rem` |
+| `--moduix-menu-popup-max-width` | `20rem` |
+| `--moduix-menu-popup-min-width` | `12rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Home`, `Space`, `Tab`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -210,9 +233,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

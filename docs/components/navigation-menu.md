@@ -10,22 +10,37 @@ Build a site header where items link directly or open panels of links.
 
 Port of `moduix/packages/svelte/src/components/navigation-menu` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `NavigationMenu` | `NavigationMenu.svelte` |
-| `NavigationMenuArrow` | `NavigationMenuArrow.svelte` |
-| `NavigationMenuContent` | `NavigationMenuContent.svelte` |
-| `NavigationMenuIndicator` | `NavigationMenuIndicator.svelte` |
-| `NavigationMenuItem` | `NavigationMenuItem.svelte` |
-| `NavigationMenuItemIndicator` | `NavigationMenuItemIndicator.svelte` |
-| `NavigationMenuLink` | `NavigationMenuLink.svelte` |
-| `NavigationMenuList` | `NavigationMenuList.svelte` |
-| `NavigationMenuRootProvider` | `NavigationMenuRootProvider.svelte` |
-| `NavigationMenuTrigger` | `NavigationMenuTrigger.svelte` |
-| `NavigationMenuViewport` | `NavigationMenuViewport.svelte` |
-| `NavigationMenuViewportPositioner` | `NavigationMenuViewportPositioner.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { NavigationMenu } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `NavigationMenu` | `NavigationMenu.svelte` | `—` |
+| `NavigationMenuArrow` | `NavigationMenuArrow.svelte` | `none (aria-hidden)` |
+| `NavigationMenuContent` | `NavigationMenuContent.svelte` | `—` |
+| `NavigationMenuIndicator` | `NavigationMenuIndicator.svelte` | `none (aria-hidden)` |
+| `NavigationMenuItem` | `NavigationMenuItem.svelte` | `—` |
+| `NavigationMenuItemIndicator` | `NavigationMenuItemIndicator.svelte` | `none (aria-hidden)` |
+| `NavigationMenuLink` | `NavigationMenuLink.svelte` | `—` |
+| `NavigationMenuList` | `NavigationMenuList.svelte` | `—` |
+| `NavigationMenuRootProvider` | `NavigationMenuRootProvider.svelte` | `—` |
+| `NavigationMenuTrigger` | `NavigationMenuTrigger.svelte` | `—` |
+| `NavigationMenuViewport` | `NavigationMenuViewport.svelte` | `—` |
+| `NavigationMenuViewportPositioner` | `NavigationMenuViewportPositioner.svelte` | `—` |
 
 ## Props
 
@@ -117,13 +132,19 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `NavigationMenuViewport` | `navigation-menu` | `viewport` | `navigation-menu-viewport` |
 | `NavigationMenuViewportPositioner` | `navigation-menu` | `viewport-positioner` | `navigation-menu-viewport-positioner` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-navigation-menu-content-max-height`
-- `--moduix-navigation-menu-content-max-width`
-- `--moduix-navigation-menu-content-min-width`
-- `--moduix-navigation-menu-viewport-max-height`
-- `--moduix-navigation-menu-viewport-max-width`
+| variable | default |
+| --- | --- |
+| `--moduix-navigation-menu-content-max-height` | `24rem` |
+| `--moduix-navigation-menu-content-max-width` | `20rem` |
+| `--moduix-navigation-menu-content-min-width` | `12rem` |
+| `--moduix-navigation-menu-viewport-max-height` | `32rem` |
+| `--moduix-navigation-menu-viewport-max-width` | `40rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Home`, `Tab`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -138,9 +159,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

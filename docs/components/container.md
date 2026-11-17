@@ -10,11 +10,26 @@ Center page content at a readable width with responsive side padding.
 
 Port of `moduix/packages/svelte/src/components/container` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Container` | `Container.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Container } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Container` | `Container.svelte` | `—` |
 
 ## Props
 
@@ -33,16 +48,19 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | --- | --- | --- | --- |
 | `Container` | `container` | `root` | `container-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-container-gutter-lg`
-- `--moduix-container-gutter-md`
-- `--moduix-container-gutter-sm`
-- `--moduix-container-max-width-lg`
-- `--moduix-container-max-width-md`
-- `--moduix-container-max-width-sm`
-- `--moduix-container-max-width-xl`
-- `--moduix-container-max-width-xs`
+| variable | default |
+| --- | --- |
+| `--moduix-container-max-width-lg` | `72rem` |
+| `--moduix-container-max-width-md` | `64rem` |
+| `--moduix-container-max-width-sm` | `48rem` |
+| `--moduix-container-max-width-xl` | `90rem` |
+| `--moduix-container-max-width-xs` | `40rem` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

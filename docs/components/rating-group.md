@@ -10,18 +10,35 @@ Rate something on a scale of stars, including half-star steps.
 
 Port of `moduix/packages/svelte/src/components/rating-group` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `RatingGroup` | `RatingGroup.svelte` |
-| `RatingGroupControl` | `RatingGroupControl.svelte` |
-| `RatingGroupHiddenInput` | `RatingGroupHiddenInput.svelte` |
-| `RatingGroupItem` | `RatingGroupItem.svelte` |
-| `RatingGroupItemIndicator` | `RatingGroupItemIndicator.svelte` |
-| `RatingGroupItems` | `RatingGroupItems.svelte` |
-| `RatingGroupLabel` | `RatingGroupLabel.svelte` |
-| `RatingGroupRootProvider` | `RatingGroupRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { RatingGroup } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `RatingGroup` | `RatingGroup.svelte` | `—` |
+| `RatingGroupControl` | `RatingGroupControl.svelte` | `radiogroup` |
+| `RatingGroupHiddenInput` | `RatingGroupHiddenInput.svelte` | `—` |
+| `RatingGroupItem` | `RatingGroupItem.svelte` | `radio` |
+| `RatingGroupItemIndicator` | `RatingGroupItemIndicator.svelte` | `—` |
+| `RatingGroupItems` | `RatingGroupItems.svelte` | `—` |
+| `RatingGroupLabel` | `RatingGroupLabel.svelte` | `—` |
+| `RatingGroupRootProvider` | `RatingGroupRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `radio`, `radiogroup`.
 
 ## Props
 
@@ -86,12 +103,18 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `RatingGroupLabel` | `rating-group` | `label` | `rating-group-label` |
 | `RatingGroupRootProvider` | `rating-group` | `root` | `rating-group-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-rating-group-active-color`
-- `--moduix-rating-group-color`
-- `--moduix-rating-group-gap`
-- `--moduix-rating-group-icon-size`
+| variable | default |
+| --- | --- |
+| `--moduix-rating-group-active-color` | `var(--moduix-primary)` |
+| `--moduix-rating-group-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-rating-group-gap` | `var(--moduix-spacing-1)` |
+| `--moduix-rating-group-icon-size` | `var(--_rating-group-icon-size)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -99,9 +122,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -13,6 +13,7 @@ const COMPONENTS = path.join(root, 'src/lib/components');
 const DEMOS = path.join(root, 'src/routes/demos');
 const TESTS = path.join(root, 'tests');
 const OUT = path.join(root, 'docs/components');
+const DOCS_ROOT = path.join(root, 'docs');
 const MODUIX_DOCS =
 	process.env.RTA_MODUIX_DOCS_DIR ??
 	path.resolve(root, '../moduix-main/website/docs/en/docs');
@@ -39,6 +40,17 @@ async function readIfExists(file) {
 function moduleScript(source) {
 	const match = /<script\s+module\s+lang="ts"\s*>([\s\S]*?)<\/script>/.exec(source);
 	return match ? match[1] : null;
+}
+
+function parseAliases(text) {
+	const file = ts.createSourceFile('source.ts', text, ts.ScriptTarget.Latest, true);
+	const aliases = new Map();
+	for (const statement of file.statements) {
+		if (ts.isTypeAliasDeclaration(statement)) {
+			aliases.set(statement.name.text, statement.type.getText());
+		}
+	}
+	return aliases;
 }
 
 function parseInterfaceSource(text) {
@@ -101,6 +113,72 @@ function parseInterfaces(source) {
 	return interfaces;
 }
 
+function roleMap(stateSource) {
+	const map = new Map();
+	if (!stateSource) return map;
+	// `controlAttrs() { ... role: 'switch' ... }` — attribute the role to the part with that base name.
+	const pattern = /\n\t{1,2}([a-zA-Z]+)Attrs\s*\(([^)]*)\)\s*\{([\s\S]*?)\n\t{1,2}\}/g;
+	for (const match of stateSource.matchAll(pattern)) {
+		const body = match[3];
+		const role = /role':?\s*'([a-z]+)'/.exec(body)?.[1] ?? /role:\s*'([a-z]+)'/.exec(body)?.[1];
+		if (role) map.set(match[1].toLowerCase(), role);
+		const dynamic = /role':\s*([^,\n]+)/.exec(body)?.[1];
+		if (!role && dynamic) map.set(match[1].toLowerCase(), 'computed');
+	}
+	return map;
+}
+
+function roleOf(source) {
+	const literal = /role="([a-z]+)"/.exec(source)?.[1];
+	if (literal) return literal;
+	const attr = /'role':\s*'([a-z]+)'/.exec(source)?.[1];
+	if (attr) return attr;
+	const dynamic = /'role':\s*([^,\n]+)/.exec(source)?.[1];
+	if (dynamic) return 'computed';
+	// Decorative parts hand their semantics to the hidden native control.
+	if (/aria-hidden/.test(source)) return 'none (aria-hidden)';
+	return '—';
+}
+
+function keysHandled(stateSource) {
+	if (!stateSource) return [];
+	const keys = new Set();
+	for (const match of stateSource.matchAll(/case '([^']{1,12})':/g)) keys.add(match[1]);
+	for (const match of stateSource.matchAll(/event\.key === '([^']{1,12})'/g)) keys.add(match[1]);
+	for (const match of stateSource.matchAll(/key === '([^']{1,12})'/g)) keys.add(match[1]);
+	const friendly = (key) =>
+		key
+			.replace('ArrowUp', '↑ ArrowUp')
+			.replace('ArrowDown', '↓ ArrowDown')
+			.replace('ArrowLeft', '← ArrowLeft')
+			.replace('ArrowRight', '→ ArrowRight')
+			.replace(' ', 'Space')
+			.replace('PageUp', 'PageUp')
+			.replace('PageDown', 'PageDown');
+	return [...keys]
+		.filter((key) => /^([A-Za-z]+| )$/.test(key) || key.startsWith('Arrow'))
+		.map(friendly)
+		.sort();
+}
+
+/** String-literal unions on the root, which are what a variation grid can drive. */
+function enumProps(rootIface, library) {
+	if (!rootIface) return [];
+	const rows = flatten(rootIface, library);
+	const interesting = ['variant', 'size', 'tone', 'appearance', 'orientation', 'shape', 'radius'];
+	const results = [];
+	for (const row of rows) {
+		if (!interesting.includes(row.name)) continue;
+		// `variant?: ButtonVariant` needs the alias expanded before values can be read.
+		const resolved = library.aliases.get(row.type.trim()) ?? row.type;
+		const values = [...resolved.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+		if (values.length < 2 || values.length > 9) continue;
+		if (resolved.includes('=>') || resolved.includes('[')) continue;
+		results.push({ prop: row.name, values });
+	}
+	return results;
+}
+
 const DOM_BASES = /^(Omit<)?(HTMLProps|PolymorphicProps|RefAttribute|HTMLAttributes|SvelteHTMLElements|Omit<HTMLAttributes)/;
 
 function hookTable(sources) {
@@ -117,11 +195,21 @@ function hookTable(sources) {
 		.join('\n');
 }
 
+/** Custom properties with the default the CSS Module gives them. */
 function cssVariables(css, family) {
-	const names = new Set();
-	const pattern = new RegExp(`--moduix-${family}[a-z0-9-]*`, 'g');
-	for (const match of css.matchAll(pattern)) names.add(match[0]);
-	return [...names].sort();
+	const found = new Map();
+	const pattern = new RegExp(
+		`var\\(\\s*(--moduix-${family}[a-z0-9-]*)\\s*,\\s*((?:[^()]|\\([^()]*\\))*)\\)`,
+		'g'
+	);
+	for (const match of css.matchAll(pattern)) {
+		if (!found.has(match[1])) found.set(match[1], match[2].trim());
+	}
+	// A property declared directly on a variant rule is its own default.
+	for (const match of css.matchAll(new RegExp(`^\\s*(--moduix-${family}[a-z0-9-]*):\\s*([^;]+);`, 'gm'))) {
+		if (!found.has(match[1])) found.set(match[1], match[2].trim());
+	}
+	return [...found.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
 
 function idPatterns(stateSource) {
@@ -271,12 +359,16 @@ async function buildFamily(family, deviations) {
 	);
 
 	const library = new Map();
+	library.aliases = new Map();
 	for (const file of files.filter((name) => name.endsWith('.ts'))) {
 		const text = await readIfExists(path.join(dir, file));
 		if (!text) continue;
 		for (const iface of parseInterfaceSource(text)) library.set(iface.name, iface);
+		for (const [name, body] of parseAliases(text)) library.aliases.set(name, body);
 	}
 	for (const { source } of sources) {
+		const script = moduleScript(source);
+		if (script) for (const [name, body] of parseAliases(script)) library.aliases.set(name, body);
 		for (const iface of parseInterfaces(source)) library.set(iface.name, iface);
 	}
 
@@ -311,6 +403,35 @@ async function buildFamily(family, deviations) {
 	const variables = cssVariables(css, family);
 	const ids = idPatterns(state);
 	const titles = testTitles(test);
+	const keys = keysHandled(state);
+	const roles = roleMap(state);
+	// Every role the family actually puts in the DOM, wherever it is declared.
+	const familyRoles = new Set();
+	for (const source of [state ?? '', ...sources.map((entry) => entry.source)]) {
+		for (const match of source.matchAll(/role['"]?\s*:\s*'([a-z]+)'/g)) familyRoles.add(match[1]);
+		for (const match of source.matchAll(/role="([a-z]+)"/g)) familyRoles.add(match[1]);
+		// `role: role()` with `getProps().role ?? 'dialog'` — the fallback is the rendered default.
+		for (const match of source.matchAll(/getProps\(\)\.role\s*\?\?\s*'([a-z]+)'/g)) familyRoles.add(match[1]);
+	}
+
+	// A variation grid needs a root that renders children directly and an enum prop to drive it.
+	const rootPart = [...partFiles.keys()][0];
+	const rootSource = sources.find((candidate) => candidate.file === partFiles.get(rootPart))?.source ?? '';
+	// Roots either render children explicitly or forward them through a `...props` spread into Element.
+	const rootRendersChildren =
+		/\{@render children/.test(rootSource) || /\.\.\.props/.test(rootSource);
+	// A generated grid can only drive a root that needs nothing but the prop it varies, so a family
+	// with required props (Splitter's `panels`, Navigator's items) is left to its own demo.
+	const rootInterface = rootPart ? interfaces.get(rootPart) : undefined;
+	const requiredProps = rootInterface
+		? flatten(rootInterface, library).filter(
+				(member) => !member.optional && member.name !== 'children' && member.name !== 'asChild'
+			)
+		: [];
+	const examples =
+		rootRendersChildren && rootPart && requiredProps.length === 0
+			? enumProps(rootInterface, library).slice(0, 2)
+			: [];
 
 	const isStateOnly = partFiles.size === 0;
 
@@ -348,11 +469,33 @@ async function buildFamily(family, deviations) {
 		}
 		lines.push('');
 	} else {
-	lines.push('## Parts');
+	lines.push('## Installation');
 	lines.push('');
-	lines.push('| export | file |');
-	lines.push('| --- | --- |');
-	for (const [part, file] of partFiles) lines.push(`| \`${part}\` | \`${file}\` |`);
+	lines.push('```sh');
+	lines.push('pnpm add rta-ui');
+	lines.push('```');
+	lines.push('');
+	lines.push('`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:');
+	lines.push('');
+	lines.push('```svelte');
+	lines.push('<script lang="ts">');
+	lines.push(`\timport { ${rootPart ?? pascal(family)} } from 'rta-ui';`);
+	lines.push("\timport 'rta-ui/style.css';");
+	lines.push('</script>');
+	lines.push('```');
+	lines.push('');
+
+	lines.push('## Anatomy');
+	lines.push('');
+	lines.push('| export | file | role |');
+	lines.push('| --- | --- | --- |');
+	for (const [part, file] of partFiles) {
+		const entry = sources.find((candidate) => candidate.file === file);
+		const base = part.replace(pascal(family), '').toLowerCase() || 'root';
+		const local = entry ? roleOf(entry.source) : '—';
+		const role = local !== '—' ? local : (roles.get(base) ?? roles.get(file.replace(/^\.\//, '')) ?? '—');
+		lines.push(`| \`${part}\` | \`${file}\` | \`${role}\` |`);
+	}
 	lines.push('');
 	// A part renders no element when its markup has no tags at all, only a `{@render}` of children.
 	const providers = [...partFiles.entries()]
@@ -372,7 +515,12 @@ async function buildFamily(family, deviations) {
 	}
 
 	if (parts.length) {
-		lines.push('## Props');
+		if (familyRoles.size) {
+		lines.push(`ARIA roles rendered by this family: ${[...familyRoles].sort().map((role) => `\`${role}\``).join(', ')}.`);
+		lines.push('');
+	}
+
+	lines.push('## Props');
 		lines.push('');
 		const section = propsSection(parts, interfaces, library, sourcesByPart);
 		lines.push(section.trim() ? section : 'Every part accepts its native element props plus `class`, `style`, `ref` and `asChild`.');
@@ -388,11 +536,22 @@ async function buildFamily(family, deviations) {
 		lines.push('');
 	}
 	if (variables.length) {
-		lines.push('Custom properties read by this family’s CSS Module:');
+		lines.push('### CSS variables');
 		lines.push('');
-		for (const variable of variables) lines.push(`- \`${variable}\``);
+		lines.push('| variable | default |');
+		lines.push('| --- | --- |');
+		for (const [name, value] of variables) lines.push(`| \`${name}\` | \`${value}\` |`);
 		lines.push('');
 	}
+
+	lines.push('## Keyboard');
+	lines.push('');
+	lines.push(
+		keys.length
+			? `Keys handled by this family: ${keys.map((key) => `\`${key}\``).join(', ')}.`
+			: 'No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.'
+	);
+	lines.push('');
 
 	if (ids.length) {
 		lines.push('## Generated ids');
@@ -405,9 +564,9 @@ async function buildFamily(family, deviations) {
 
 	const snippet = usageSnippet(demo);
 	if (snippet) {
-		lines.push('## Usage');
+		lines.push('## Overview example source');
 		lines.push('');
-		lines.push('The gallery demo, verbatim:');
+		lines.push('The component above is this file, unchanged:');
 		lines.push('');
 		lines.push('```svelte');
 		lines.push(snippet);
@@ -457,7 +616,7 @@ async function buildFamily(family, deviations) {
 	);
 	lines.push('');
 
-	return { family, markdown: lines.join('\n'), parts };
+	return { family, markdown: lines.join('\n'), parts, examples };
 }
 
 const GALLERY_GROUPS = [
@@ -516,6 +675,10 @@ export async function buildDocs() {
 		index.push('');
 	}
 	const files = new Map(docs.map((doc) => [`${doc.family}.md`, doc.markdown]));
+	const exampleMap = Object.fromEntries(
+		docs.filter((doc) => doc.examples?.length).map((doc) => [doc.family, doc.examples])
+	);
+	files.set('../examples.json', JSON.stringify(exampleMap, null, '\t') + '\n');
 	files.set('README.md', index.join('\n'));
 	return { files, count: docs.length };
 }

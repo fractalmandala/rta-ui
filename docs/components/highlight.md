@@ -10,11 +10,26 @@ Mark the words that match a search query inside a piece of text.
 
 Port of `moduix/packages/svelte/src/components/highlight` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Highlight` | `Highlight.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Highlight } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Highlight` | `Highlight.svelte` | `—` |
 
 ## Props
 
@@ -26,18 +41,23 @@ Every part accepts its native element props plus `class`, `style`, `ref` and `as
 | --- | --- | --- | --- |
 | `Highlight` | `highlight` | `root` | `highlight-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-highlight-bg`
-- `--moduix-highlight-color`
-- `--moduix-highlight-font-weight`
-- `--moduix-highlight-padding-x`
-- `--moduix-highlight-padding-y`
-- `--moduix-highlight-radius`
+| variable | default |
+| --- | --- |
+| `--moduix-highlight-color` | `var(--moduix-foreground)` |
+| `--moduix-highlight-font-weight` | `var(--moduix-weight-medium)` |
+| `--moduix-highlight-padding-x` | `var(--moduix-spacing-1)` |
+| `--moduix-highlight-padding-y` | `0.0625rem` |
+| `--moduix-highlight-radius` | `var(--moduix-radius-xs)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

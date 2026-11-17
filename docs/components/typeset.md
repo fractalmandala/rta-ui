@@ -10,12 +10,27 @@ Style rendered Markdown, CMS content, and AI answers for reading.
 
 Port of `moduix/packages/svelte/src/components/typeset` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Typeset` | `Typeset.svelte` |
-| `TypesetScroll` | `TypesetScroll.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Typeset } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Typeset` | `Typeset.svelte` | `—` |
+| `TypesetScroll` | `TypesetScroll.svelte` | `—` |
 
 ## Props
 
@@ -28,18 +43,24 @@ Every part accepts its native element props plus `class`, `style`, `ref` and `as
 | `Typeset` | `typeset` | `root` | `typeset-root` |
 | `TypesetScroll` | `typeset` | `scroll` | `typeset-scroll` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-typeset-flow`
-- `--moduix-typeset-font-body`
-- `--moduix-typeset-font-heading`
-- `--moduix-typeset-font-mono`
-- `--moduix-typeset-leading`
-- `--moduix-typeset-size`
+| variable | default |
+| --- | --- |
+| `--moduix-typeset-flow` | `1.25em` |
+| `--moduix-typeset-font-body` | `inherit` |
+| `--moduix-typeset-font-heading` | `var(--moduix-font-sans)` |
+| `--moduix-typeset-font-mono` | `var(--moduix-font-mono)` |
+| `--moduix-typeset-leading` | `1.75` |
+| `--moduix-typeset-size` | `1em` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

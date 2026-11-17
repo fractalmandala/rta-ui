@@ -1,0 +1,56 @@
+{
+	"accordion": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"radio-group": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"splitter": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"steps": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"tabs": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	],
+	"toggle-group": [
+		{
+			"prop": "orientation",
+			"values": [
+				"horizontal",
+				"vertical"
+			]
+		}
+	]
+}

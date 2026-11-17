@@ -10,27 +10,44 @@ Page through slides with buttons, indicators, swipe, or autoplay.
 
 Port of `moduix/packages/svelte/src/components/carousel` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Carousel` | `Carousel.svelte` |
-| `CarouselAutoplayIndicator` | `CarouselAutoplayIndicator.svelte` |
-| `CarouselAutoplayTrigger` | `CarouselAutoplayTrigger.svelte` |
-| `CarouselContext` | `CarouselContext.svelte` |
-| `CarouselControl` | `CarouselControl.svelte` |
-| `CarouselIndicator` | `CarouselIndicator.svelte` |
-| `CarouselIndicatorGroup` | `CarouselIndicatorGroup.svelte` |
-| `CarouselIndicators` | `CarouselIndicators.svelte` |
-| `CarouselItem` | `CarouselItem.svelte` |
-| `CarouselItemGroup` | `CarouselItemGroup.svelte` |
-| `CarouselNextTrigger` | `CarouselNextTrigger.svelte` |
-| `CarouselPrevTrigger` | `CarouselPrevTrigger.svelte` |
-| `CarouselProgressText` | `CarouselProgressText.svelte` |
-| `CarouselRootProvider` | `CarouselRootProvider.svelte` |
-| `CarouselSpinner` | `CarouselSpinner.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Carousel } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Carousel` | `Carousel.svelte` | `region` |
+| `CarouselAutoplayIndicator` | `CarouselAutoplayIndicator.svelte` | `—` |
+| `CarouselAutoplayTrigger` | `CarouselAutoplayTrigger.svelte` | `—` |
+| `CarouselContext` | `CarouselContext.svelte` | `—` |
+| `CarouselControl` | `CarouselControl.svelte` | `—` |
+| `CarouselIndicator` | `CarouselIndicator.svelte` | `—` |
+| `CarouselIndicatorGroup` | `CarouselIndicatorGroup.svelte` | `—` |
+| `CarouselIndicators` | `CarouselIndicators.svelte` | `—` |
+| `CarouselItem` | `CarouselItem.svelte` | `group` |
+| `CarouselItemGroup` | `CarouselItemGroup.svelte` | `—` |
+| `CarouselNextTrigger` | `CarouselNextTrigger.svelte` | `—` |
+| `CarouselPrevTrigger` | `CarouselPrevTrigger.svelte` | `—` |
+| `CarouselProgressText` | `CarouselProgressText.svelte` | `—` |
+| `CarouselRootProvider` | `CarouselRootProvider.svelte` | `—` |
+| `CarouselSpinner` | `CarouselSpinner.svelte` | `none (aria-hidden)` |
 
 `CarouselContext` renders no element of its own: it creates the state and provides it to the other parts.
+
+ARIA roles rendered by this family: `group`, `region`.
 
 ## Props
 
@@ -125,17 +142,22 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `CarouselRootProvider` | `carousel` | `root` | `carousel-root-provider` |
 | `CarouselSpinner` | `carousel` | `spinner` | `carousel-spinner` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-carousel-control-bg`
-- `--moduix-carousel-control-border-color`
-- `--moduix-carousel-control-color`
-- `--moduix-carousel-control-size`
-- `--moduix-carousel-gap`
-- `--moduix-carousel-height`
-- `--moduix-carousel-indicator-bg`
-- `--moduix-carousel-indicator-bg-current`
-- `--moduix-carousel-indicator-size`
+| variable | default |
+| --- | --- |
+| `--moduix-carousel-control-bg` | `var(--moduix-card)` |
+| `--moduix-carousel-control-border-color` | `var(--moduix-border)` |
+| `--moduix-carousel-control-color` | `var(--moduix-foreground)` |
+| `--moduix-carousel-control-size` | `var(--moduix-size-md)` |
+| `--moduix-carousel-gap` | `var(--moduix-spacing-3)` |
+| `--moduix-carousel-height` | `24rem` |
+| `--moduix-carousel-indicator-bg-current` | `var(--moduix-primary)` |
+| `--moduix-carousel-indicator-size` | `var(--moduix-spacing-2)` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Home`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -143,9 +165,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

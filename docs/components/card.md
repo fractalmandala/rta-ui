@@ -10,20 +10,35 @@ Group a title, content, and actions on one surface.
 
 Port of `moduix/packages/svelte/src/components/card` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Card` | `Card.svelte` |
-| `CardAction` | `CardAction.svelte` |
-| `CardBackground` | `CardBackground.svelte` |
-| `CardBody` | `CardBody.svelte` |
-| `CardDescription` | `CardDescription.svelte` |
-| `CardFooter` | `CardFooter.svelte` |
-| `CardHeader` | `CardHeader.svelte` |
-| `CardLink` | `CardLink.svelte` |
-| `CardMedia` | `CardMedia.svelte` |
-| `CardTitle` | `CardTitle.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Card } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Card` | `Card.svelte` | `—` |
+| `CardAction` | `CardAction.svelte` | `—` |
+| `CardBackground` | `CardBackground.svelte` | `—` |
+| `CardBody` | `CardBody.svelte` | `—` |
+| `CardDescription` | `CardDescription.svelte` | `—` |
+| `CardFooter` | `CardFooter.svelte` | `—` |
+| `CardHeader` | `CardHeader.svelte` | `—` |
+| `CardLink` | `CardLink.svelte` | `—` |
+| `CardMedia` | `CardMedia.svelte` | `—` |
+| `CardTitle` | `CardTitle.svelte` | `—` |
 
 ## Props
 
@@ -51,21 +66,25 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `CardMedia` | `card` | `media` | `card-media` |
 | `CardTitle` | `card` | `title` | `card-title` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-card`
-- `--moduix-card-bg`
-- `--moduix-card-border-color`
-- `--moduix-card-border-width`
-- `--moduix-card-color`
-- `--moduix-card-foreground`
-- `--moduix-card-radius`
-- `--moduix-card-shadow`
-- `--moduix-card-spacing`
+| variable | default |
+| --- | --- |
+| `--moduix-card-bg` | `var(--_card-bg)` |
+| `--moduix-card-border-color` | `var(--moduix-border)` |
+| `--moduix-card-border-width` | `var(--_card-border-width)` |
+| `--moduix-card-color` | `var(--moduix-card-foreground)` |
+| `--moduix-card-radius` | `var(--moduix-radius-lg)` |
+| `--moduix-card-shadow` | `var(--_card-shadow)` |
+| `--moduix-card-spacing` | `var(--_card-spacing)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

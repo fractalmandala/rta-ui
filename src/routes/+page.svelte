@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component } from 'svelte';
+  import { onMount } from 'svelte';
 
   import AlertDemo from './demos/Alert.svelte';
   import BadgeDemo from './demos/Badge.svelte';
@@ -202,13 +203,29 @@
     },
   ];
 
+  // A docs page deep-links here as `?c=<component>`. The gallery is prerendered, so the query string
+  // is only available in the browser: read it on mount and open that component's group.
   let active = $state('Actions');
+
+  onMount(() => {
+    const requested = new URLSearchParams(window.location.search).get('c');
+    if (!requested) return;
+    const group = groups.find((entry) =>
+      entry.demos.some((demo) => demo.name.toLowerCase() === requested)
+    );
+    if (!group) return;
+    active = group.title;
+    setTimeout(() => {
+      document.getElementById(requested)?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }, 80);
+  });
 </script>
 
 <main>
   <header>
     <h1>rta ui</h1>
     <p>Eighty-seven dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
+    <p class="docs-link"><a href="/docs">Read the component docs →</a></p>
   </header>
 
   <nav>
@@ -223,7 +240,7 @@
 
   {#each groups.filter((group) => group.title === active) as group (group.title)}
     {#each group.demos as demo (demo.name)}
-      <section>
+      <section id={demo.name.toLowerCase()}>
         <h2>{demo.name}</h2>
         <p class="note">{demo.note}</p>
         <div class="canvas">
@@ -251,6 +268,15 @@
     margin: 0;
     color: var(--moduix-muted-foreground);
     font-size: 0.875rem;
+  }
+
+  header .docs-link {
+    margin-top: 0.4rem;
+  }
+
+  header .docs-link a {
+    color: var(--moduix-primary, #6c5ce7);
+    font-weight: 600;
   }
   nav {
     display: flex;

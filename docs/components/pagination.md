@@ -10,19 +10,36 @@ Move through pages of a list, table, or search results.
 
 Port of `moduix/packages/svelte/src/components/pagination` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Pagination` | `Pagination.svelte` |
-| `PaginationEllipsis` | `PaginationEllipsis.svelte` |
-| `PaginationFirstTrigger` | `PaginationFirstTrigger.svelte` |
-| `PaginationItem` | `PaginationItem.svelte` |
-| `PaginationItems` | `PaginationItems.svelte` |
-| `PaginationLastTrigger` | `PaginationLastTrigger.svelte` |
-| `PaginationNextTrigger` | `PaginationNextTrigger.svelte` |
-| `PaginationPrevTrigger` | `PaginationPrevTrigger.svelte` |
-| `PaginationRootProvider` | `PaginationRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Pagination } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Pagination` | `Pagination.svelte` | `—` |
+| `PaginationEllipsis` | `PaginationEllipsis.svelte` | `none (aria-hidden)` |
+| `PaginationFirstTrigger` | `PaginationFirstTrigger.svelte` | `none (aria-hidden)` |
+| `PaginationItem` | `PaginationItem.svelte` | `—` |
+| `PaginationItems` | `PaginationItems.svelte` | `—` |
+| `PaginationLastTrigger` | `PaginationLastTrigger.svelte` | `none (aria-hidden)` |
+| `PaginationNextTrigger` | `PaginationNextTrigger.svelte` | `—` |
+| `PaginationPrevTrigger` | `PaginationPrevTrigger.svelte` | `—` |
+| `PaginationRootProvider` | `PaginationRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `link`.
 
 ## Props
 
@@ -82,9 +99,15 @@ accepts the native props of `HTMLProps<'nav'>`, `PolymorphicProps<'nav'>`, `RefA
 | `PaginationPrevTrigger` | `pagination` | `prev-trigger` | `pagination-prev-trigger` |
 | `PaginationRootProvider` | `pagination` | `root` | `pagination-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-pagination-item-size`
+| variable | default |
+| --- | --- |
+| `--moduix-pagination-item-size` | `var(--moduix-size-md)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -92,9 +115,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

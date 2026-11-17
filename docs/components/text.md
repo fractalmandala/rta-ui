@@ -10,11 +10,26 @@ Set body text, captions, and inline copy on the type scale.
 
 Port of `moduix/packages/svelte/src/components/text` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Text` | `Text.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Text } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Text` | `Text.svelte` | `—` |
 
 ## Props
 
@@ -38,13 +53,9 @@ accepts the native props of `HTMLProps<'p'>`, `PolymorphicProps<'p'>`, `RefAttri
 | --- | --- | --- | --- |
 | `Text` | `text` | `root` | `text-root` |
 
-Custom properties read by this family’s CSS Module:
+## Keyboard
 
-- `--moduix-text-lg`
-- `--moduix-text-md`
-- `--moduix-text-sm`
-- `--moduix-text-xl`
-- `--moduix-text-xs`
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

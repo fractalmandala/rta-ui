@@ -10,15 +10,30 @@ Show a user’s photo, with initials while it loads or if it fails.
 
 Port of `moduix/packages/svelte/src/components/avatar` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Avatar` | `Avatar.svelte` |
-| `AvatarFallback` | `AvatarFallback.svelte` |
-| `AvatarGroup` | `AvatarGroup.svelte` |
-| `AvatarImage` | `AvatarImage.svelte` |
-| `AvatarRootProvider` | `AvatarRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Avatar } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Avatar` | `Avatar.svelte` | `—` |
+| `AvatarFallback` | `AvatarFallback.svelte` | `—` |
+| `AvatarGroup` | `AvatarGroup.svelte` | `—` |
+| `AvatarImage` | `AvatarImage.svelte` | `—` |
+| `AvatarRootProvider` | `AvatarRootProvider.svelte` | `—` |
 
 ## Props
 
@@ -52,14 +67,20 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `AvatarImage` | `avatar` | `image` | `avatar-image` |
 | `AvatarRootProvider` | `avatar` | `root` | `avatar-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-avatar-bg`
-- `--moduix-avatar-color`
-- `--moduix-avatar-font-size`
-- `--moduix-avatar-font-weight`
-- `--moduix-avatar-radius`
-- `--moduix-avatar-size`
+| variable | default |
+| --- | --- |
+| `--moduix-avatar-bg` | `var(--moduix-muted)` |
+| `--moduix-avatar-color` | `var(--moduix-foreground)` |
+| `--moduix-avatar-font-size` | `var(--moduix-text-md)` |
+| `--moduix-avatar-font-weight` | `var(--moduix-weight-medium)` |
+| `--moduix-avatar-radius` | `var(--moduix-radius-full)` |
+| `--moduix-avatar-size` | `var(--moduix-size-md)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -67,9 +88,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

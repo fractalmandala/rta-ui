@@ -10,11 +10,26 @@ Collect a single line of text with native input behavior.
 
 Port of `moduix/packages/svelte/src/components/input` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Input` | `Input.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Input } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Input` | `Input.svelte` | `—` |
 
 ## Props
 
@@ -34,16 +49,21 @@ adds to `Omit<HTMLInputAttributes, 'size'>`.
 | --- | --- | --- | --- |
 | `Input` | `field` | `input` | `input-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-input`
-- `--moduix-input-height`
-- `--moduix-input-radius`
-- `--moduix-input-width`
+| variable | default |
+| --- | --- |
+| `--moduix-input-height` | `var(--_input-height)` |
+| `--moduix-input-radius` | `var(--moduix-radius-md)` |
+| `--moduix-input-width` | `100%` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

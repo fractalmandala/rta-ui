@@ -10,18 +10,35 @@ Crop, zoom, rotate, and flip an image before upload.
 
 Port of `moduix/packages/svelte/src/components/image-cropper` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `ImageCropper` | `ImageCropper.svelte` |
-| `ImageCropperCropArea` | `ImageCropperCropArea.svelte` |
-| `ImageCropperGrid` | `ImageCropperGrid.svelte` |
-| `ImageCropperHandle` | `ImageCropperHandle.svelte` |
-| `ImageCropperImage` | `ImageCropperImage.svelte` |
-| `ImageCropperRootProvider` | `ImageCropperRootProvider.svelte` |
-| `ImageCropperSelection` | `ImageCropperSelection.svelte` |
-| `ImageCropperViewport` | `ImageCropperViewport.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { ImageCropper } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `ImageCropper` | `ImageCropper.svelte` | `—` |
+| `ImageCropperCropArea` | `ImageCropperCropArea.svelte` | `—` |
+| `ImageCropperGrid` | `ImageCropperGrid.svelte` | `—` |
+| `ImageCropperHandle` | `ImageCropperHandle.svelte` | `—` |
+| `ImageCropperImage` | `ImageCropperImage.svelte` | `—` |
+| `ImageCropperRootProvider` | `ImageCropperRootProvider.svelte` | `—` |
+| `ImageCropperSelection` | `ImageCropperSelection.svelte` | `—` |
+| `ImageCropperViewport` | `ImageCropperViewport.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`, `presentation`, `slider`.
 
 ## Props
 
@@ -102,6 +119,10 @@ accepts the native props of `HTMLProps<'div'>`, and adds to `ImageCropperRootPro
 | `ImageCropperSelection` | `image-cropper` | `selection` | `image-cropper-selection` |
 | `ImageCropperViewport` | `image-cropper` | `viewport` | `image-cropper-viewport` |
 
+## Keyboard
+
+Keys handled by this family: `↑SpaceArrowUp`, `↓SpaceArrowDown`.
+
 ## Generated ids
 
 - `image-cropper:${id}`
@@ -114,9 +135,9 @@ accepts the native props of `HTMLProps<'div'>`, and adds to `ImageCropperRootPro
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

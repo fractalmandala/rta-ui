@@ -10,20 +10,35 @@ A table of contents tracking the visible heading.
 
 Port of `moduix/packages/svelte/src/components/toc` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Toc` | `Toc.svelte` |
-| `TocContent` | `TocContent.svelte` |
-| `TocIndicator` | `TocIndicator.svelte` |
-| `TocItem` | `TocItem.svelte` |
-| `TocLink` | `TocLink.svelte` |
-| `TocList` | `TocList.svelte` |
-| `TocNav` | `TocNav.svelte` |
-| `TocRail` | `TocRail.svelte` |
-| `TocRootProvider` | `TocRootProvider.svelte` |
-| `TocTitle` | `TocTitle.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Toc } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Toc` | `Toc.svelte` | `—` |
+| `TocContent` | `TocContent.svelte` | `—` |
+| `TocIndicator` | `TocIndicator.svelte` | `—` |
+| `TocItem` | `TocItem.svelte` | `—` |
+| `TocLink` | `TocLink.svelte` | `—` |
+| `TocList` | `TocList.svelte` | `—` |
+| `TocNav` | `TocNav.svelte` | `—` |
+| `TocRail` | `TocRail.svelte` | `none (aria-hidden)` |
+| `TocRootProvider` | `TocRootProvider.svelte` | `—` |
+| `TocTitle` | `TocTitle.svelte` | `—` |
 
 ## Props
 
@@ -94,15 +109,19 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `TocRootProvider` | `toc` | `root` | `toc-root-provider` |
 | `TocTitle` | `toc` | `title` | `toc-title` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `toc:${id}`
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

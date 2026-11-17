@@ -10,11 +10,26 @@ Collect several lines of text, with optional auto-resize.
 
 Port of `moduix/packages/svelte/src/components/textarea` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Textarea` | `Textarea.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Textarea } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Textarea` | `Textarea.svelte` | `—` |
 
 ## Props
 
@@ -33,10 +48,16 @@ adds to `HTMLTextareaAttributes`.
 | --- | --- | --- | --- |
 | `Textarea` | `field` | `textarea` | `textarea-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-textarea-radius`
-- `--moduix-textarea-width`
+| variable | default |
+| --- | --- |
+| `--moduix-textarea-radius` | `var(--moduix-radius-md)` |
+| `--moduix-textarea-width` | `100%` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

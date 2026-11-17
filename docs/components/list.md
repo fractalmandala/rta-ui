@@ -10,13 +10,28 @@ Render bulleted or numbered lists with consistent spacing and markers.
 
 Port of `moduix/packages/svelte/src/components/list` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `List` | `List.svelte` |
-| `ListIndicator` | `ListIndicator.svelte` |
-| `ListItem` | `ListItem.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { List } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `List` | `List.svelte` | `—` |
+| `ListIndicator` | `ListIndicator.svelte` | `—` |
+| `ListItem` | `ListItem.svelte` | `—` |
 
 ## Props
 
@@ -40,9 +55,13 @@ accepts the native props of `HTMLProps<'ol'>`, `PolymorphicProps<'ol'>`, `RefAtt
 | `ListIndicator` | `list` | `indicator` | `list-indicator` |
 | `ListItem` | `list` | `item` | `list-item` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

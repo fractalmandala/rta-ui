@@ -17,6 +17,10 @@ Shared state module rather than a component: there is no markup of its own. The 
 - `ProgressValueTextDetails`
 - `UseProgressProps`
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `progress:${id}`

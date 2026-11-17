@@ -10,18 +10,33 @@ Show where a page sits in the site hierarchy with links back up.
 
 Port of `moduix/packages/svelte/src/components/breadcrumbs` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Breadcrumbs` | `Breadcrumbs.svelte` |
-| `BreadcrumbsEllipsis` | `BreadcrumbsEllipsis.svelte` |
-| `BreadcrumbsItem` | `BreadcrumbsItem.svelte` |
-| `BreadcrumbsLink` | `BreadcrumbsLink.svelte` |
-| `BreadcrumbsList` | `BreadcrumbsList.svelte` |
-| `BreadcrumbsPage` | `BreadcrumbsPage.svelte` |
-| `BreadcrumbsPath` | `BreadcrumbsPath.svelte` |
-| `BreadcrumbsSeparator` | `BreadcrumbsSeparator.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Breadcrumbs } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Breadcrumbs` | `Breadcrumbs.svelte` | `—` |
+| `BreadcrumbsEllipsis` | `BreadcrumbsEllipsis.svelte` | `none (aria-hidden)` |
+| `BreadcrumbsItem` | `BreadcrumbsItem.svelte` | `—` |
+| `BreadcrumbsLink` | `BreadcrumbsLink.svelte` | `—` |
+| `BreadcrumbsList` | `BreadcrumbsList.svelte` | `—` |
+| `BreadcrumbsPage` | `BreadcrumbsPage.svelte` | `—` |
+| `BreadcrumbsPath` | `BreadcrumbsPath.svelte` | `—` |
+| `BreadcrumbsSeparator` | `BreadcrumbsSeparator.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -47,22 +62,28 @@ accepts the native props of `Omit<HTMLProps<'ol'>, 'children'>`, `RefAttribute`.
 | `BreadcrumbsPage` | `—` | `—` | `breadcrumbs-page` |
 | `BreadcrumbsSeparator` | `—` | `—` | `breadcrumbs-separator` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-breadcrumbs-color`
-- `--moduix-breadcrumbs-font-size`
-- `--moduix-breadcrumbs-gap`
-- `--moduix-breadcrumbs-item-max-width`
-- `--moduix-breadcrumbs-item-padding-x`
-- `--moduix-breadcrumbs-line-height`
-- `--moduix-breadcrumbs-link-color-hover`
-- `--moduix-breadcrumbs-page-color`
-- `--moduix-breadcrumbs-page-font-weight`
-- `--moduix-breadcrumbs-separator-icon-size`
+| variable | default |
+| --- | --- |
+| `--moduix-breadcrumbs-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-breadcrumbs-font-size` | `var(--moduix-text-sm)` |
+| `--moduix-breadcrumbs-gap` | `var(--moduix-spacing-1)` |
+| `--moduix-breadcrumbs-item-max-width` | `16rem` |
+| `--moduix-breadcrumbs-item-padding-x` | `var(--moduix-spacing-1)` |
+| `--moduix-breadcrumbs-line-height` | `var(--moduix-line-height-text-sm)` |
+| `--moduix-breadcrumbs-link-color-hover` | `var(--moduix-foreground)` |
+| `--moduix-breadcrumbs-page-color` | `var(--moduix-foreground)` |
+| `--moduix-breadcrumbs-page-font-weight` | `var(--moduix-weight-medium)` |
+| `--moduix-breadcrumbs-separator-icon-size` | `1em` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,19 +10,34 @@ Show task progress in a compact ring, with a known or unknown end.
 
 Port of `moduix/packages/svelte/src/components/progress-circular` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `ProgressCircular` | `ProgressCircular.svelte` |
-| `ProgressCircularCircle` | `ProgressCircularCircle.svelte` |
-| `ProgressCircularCircleRange` | `ProgressCircularCircleRange.svelte` |
-| `ProgressCircularCircleTrack` | `ProgressCircularCircleTrack.svelte` |
-| `ProgressCircularLabel` | `ProgressCircularLabel.svelte` |
-| `ProgressCircularRing` | `ProgressCircularRing.svelte` |
-| `ProgressCircularRootProvider` | `ProgressCircularRootProvider.svelte` |
-| `ProgressCircularValueText` | `ProgressCircularValueText.svelte` |
-| `ProgressCircularView` | `ProgressCircularView.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { ProgressCircular } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `ProgressCircular` | `ProgressCircular.svelte` | `—` |
+| `ProgressCircularCircle` | `ProgressCircularCircle.svelte` | `—` |
+| `ProgressCircularCircleRange` | `ProgressCircularCircleRange.svelte` | `—` |
+| `ProgressCircularCircleTrack` | `ProgressCircularCircleTrack.svelte` | `—` |
+| `ProgressCircularLabel` | `ProgressCircularLabel.svelte` | `—` |
+| `ProgressCircularRing` | `ProgressCircularRing.svelte` | `—` |
+| `ProgressCircularRootProvider` | `ProgressCircularRootProvider.svelte` | `—` |
+| `ProgressCircularValueText` | `ProgressCircularValueText.svelte` | `—` |
+| `ProgressCircularView` | `ProgressCircularView.svelte` | `—` |
 
 ## Props
 
@@ -54,16 +69,22 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `ProgressCircularValueText` | `progress` | `value-text` | `progress-circular-value-text` |
 | `ProgressCircularView` | `progress` | `view` | `progress-circular-view` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-progress-circular-range-bg`
-- `--moduix-progress-circular-size`
-- `--moduix-progress-circular-thickness`
-- `--moduix-progress-circular-track-bg`
+| variable | default |
+| --- | --- |
+| `--moduix-progress-circular-range-bg` | `var(--moduix-primary)` |
+| `--moduix-progress-circular-size` | `var(--moduix-size-xl)` |
+| `--moduix-progress-circular-thickness` | `0.4rem` |
+| `--moduix-progress-circular-track-bg` | `var(--moduix-muted)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

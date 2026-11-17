@@ -10,21 +10,38 @@ Give a control a short hint that shows on hover or focus.
 
 Port of `moduix/packages/svelte/src/components/tooltip` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Tooltip` | `Tooltip.svelte` |
-| `TooltipArrow` | `TooltipArrow.svelte` |
-| `TooltipArrowTip` | `TooltipArrowTip.svelte` |
-| `TooltipBody` | `TooltipBody.svelte` |
-| `TooltipContent` | `TooltipContent.svelte` |
-| `TooltipDisabledTrigger` | `TooltipDisabledTrigger.svelte` |
-| `TooltipPositioner` | `TooltipPositioner.svelte` |
-| `TooltipRootProvider` | `TooltipRootProvider.svelte` |
-| `TooltipTrigger` | `TooltipTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Tooltip } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Tooltip` | `Tooltip.svelte` | `—` |
+| `TooltipArrow` | `TooltipArrow.svelte` | `—` |
+| `TooltipArrowTip` | `TooltipArrowTip.svelte` | `—` |
+| `TooltipBody` | `TooltipBody.svelte` | `—` |
+| `TooltipContent` | `TooltipContent.svelte` | `tooltip` |
+| `TooltipDisabledTrigger` | `TooltipDisabledTrigger.svelte` | `—` |
+| `TooltipPositioner` | `TooltipPositioner.svelte` | `—` |
+| `TooltipRootProvider` | `TooltipRootProvider.svelte` | `—` |
+| `TooltipTrigger` | `TooltipTrigger.svelte` | `—` |
 
 `Tooltip`, `TooltipRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `tooltip`.
 
 ## Props
 
@@ -84,6 +101,10 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `TooltipPositioner` | `tooltip` | `positioner` | `tooltip-positioner` |
 | `TooltipTrigger` | `tooltip` | `trigger` | `tooltip-trigger` |
 
+## Keyboard
+
+Keys handled by this family: `close`, `open`.
+
 ## Generated ids
 
 - `tooltip:${id}:arrow`
@@ -94,9 +115,9 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

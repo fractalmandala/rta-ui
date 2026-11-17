@@ -10,12 +10,27 @@ Press a button to turn an option on and press again to turn it off.
 
 Port of `moduix/packages/svelte/src/components/toggle` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Toggle` | `Toggle.svelte` |
-| `ToggleIndicator` | `ToggleIndicator.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Toggle } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Toggle` | `Toggle.svelte` | `—` |
+| `ToggleIndicator` | `ToggleIndicator.svelte` | `—` |
 
 ## Props
 
@@ -39,18 +54,24 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `Toggle` | `toggle` | `root` | `toggle-root` |
 | `ToggleIndicator` | `toggle` | `indicator` | `toggle-indicator` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-toggle-bg`
-- `--moduix-toggle-bg-hover`
-- `--moduix-toggle-bg-pressed`
-- `--moduix-toggle-border-color`
-- `--moduix-toggle-color`
-- `--moduix-toggle-color-pressed`
+| variable | default |
+| --- | --- |
+| `--moduix-toggle-bg` | `var(--_toggle-bg)` |
+| `--moduix-toggle-bg-hover` | `var(--moduix-accent)` |
+| `--moduix-toggle-bg-pressed` | `var(--_toggle-bg-pressed)` |
+| `--moduix-toggle-border-color` | `var(--_toggle-border-color)` |
+| `--moduix-toggle-color` | `var(--_toggle-color)` |
+| `--moduix-toggle-color-pressed` | `var(--_toggle-color-pressed)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

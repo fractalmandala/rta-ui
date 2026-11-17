@@ -10,18 +10,35 @@ Count elapsed or remaining time with start, pause, and reset.
 
 Port of `moduix/packages/svelte/src/components/timer` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Timer` | `Timer.svelte` |
-| `TimerActionTrigger` | `TimerActionTrigger.svelte` |
-| `TimerArea` | `TimerArea.svelte` |
-| `TimerControl` | `TimerControl.svelte` |
-| `TimerItem` | `TimerItem.svelte` |
-| `TimerRootProvider` | `TimerRootProvider.svelte` |
-| `TimerSegments` | `TimerSegments.svelte` |
-| `TimerSeparator` | `TimerSeparator.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Timer } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Timer` | `Timer.svelte` | `—` |
+| `TimerActionTrigger` | `TimerActionTrigger.svelte` | `—` |
+| `TimerArea` | `TimerArea.svelte` | `—` |
+| `TimerControl` | `TimerControl.svelte` | `—` |
+| `TimerItem` | `TimerItem.svelte` | `—` |
+| `TimerRootProvider` | `TimerRootProvider.svelte` | `—` |
+| `TimerSegments` | `TimerSegments.svelte` | `—` |
+| `TimerSeparator` | `TimerSeparator.svelte` | `—` |
+
+ARIA roles rendered by this family: `timer`.
 
 ## Props
 
@@ -82,15 +99,19 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'children'>`, `PolymorphicPr
 | `TimerRootProvider` | `timer` | `root` | `timer-root-provider` |
 | `TimerSeparator` | `timer` | `separator` | `timer-separator` |
 
+## Keyboard
+
+Keys handled by this family: `pause`, `reset`, `resume`, `start`.
+
 ## Generated ids
 
 - `timer:${id}`
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

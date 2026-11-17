@@ -10,11 +10,26 @@ Keep images, video, and embeds at a fixed width-to-height ratio.
 
 Port of `moduix/packages/svelte/src/components/aspect-ratio` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `AspectRatio` | `AspectRatio.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { AspectRatio } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `AspectRatio` | `AspectRatio.svelte` | `—` |
 
 ## Props
 
@@ -31,6 +46,10 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | part file | `data-scope` | `data-part` | `data-slot` |
 | --- | --- | --- | --- |
 | `AspectRatio` | `aspect-ratio` | `root` | `aspect-ratio-root` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

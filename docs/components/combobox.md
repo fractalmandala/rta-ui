@@ -10,28 +10,45 @@ Type to filter a list and pick one or more values.
 
 Port of `moduix/packages/svelte/src/components/combobox` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Combobox` | `Combobox.svelte` |
-| `ComboboxClearTrigger` | `ComboboxClearTrigger.svelte` |
-| `ComboboxContent` | `ComboboxContent.svelte` |
-| `ComboboxControl` | `ComboboxControl.svelte` |
-| `ComboboxEmpty` | `ComboboxEmpty.svelte` |
-| `ComboboxInput` | `ComboboxInput.svelte` |
-| `ComboboxItem` | `ComboboxItem.svelte` |
-| `ComboboxItemGroup` | `ComboboxItemGroup.svelte` |
-| `ComboboxItemGroupLabel` | `ComboboxItemGroupLabel.svelte` |
-| `ComboboxItemIndicator` | `ComboboxItemIndicator.svelte` |
-| `ComboboxItemText` | `ComboboxItemText.svelte` |
-| `ComboboxLabel` | `ComboboxLabel.svelte` |
-| `ComboboxList` | `ComboboxList.svelte` |
-| `ComboboxOption` | `ComboboxOption.svelte` |
-| `ComboboxPositioner` | `ComboboxPositioner.svelte` |
-| `ComboboxRootProvider` | `ComboboxRootProvider.svelte` |
-| `ComboboxStatus` | `ComboboxStatus.svelte` |
-| `ComboboxTrigger` | `ComboboxTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Combobox } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Combobox` | `Combobox.svelte` | `—` |
+| `ComboboxClearTrigger` | `ComboboxClearTrigger.svelte` | `—` |
+| `ComboboxContent` | `ComboboxContent.svelte` | `—` |
+| `ComboboxControl` | `ComboboxControl.svelte` | `—` |
+| `ComboboxEmpty` | `ComboboxEmpty.svelte` | `presentation` |
+| `ComboboxInput` | `ComboboxInput.svelte` | `combobox` |
+| `ComboboxItem` | `ComboboxItem.svelte` | `option` |
+| `ComboboxItemGroup` | `ComboboxItemGroup.svelte` | `group` |
+| `ComboboxItemGroupLabel` | `ComboboxItemGroupLabel.svelte` | `presentation` |
+| `ComboboxItemIndicator` | `ComboboxItemIndicator.svelte` | `—` |
+| `ComboboxItemText` | `ComboboxItemText.svelte` | `—` |
+| `ComboboxLabel` | `ComboboxLabel.svelte` | `—` |
+| `ComboboxList` | `ComboboxList.svelte` | `—` |
+| `ComboboxOption` | `ComboboxOption.svelte` | `—` |
+| `ComboboxPositioner` | `ComboboxPositioner.svelte` | `—` |
+| `ComboboxRootProvider` | `ComboboxRootProvider.svelte` | `—` |
+| `ComboboxStatus` | `ComboboxStatus.svelte` | `—` |
+| `ComboboxTrigger` | `ComboboxTrigger.svelte` | `none (aria-hidden)` |
+
+ARIA roles rendered by this family: `combobox`, `group`, `option`, `presentation`.
 
 ## Props
 
@@ -155,13 +172,19 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'id'>`, `PolymorphicProps<'d
 | `ComboboxStatus` | `combobox` | `—` | `combobox-status` |
 | `ComboboxTrigger` | `combobox` | `trigger` | `combobox-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-combobox-action-size`
-- `--moduix-combobox-content-max-height`
-- `--moduix-combobox-control-height`
-- `--moduix-combobox-radius`
-- `--moduix-combobox-width`
+| variable | default |
+| --- | --- |
+| `--moduix-combobox-action-size` | `var(--moduix-size-xs)` |
+| `--moduix-combobox-content-max-height` | `24rem` |
+| `--moduix-combobox-control-height` | `var(--moduix-size-md)` |
+| `--moduix-combobox-radius` | `var(--moduix-radius-md)` |
+| `--moduix-combobox-width` | `16rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Escape`, `Home`, `Space`, `Tab`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -169,9 +192,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

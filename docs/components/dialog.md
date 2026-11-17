@@ -10,25 +10,42 @@ Open a modal window for a form, confirmation, or details.
 
 Port of `moduix/packages/svelte/src/components/dialog` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Dialog` | `Dialog.svelte` |
-| `DialogBackdrop` | `DialogBackdrop.svelte` |
-| `DialogBody` | `DialogBody.svelte` |
-| `DialogCloseIcon` | `DialogCloseIcon.svelte` |
-| `DialogCloseTrigger` | `DialogCloseTrigger.svelte` |
-| `DialogContent` | `DialogContent.svelte` |
-| `DialogDescription` | `DialogDescription.svelte` |
-| `DialogFooter` | `DialogFooter.svelte` |
-| `DialogHeader` | `DialogHeader.svelte` |
-| `DialogPositioner` | `DialogPositioner.svelte` |
-| `DialogRootProvider` | `DialogRootProvider.svelte` |
-| `DialogTitle` | `DialogTitle.svelte` |
-| `DialogTrigger` | `DialogTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Dialog } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Dialog` | `Dialog.svelte` | `—` |
+| `DialogBackdrop` | `DialogBackdrop.svelte` | `—` |
+| `DialogBody` | `DialogBody.svelte` | `—` |
+| `DialogCloseIcon` | `DialogCloseIcon.svelte` | `—` |
+| `DialogCloseTrigger` | `DialogCloseTrigger.svelte` | `—` |
+| `DialogContent` | `DialogContent.svelte` | `—` |
+| `DialogDescription` | `DialogDescription.svelte` | `—` |
+| `DialogFooter` | `DialogFooter.svelte` | `—` |
+| `DialogHeader` | `DialogHeader.svelte` | `—` |
+| `DialogPositioner` | `DialogPositioner.svelte` | `—` |
+| `DialogRootProvider` | `DialogRootProvider.svelte` | `—` |
+| `DialogTitle` | `DialogTitle.svelte` | `—` |
+| `DialogTrigger` | `DialogTrigger.svelte` | `—` |
 
 `Dialog`, `DialogRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `dialog`.
 
 ## Props
 
@@ -116,9 +133,15 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `DialogTitle` | `dialog` | `title` | `dialog-title` |
 | `DialogTrigger` | `dialog` | `trigger` | `dialog-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-dialog-width`
+| variable | default |
+| --- | --- |
+| `--moduix-dialog-width` | `var(--_dialog-width)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -133,9 +156,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

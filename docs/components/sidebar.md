@@ -10,37 +10,52 @@ Build app navigation that resizes and collapses to icons.
 
 Port of `moduix/packages/svelte/src/components/sidebar` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Sidebar` | `Sidebar.svelte` |
-| `SidebarCollapsedContent` | `SidebarCollapsedContent.svelte` |
-| `SidebarContent` | `SidebarContent.svelte` |
-| `SidebarExpandedContent` | `SidebarExpandedContent.svelte` |
-| `SidebarFooter` | `SidebarFooter.svelte` |
-| `SidebarGroup` | `SidebarGroup.svelte` |
-| `SidebarGroupAction` | `SidebarGroupAction.svelte` |
-| `SidebarGroupHeader` | `SidebarGroupHeader.svelte` |
-| `SidebarGroupLabel` | `SidebarGroupLabel.svelte` |
-| `SidebarHeader` | `SidebarHeader.svelte` |
-| `SidebarInput` | `SidebarInput.svelte` |
-| `SidebarInset` | `SidebarInset.svelte` |
-| `SidebarLabel` | `SidebarLabel.svelte` |
-| `SidebarNavigationBadge` | `SidebarNavigationBadge.svelte` |
-| `SidebarNavigationButton` | `SidebarNavigationButton.svelte` |
-| `SidebarNavigationItem` | `SidebarNavigationItem.svelte` |
-| `SidebarNavigationList` | `SidebarNavigationList.svelte` |
-| `SidebarNavigationSubButton` | `SidebarNavigationSubButton.svelte` |
-| `SidebarNavigationSubItem` | `SidebarNavigationSubItem.svelte` |
-| `SidebarNavigationSubList` | `SidebarNavigationSubList.svelte` |
-| `SidebarPanel` | `SidebarPanel.svelte` |
-| `SidebarRail` | `SidebarRail.svelte` |
-| `SidebarResizeTrigger` | `SidebarResizeTrigger.svelte` |
-| `SidebarRootProvider` | `SidebarRootProvider.svelte` |
-| `SidebarSeparator` | `SidebarSeparator.svelte` |
-| `SidebarTooltip` | `SidebarTooltip.svelte` |
-| `SidebarTrigger` | `SidebarTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Sidebar } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Sidebar` | `Sidebar.svelte` | `—` |
+| `SidebarCollapsedContent` | `SidebarCollapsedContent.svelte` | `—` |
+| `SidebarContent` | `SidebarContent.svelte` | `—` |
+| `SidebarExpandedContent` | `SidebarExpandedContent.svelte` | `—` |
+| `SidebarFooter` | `SidebarFooter.svelte` | `—` |
+| `SidebarGroup` | `SidebarGroup.svelte` | `—` |
+| `SidebarGroupAction` | `SidebarGroupAction.svelte` | `—` |
+| `SidebarGroupHeader` | `SidebarGroupHeader.svelte` | `—` |
+| `SidebarGroupLabel` | `SidebarGroupLabel.svelte` | `—` |
+| `SidebarHeader` | `SidebarHeader.svelte` | `—` |
+| `SidebarInput` | `SidebarInput.svelte` | `—` |
+| `SidebarInset` | `SidebarInset.svelte` | `—` |
+| `SidebarLabel` | `SidebarLabel.svelte` | `—` |
+| `SidebarNavigationBadge` | `SidebarNavigationBadge.svelte` | `—` |
+| `SidebarNavigationButton` | `SidebarNavigationButton.svelte` | `—` |
+| `SidebarNavigationItem` | `SidebarNavigationItem.svelte` | `—` |
+| `SidebarNavigationList` | `SidebarNavigationList.svelte` | `—` |
+| `SidebarNavigationSubButton` | `SidebarNavigationSubButton.svelte` | `—` |
+| `SidebarNavigationSubItem` | `SidebarNavigationSubItem.svelte` | `—` |
+| `SidebarNavigationSubList` | `SidebarNavigationSubList.svelte` | `—` |
+| `SidebarPanel` | `SidebarPanel.svelte` | `—` |
+| `SidebarRail` | `SidebarRail.svelte` | `—` |
+| `SidebarResizeTrigger` | `SidebarResizeTrigger.svelte` | `—` |
+| `SidebarRootProvider` | `SidebarRootProvider.svelte` | `—` |
+| `SidebarSeparator` | `SidebarSeparator.svelte` | `—` |
+| `SidebarTooltip` | `SidebarTooltip.svelte` | `—` |
+| `SidebarTrigger` | `SidebarTrigger.svelte` | `none (aria-hidden)` |
 
 `SidebarRootProvider` renders no element of its own: it creates the state and provides it to the other parts.
 
@@ -150,15 +165,15 @@ adds to `Omit<TooltipRootProps, 'children' | 'disabled' | 'positioning'>`.
 | `SidebarSeparator` | `—` | `—` | `sidebar-separator` |
 | `SidebarTrigger` | `sidebar` | `trigger` | `sidebar-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-sidebar`
-- `--moduix-sidebar-accent`
-- `--moduix-sidebar-accent-foreground`
-- `--moduix-sidebar-border`
-- `--moduix-sidebar-foreground`
-- `--moduix-sidebar-ring`
-- `--moduix-sidebar-trigger-offset-y`
+| variable | default |
+| --- | --- |
+| `--moduix-sidebar-trigger-offset-y` | `40px` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -166,9 +181,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

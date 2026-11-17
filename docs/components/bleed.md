@@ -10,11 +10,26 @@ Let a banner or image extend past the padding of its container.
 
 Port of `moduix/packages/svelte/src/components/bleed` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Bleed` | `Bleed.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Bleed } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Bleed` | `Bleed.svelte` | `—` |
 
 ## Props
 
@@ -32,6 +47,10 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | part file | `data-scope` | `data-part` | `data-slot` |
 | --- | --- | --- | --- |
 | `Bleed` | `bleed` | `root` | `bleed-root` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

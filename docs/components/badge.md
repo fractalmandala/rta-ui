@@ -10,13 +10,28 @@ Label a status, category, version, or count in a small chip.
 
 Port of `moduix/packages/svelte/src/components/badge` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Badge` | `Badge.svelte` |
-| `BadgeDot` | `BadgeDot.svelte` |
-| `BadgeLabel` | `BadgeLabel.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Badge } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Badge` | `Badge.svelte` | `—` |
+| `BadgeDot` | `BadgeDot.svelte` | `none (aria-hidden)` |
+| `BadgeLabel` | `BadgeLabel.svelte` | `—` |
 
 ## Props
 
@@ -37,15 +52,21 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `BadgeDot` | `badge` | `dot` | `badge-dot` |
 | `BadgeLabel` | `badge` | `label` | `badge-label` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-badge-bg`
-- `--moduix-badge-border-color`
-- `--moduix-badge-color`
+| variable | default |
+| --- | --- |
+| `--moduix-badge-bg` | `var(--moduix-primary)` |
+| `--moduix-badge-border-color` | `transparent` |
+| `--moduix-badge-color` | `var(--moduix-primary-foreground)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

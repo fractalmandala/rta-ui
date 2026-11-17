@@ -10,11 +10,26 @@ Trigger an action or follow a link with accessible button styles.
 
 Port of `moduix/packages/svelte/src/components/button` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Button` | `Button.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Button } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Button` | `Button.svelte` | `—` |
 
 ## Props
 
@@ -37,26 +52,32 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | --- | --- | --- | --- |
 | — | — | — | — |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-button-bg`
-- `--moduix-button-bg-hover`
-- `--moduix-button-border-color`
-- `--moduix-button-border-width`
-- `--moduix-button-color`
-- `--moduix-button-content-gap`
-- `--moduix-button-font-size`
-- `--moduix-button-font-weight`
-- `--moduix-button-height`
-- `--moduix-button-icon-size`
-- `--moduix-button-line-height`
-- `--moduix-button-padding-x`
-- `--moduix-button-padding-y`
-- `--moduix-button-radius`
+| variable | default |
+| --- | --- |
+| `--moduix-button-bg` | `var(--_button-bg)` |
+| `--moduix-button-bg-hover` | `var(--_button-bg-hover)` |
+| `--moduix-button-border-color` | `var(--_button-border-color)` |
+| `--moduix-button-border-width` | `var(--moduix-border-width-sm)` |
+| `--moduix-button-color` | `var(--_button-color)` |
+| `--moduix-button-content-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-button-font-size` | `var(--_button-font-size)` |
+| `--moduix-button-font-weight` | `var(--moduix-weight-medium)` |
+| `--moduix-button-height` | `var(--_button-height)` |
+| `--moduix-button-icon-size` | `var(--moduix-spacing-4)` |
+| `--moduix-button-line-height` | `var(--_button-line-height)` |
+| `--moduix-button-padding-x` | `var(--_button-padding-x)` |
+| `--moduix-button-padding-y` | `var(--_button-padding-y)` |
+| `--moduix-button-radius` | `var(--moduix-radius-md)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

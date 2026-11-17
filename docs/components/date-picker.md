@@ -10,43 +10,60 @@ Pick a date, range, or several dates from a calendar.
 
 Port of `moduix/packages/svelte/src/components/date-picker` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `DatePicker` | `DatePicker.svelte` |
-| `DatePickerClearTrigger` | `DatePickerClearTrigger.svelte` |
-| `DatePickerContent` | `DatePickerContent.svelte` |
-| `DatePickerControl` | `DatePickerControl.svelte` |
-| `DatePickerDayTable` | `DatePickerDayTable.svelte` |
-| `DatePickerField` | `DatePickerField.svelte` |
-| `DatePickerInput` | `DatePickerInput.svelte` |
-| `DatePickerLabel` | `DatePickerLabel.svelte` |
-| `DatePickerMonthSelect` | `DatePickerMonthSelect.svelte` |
-| `DatePickerMonthTable` | `DatePickerMonthTable.svelte` |
-| `DatePickerNextTrigger` | `DatePickerNextTrigger.svelte` |
-| `DatePickerPositioner` | `DatePickerPositioner.svelte` |
-| `DatePickerPresetTrigger` | `DatePickerPresetTrigger.svelte` |
-| `DatePickerPrevTrigger` | `DatePickerPrevTrigger.svelte` |
-| `DatePickerRangeField` | `DatePickerRangeField.svelte` |
-| `DatePickerRangeText` | `DatePickerRangeText.svelte` |
-| `DatePickerRootProvider` | `DatePickerRootProvider.svelte` |
-| `DatePickerTable` | `DatePickerTable.svelte` |
-| `DatePickerTableBody` | `DatePickerTableBody.svelte` |
-| `DatePickerTableCell` | `DatePickerTableCell.svelte` |
-| `DatePickerTableCellTrigger` | `DatePickerTableCellTrigger.svelte` |
-| `DatePickerTableHead` | `DatePickerTableHead.svelte` |
-| `DatePickerTableHeader` | `DatePickerTableHeader.svelte` |
-| `DatePickerTableRow` | `DatePickerTableRow.svelte` |
-| `DatePickerTrigger` | `DatePickerTrigger.svelte` |
-| `DatePickerValueText` | `DatePickerValueText.svelte` |
-| `DatePickerView` | `DatePickerView.svelte` |
-| `DatePickerViewControl` | `DatePickerViewControl.svelte` |
-| `DatePickerViewTrigger` | `DatePickerViewTrigger.svelte` |
-| `DatePickerWeekNumberCell` | `DatePickerWeekNumberCell.svelte` |
-| `DatePickerWeekNumberHeaderCell` | `DatePickerWeekNumberHeaderCell.svelte` |
-| `DatePickerYearSelect` | `DatePickerYearSelect.svelte` |
-| `DatePickerYearTable` | `DatePickerYearTable.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { DatePicker } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `DatePicker` | `DatePicker.svelte` | `—` |
+| `DatePickerClearTrigger` | `DatePickerClearTrigger.svelte` | `none (aria-hidden)` |
+| `DatePickerContent` | `DatePickerContent.svelte` | `—` |
+| `DatePickerControl` | `DatePickerControl.svelte` | `—` |
+| `DatePickerDayTable` | `DatePickerDayTable.svelte` | `—` |
+| `DatePickerField` | `DatePickerField.svelte` | `—` |
+| `DatePickerInput` | `DatePickerInput.svelte` | `—` |
+| `DatePickerLabel` | `DatePickerLabel.svelte` | `—` |
+| `DatePickerMonthSelect` | `DatePickerMonthSelect.svelte` | `none (aria-hidden)` |
+| `DatePickerMonthTable` | `DatePickerMonthTable.svelte` | `—` |
+| `DatePickerNextTrigger` | `DatePickerNextTrigger.svelte` | `none (aria-hidden)` |
+| `DatePickerPositioner` | `DatePickerPositioner.svelte` | `—` |
+| `DatePickerPresetTrigger` | `DatePickerPresetTrigger.svelte` | `—` |
+| `DatePickerPrevTrigger` | `DatePickerPrevTrigger.svelte` | `none (aria-hidden)` |
+| `DatePickerRangeField` | `DatePickerRangeField.svelte` | `—` |
+| `DatePickerRangeText` | `DatePickerRangeText.svelte` | `—` |
+| `DatePickerRootProvider` | `DatePickerRootProvider.svelte` | `—` |
+| `DatePickerTable` | `DatePickerTable.svelte` | `—` |
+| `DatePickerTableBody` | `DatePickerTableBody.svelte` | `—` |
+| `DatePickerTableCell` | `DatePickerTableCell.svelte` | `—` |
+| `DatePickerTableCellTrigger` | `DatePickerTableCellTrigger.svelte` | `—` |
+| `DatePickerTableHead` | `DatePickerTableHead.svelte` | `—` |
+| `DatePickerTableHeader` | `DatePickerTableHeader.svelte` | `—` |
+| `DatePickerTableRow` | `DatePickerTableRow.svelte` | `—` |
+| `DatePickerTrigger` | `DatePickerTrigger.svelte` | `none (aria-hidden)` |
+| `DatePickerValueText` | `DatePickerValueText.svelte` | `—` |
+| `DatePickerView` | `DatePickerView.svelte` | `—` |
+| `DatePickerViewControl` | `DatePickerViewControl.svelte` | `—` |
+| `DatePickerViewTrigger` | `DatePickerViewTrigger.svelte` | `none (aria-hidden)` |
+| `DatePickerWeekNumberCell` | `DatePickerWeekNumberCell.svelte` | `—` |
+| `DatePickerWeekNumberHeaderCell` | `DatePickerWeekNumberHeaderCell.svelte` | `—` |
+| `DatePickerYearSelect` | `DatePickerYearSelect.svelte` | `none (aria-hidden)` |
+| `DatePickerYearTable` | `DatePickerYearTable.svelte` | `—` |
+
+ARIA roles rendered by this family: `application`, `button`, `grid`, `gridcell`, `rowheader`.
 
 ## Props
 
@@ -270,13 +287,19 @@ adds to `Omit<DatePickerTableProps, 'asChild' | 'children'>`.
 | `DatePickerWeekNumberHeaderCell` | `date-picker` | `table-cell` | `date-picker-week-number-header-cell` |
 | `DatePickerYearSelect` | `date-picker` | `year-select` | `date-picker-year-select-control` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-date-picker-content-width`
-- `--moduix-date-picker-control-height`
-- `--moduix-date-picker-radius`
-- `--moduix-date-picker-table-cell-size`
-- `--moduix-date-picker-width`
+| variable | default |
+| --- | --- |
+| `--moduix-date-picker-content-width` | `20rem` |
+| `--moduix-date-picker-control-height` | `var(--moduix-size-md)` |
+| `--moduix-date-picker-radius` | `var(--moduix-radius-md)` |
+| `--moduix-date-picker-table-cell-size` | `var(--moduix-size-sm)` |
+| `--moduix-date-picker-width` | `18.75rem` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -295,9 +318,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

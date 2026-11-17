@@ -10,17 +10,32 @@ Show task progress on a bar, with a known or unknown end.
 
 Port of `moduix/packages/svelte/src/components/progress-linear` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `ProgressLinear` | `ProgressLinear.svelte` |
-| `ProgressLinearLabel` | `ProgressLinearLabel.svelte` |
-| `ProgressLinearRange` | `ProgressLinearRange.svelte` |
-| `ProgressLinearRootProvider` | `ProgressLinearRootProvider.svelte` |
-| `ProgressLinearTrack` | `ProgressLinearTrack.svelte` |
-| `ProgressLinearValueText` | `ProgressLinearValueText.svelte` |
-| `ProgressLinearView` | `ProgressLinearView.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { ProgressLinear } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `ProgressLinear` | `ProgressLinear.svelte` | `—` |
+| `ProgressLinearLabel` | `ProgressLinearLabel.svelte` | `—` |
+| `ProgressLinearRange` | `ProgressLinearRange.svelte` | `—` |
+| `ProgressLinearRootProvider` | `ProgressLinearRootProvider.svelte` | `—` |
+| `ProgressLinearTrack` | `ProgressLinearTrack.svelte` | `—` |
+| `ProgressLinearValueText` | `ProgressLinearValueText.svelte` | `—` |
+| `ProgressLinearView` | `ProgressLinearView.svelte` | `—` |
 
 ## Props
 
@@ -51,15 +66,21 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `ProgressLinearValueText` | `progress` | `value-text` | `progress-linear-value-text` |
 | `ProgressLinearView` | `progress` | `view` | `progress-linear-view` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-progress-linear-range-bg`
-- `--moduix-progress-linear-track-bg`
-- `--moduix-progress-linear-track-size`
+| variable | default |
+| --- | --- |
+| `--moduix-progress-linear-range-bg` | `var(--moduix-primary)` |
+| `--moduix-progress-linear-track-bg` | `var(--moduix-muted)` |
+| `--moduix-progress-linear-track-size` | `var(--moduix-spacing-2)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

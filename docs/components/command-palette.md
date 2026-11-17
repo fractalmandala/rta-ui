@@ -10,41 +10,58 @@ Search and run commands from a dialog opened by a button or shortcut.
 
 Port of `moduix/packages/svelte/src/components/command-palette` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `CommandPalette` | `CommandPalette.svelte` |
-| `CommandPaletteBackdrop` | `CommandPaletteBackdrop.svelte` |
-| `CommandPaletteClearTrigger` | `CommandPaletteClearTrigger.svelte` |
-| `CommandPaletteCombobox` | `CommandPaletteCombobox.svelte` |
-| `CommandPaletteContent` | `CommandPaletteContent.svelte` |
-| `CommandPaletteControl` | `CommandPaletteControl.svelte` |
-| `CommandPaletteDescription` | `CommandPaletteDescription.svelte` |
-| `CommandPaletteEmpty` | `CommandPaletteEmpty.svelte` |
-| `CommandPaletteFooter` | `CommandPaletteFooter.svelte` |
-| `CommandPaletteHeader` | `CommandPaletteHeader.svelte` |
-| `CommandPaletteInput` | `CommandPaletteInput.svelte` |
-| `CommandPaletteItem` | `CommandPaletteItem.svelte` |
-| `CommandPaletteItemDescription` | `CommandPaletteItemDescription.svelte` |
-| `CommandPaletteItemGroup` | `CommandPaletteItemGroup.svelte` |
-| `CommandPaletteItemGroupLabel` | `CommandPaletteItemGroupLabel.svelte` |
-| `CommandPaletteItemIcon` | `CommandPaletteItemIcon.svelte` |
-| `CommandPaletteItemIndicator` | `CommandPaletteItemIndicator.svelte` |
-| `CommandPaletteItemLabel` | `CommandPaletteItemLabel.svelte` |
-| `CommandPaletteItemMeta` | `CommandPaletteItemMeta.svelte` |
-| `CommandPaletteItemText` | `CommandPaletteItemText.svelte` |
-| `CommandPaletteKbd` | `CommandPaletteKbd.svelte` |
-| `CommandPaletteList` | `CommandPaletteList.svelte` |
-| `CommandPalettePanel` | `CommandPalettePanel.svelte` |
-| `CommandPalettePositioner` | `CommandPalettePositioner.svelte` |
-| `CommandPaletteRootProvider` | `CommandPaletteRootProvider.svelte` |
-| `CommandPaletteSearch` | `CommandPaletteSearch.svelte` |
-| `CommandPaletteSeparator` | `CommandPaletteSeparator.svelte` |
-| `CommandPaletteTitle` | `CommandPaletteTitle.svelte` |
-| `CommandPaletteTrigger` | `CommandPaletteTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { CommandPalette } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `CommandPalette` | `CommandPalette.svelte` | `—` |
+| `CommandPaletteBackdrop` | `CommandPaletteBackdrop.svelte` | `—` |
+| `CommandPaletteClearTrigger` | `CommandPaletteClearTrigger.svelte` | `none (aria-hidden)` |
+| `CommandPaletteCombobox` | `CommandPaletteCombobox.svelte` | `—` |
+| `CommandPaletteContent` | `CommandPaletteContent.svelte` | `listbox` |
+| `CommandPaletteControl` | `CommandPaletteControl.svelte` | `—` |
+| `CommandPaletteDescription` | `CommandPaletteDescription.svelte` | `—` |
+| `CommandPaletteEmpty` | `CommandPaletteEmpty.svelte` | `presentation` |
+| `CommandPaletteFooter` | `CommandPaletteFooter.svelte` | `—` |
+| `CommandPaletteHeader` | `CommandPaletteHeader.svelte` | `—` |
+| `CommandPaletteInput` | `CommandPaletteInput.svelte` | `combobox` |
+| `CommandPaletteItem` | `CommandPaletteItem.svelte` | `option` |
+| `CommandPaletteItemDescription` | `CommandPaletteItemDescription.svelte` | `—` |
+| `CommandPaletteItemGroup` | `CommandPaletteItemGroup.svelte` | `group` |
+| `CommandPaletteItemGroupLabel` | `CommandPaletteItemGroupLabel.svelte` | `presentation` |
+| `CommandPaletteItemIcon` | `CommandPaletteItemIcon.svelte` | `—` |
+| `CommandPaletteItemIndicator` | `CommandPaletteItemIndicator.svelte` | `none (aria-hidden)` |
+| `CommandPaletteItemLabel` | `CommandPaletteItemLabel.svelte` | `—` |
+| `CommandPaletteItemMeta` | `CommandPaletteItemMeta.svelte` | `—` |
+| `CommandPaletteItemText` | `CommandPaletteItemText.svelte` | `—` |
+| `CommandPaletteKbd` | `CommandPaletteKbd.svelte` | `—` |
+| `CommandPaletteList` | `CommandPaletteList.svelte` | `—` |
+| `CommandPalettePanel` | `CommandPalettePanel.svelte` | `—` |
+| `CommandPalettePositioner` | `CommandPalettePositioner.svelte` | `—` |
+| `CommandPaletteRootProvider` | `CommandPaletteRootProvider.svelte` | `—` |
+| `CommandPaletteSearch` | `CommandPaletteSearch.svelte` | `none (aria-hidden)` |
+| `CommandPaletteSeparator` | `CommandPaletteSeparator.svelte` | `separator` |
+| `CommandPaletteTitle` | `CommandPaletteTitle.svelte` | `—` |
+| `CommandPaletteTrigger` | `CommandPaletteTrigger.svelte` | `—` |
 
 `CommandPalette`, `CommandPaletteRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `combobox`, `dialog`, `group`, `listbox`, `option`, `presentation`, `separator`.
 
 ## Props
 
@@ -168,10 +185,16 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'id'>`, `PolymorphicProps<'d
 | `CommandPaletteTitle` | `command-palette` | `title` | `command-palette-title` |
 | `CommandPaletteTrigger` | `command-palette` | `trigger` | `command-palette-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-command-palette-max-height`
-- `--moduix-command-palette-width`
+| variable | default |
+| --- | --- |
+| `--moduix-command-palette-max-height` | `34rem` |
+| `--moduix-command-palette-width` | `37.5rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Home`, `↑SpaceArrowUp`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -185,9 +208,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

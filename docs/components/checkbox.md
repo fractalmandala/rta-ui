@@ -10,17 +10,34 @@ Turn an option on or off, alone or as part of a group.
 
 Port of `moduix/packages/svelte/src/components/checkbox` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Checkbox` | `Checkbox.svelte` |
-| `CheckboxControl` | `CheckboxControl.svelte` |
-| `CheckboxGroup` | `CheckboxGroup.svelte` |
-| `CheckboxHiddenInput` | `CheckboxHiddenInput.svelte` |
-| `CheckboxIndicator` | `CheckboxIndicator.svelte` |
-| `CheckboxLabel` | `CheckboxLabel.svelte` |
-| `CheckboxRootProvider` | `CheckboxRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Checkbox } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Checkbox` | `Checkbox.svelte` | `—` |
+| `CheckboxControl` | `CheckboxControl.svelte` | `—` |
+| `CheckboxGroup` | `CheckboxGroup.svelte` | `group` |
+| `CheckboxHiddenInput` | `CheckboxHiddenInput.svelte` | `—` |
+| `CheckboxIndicator` | `CheckboxIndicator.svelte` | `—` |
+| `CheckboxLabel` | `CheckboxLabel.svelte` | `—` |
+| `CheckboxRootProvider` | `CheckboxRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`.
 
 ## Props
 
@@ -78,20 +95,26 @@ accepts the native props of `HTMLProps<'label'>`, `PolymorphicProps<'label'>`, `
 | `CheckboxLabel` | `checkbox` | `label` | `checkbox-label` |
 | `CheckboxRootProvider` | `checkbox` | `root` | `checkbox-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-checkbox-bg`
-- `--moduix-checkbox-bg-checked`
-- `--moduix-checkbox-border-color`
-- `--moduix-checkbox-color`
-- `--moduix-checkbox-gap`
-- `--moduix-checkbox-icon-size`
-- `--moduix-checkbox-radius`
-- `--moduix-checkbox-size`
+| variable | default |
+| --- | --- |
+| `--moduix-checkbox-bg` | `var(--moduix-background)` |
+| `--moduix-checkbox-bg-checked` | `var(--moduix-primary)` |
+| `--moduix-checkbox-border-color` | `var(--moduix-input)` |
+| `--moduix-checkbox-color` | `var(--moduix-primary-foreground)` |
+| `--moduix-checkbox-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-checkbox-icon-size` | `var(--_checkbox-icon-size)` |
+| `--moduix-checkbox-radius` | `var(--moduix-radius-xs)` |
+| `--moduix-checkbox-size` | `var(--_checkbox-size)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

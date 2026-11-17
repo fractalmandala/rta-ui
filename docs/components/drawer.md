@@ -10,31 +10,48 @@ Slide a panel in from a screen edge, with swipe and snap points.
 
 Port of `moduix/packages/svelte/src/components/drawer` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Drawer` | `Drawer.svelte` |
-| `DrawerBackdrop` | `DrawerBackdrop.svelte` |
-| `DrawerBody` | `DrawerBody.svelte` |
-| `DrawerCloseIcon` | `DrawerCloseIcon.svelte` |
-| `DrawerCloseTrigger` | `DrawerCloseTrigger.svelte` |
-| `DrawerContent` | `DrawerContent.svelte` |
-| `DrawerDescription` | `DrawerDescription.svelte` |
-| `DrawerFooter` | `DrawerFooter.svelte` |
-| `DrawerGrabber` | `DrawerGrabber.svelte` |
-| `DrawerGrabberIndicator` | `DrawerGrabberIndicator.svelte` |
-| `DrawerHeader` | `DrawerHeader.svelte` |
-| `DrawerIndent` | `DrawerIndent.svelte` |
-| `DrawerIndentBackground` | `DrawerIndentBackground.svelte` |
-| `DrawerPositioner` | `DrawerPositioner.svelte` |
-| `DrawerRootProvider` | `DrawerRootProvider.svelte` |
-| `DrawerStack` | `DrawerStack.svelte` |
-| `DrawerSwipeArea` | `DrawerSwipeArea.svelte` |
-| `DrawerTitle` | `DrawerTitle.svelte` |
-| `DrawerTrigger` | `DrawerTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Drawer } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Drawer` | `Drawer.svelte` | `—` |
+| `DrawerBackdrop` | `DrawerBackdrop.svelte` | `—` |
+| `DrawerBody` | `DrawerBody.svelte` | `—` |
+| `DrawerCloseIcon` | `DrawerCloseIcon.svelte` | `—` |
+| `DrawerCloseTrigger` | `DrawerCloseTrigger.svelte` | `—` |
+| `DrawerContent` | `DrawerContent.svelte` | `—` |
+| `DrawerDescription` | `DrawerDescription.svelte` | `—` |
+| `DrawerFooter` | `DrawerFooter.svelte` | `—` |
+| `DrawerGrabber` | `DrawerGrabber.svelte` | `—` |
+| `DrawerGrabberIndicator` | `DrawerGrabberIndicator.svelte` | `—` |
+| `DrawerHeader` | `DrawerHeader.svelte` | `—` |
+| `DrawerIndent` | `DrawerIndent.svelte` | `—` |
+| `DrawerIndentBackground` | `DrawerIndentBackground.svelte` | `—` |
+| `DrawerPositioner` | `DrawerPositioner.svelte` | `—` |
+| `DrawerRootProvider` | `DrawerRootProvider.svelte` | `—` |
+| `DrawerStack` | `DrawerStack.svelte` | `—` |
+| `DrawerSwipeArea` | `DrawerSwipeArea.svelte` | `presentation` |
+| `DrawerTitle` | `DrawerTitle.svelte` | `—` |
+| `DrawerTrigger` | `DrawerTrigger.svelte` | `—` |
 
 `Drawer`, `DrawerRootProvider`, `DrawerStack` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `dialog`, `presentation`.
 
 ## Props
 
@@ -144,9 +161,15 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `DrawerTitle` | `drawer` | `title` | `drawer-title` |
 | `DrawerTrigger` | `drawer` | `trigger` | `drawer-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-drawer-island-inset`
+| variable | default |
+| --- | --- |
+| `--moduix-drawer-island-inset` | `var(--moduix-spacing-4)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -164,9 +187,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

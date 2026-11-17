@@ -10,29 +10,46 @@ Pick one or more values from a popup list of options.
 
 Port of `moduix/packages/svelte/src/components/select` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Select` | `Select.svelte` |
-| `SelectClearTrigger` | `SelectClearTrigger.svelte` |
-| `SelectContent` | `SelectContent.svelte` |
-| `SelectControl` | `SelectControl.svelte` |
-| `SelectField` | `SelectField.svelte` |
-| `SelectHiddenSelect` | `SelectHiddenSelect.svelte` |
-| `SelectIndicator` | `SelectIndicator.svelte` |
-| `SelectItem` | `SelectItem.svelte` |
-| `SelectItemGroup` | `SelectItemGroup.svelte` |
-| `SelectItemGroupLabel` | `SelectItemGroupLabel.svelte` |
-| `SelectItemIndicator` | `SelectItemIndicator.svelte` |
-| `SelectItemText` | `SelectItemText.svelte` |
-| `SelectLabel` | `SelectLabel.svelte` |
-| `SelectList` | `SelectList.svelte` |
-| `SelectOption` | `SelectOption.svelte` |
-| `SelectPositioner` | `SelectPositioner.svelte` |
-| `SelectRootProvider` | `SelectRootProvider.svelte` |
-| `SelectTrigger` | `SelectTrigger.svelte` |
-| `SelectValueText` | `SelectValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Select } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Select` | `Select.svelte` | `—` |
+| `SelectClearTrigger` | `SelectClearTrigger.svelte` | `—` |
+| `SelectContent` | `SelectContent.svelte` | `—` |
+| `SelectControl` | `SelectControl.svelte` | `—` |
+| `SelectField` | `SelectField.svelte` | `—` |
+| `SelectHiddenSelect` | `SelectHiddenSelect.svelte` | `—` |
+| `SelectIndicator` | `SelectIndicator.svelte` | `none (aria-hidden)` |
+| `SelectItem` | `SelectItem.svelte` | `—` |
+| `SelectItemGroup` | `SelectItemGroup.svelte` | `—` |
+| `SelectItemGroupLabel` | `SelectItemGroupLabel.svelte` | `—` |
+| `SelectItemIndicator` | `SelectItemIndicator.svelte` | `—` |
+| `SelectItemText` | `SelectItemText.svelte` | `—` |
+| `SelectLabel` | `SelectLabel.svelte` | `—` |
+| `SelectList` | `SelectList.svelte` | `—` |
+| `SelectOption` | `SelectOption.svelte` | `—` |
+| `SelectPositioner` | `SelectPositioner.svelte` | `—` |
+| `SelectRootProvider` | `SelectRootProvider.svelte` | `—` |
+| `SelectTrigger` | `SelectTrigger.svelte` | `—` |
+| `SelectValueText` | `SelectValueText.svelte` | `—` |
+
+ARIA roles rendered by this family: `combobox`, `group`, `option`, `presentation`.
 
 ## Props
 
@@ -106,13 +123,19 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`.
 | `SelectTrigger` | `select` | `trigger` | `select-trigger` |
 | `SelectValueText` | `select` | `value-text` | `select-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-select-action-size`
-- `--moduix-select-content-max-height`
-- `--moduix-select-control-height`
-- `--moduix-select-radius`
-- `--moduix-select-width`
+| variable | default |
+| --- | --- |
+| `--moduix-select-action-size` | `var(--moduix-size-xs)` |
+| `--moduix-select-content-max-height` | `24rem` |
+| `--moduix-select-control-height` | `var(--moduix-size-md)` |
+| `--moduix-select-radius` | `var(--moduix-radius-md)` |
+| `--moduix-select-width` | `14rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Escape`, `Home`, `Space`, `Tab`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -130,9 +153,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

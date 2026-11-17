@@ -10,16 +10,33 @@ Switch between related panels in one area of the page.
 
 Port of `moduix/packages/svelte/src/components/tabs` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Tabs` | `Tabs.svelte` |
-| `TabsContent` | `TabsContent.svelte` |
-| `TabsIndicator` | `TabsIndicator.svelte` |
-| `TabsList` | `TabsList.svelte` |
-| `TabsRootProvider` | `TabsRootProvider.svelte` |
-| `TabsTrigger` | `TabsTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Tabs } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Tabs` | `Tabs.svelte` | `—` |
+| `TabsContent` | `TabsContent.svelte` | `tabpanel` |
+| `TabsIndicator` | `TabsIndicator.svelte` | `—` |
+| `TabsList` | `TabsList.svelte` | `tablist` |
+| `TabsRootProvider` | `TabsRootProvider.svelte` | `—` |
+| `TabsTrigger` | `TabsTrigger.svelte` | `tab` |
+
+ARIA roles rendered by this family: `tab`, `tablist`, `tabpanel`.
 
 ## Props
 
@@ -88,15 +105,21 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `TabsRootProvider` | `tabs` | `root` | `tabs-root-provider` |
 | `TabsTrigger` | `tabs` | `trigger` | `tabs-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-tabs-bg`
-- `--moduix-tabs-border-color`
-- `--moduix-tabs-indicator-bg`
-- `--moduix-tabs-list-bg`
-- `--moduix-tabs-list-border-color`
-- `--moduix-tabs-tab-color`
-- `--moduix-tabs-tab-color-active`
+| variable | default |
+| --- | --- |
+| `--moduix-tabs-bg` | `var(--moduix-background)` |
+| `--moduix-tabs-border-color` | `var(--moduix-border)` |
+| `--moduix-tabs-indicator-bg` | `var(--moduix-background)` |
+| `--moduix-tabs-list-bg` | `var(--moduix-muted)` |
+| `--moduix-tabs-list-border-color` | `var(--moduix-border)` |
+| `--moduix-tabs-tab-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-tabs-tab-color-active` | `var(--moduix-foreground)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -104,9 +127,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

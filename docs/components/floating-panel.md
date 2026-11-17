@@ -10,29 +10,46 @@ Open a window that users can drag, resize, minimize, and maximize.
 
 Port of `moduix/packages/svelte/src/components/floating-panel` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `FloatingPanel` | `FloatingPanel.svelte` |
-| `FloatingPanelBody` | `FloatingPanelBody.svelte` |
-| `FloatingPanelCloseIcon` | `FloatingPanelCloseIcon.svelte` |
-| `FloatingPanelCloseTrigger` | `FloatingPanelCloseTrigger.svelte` |
-| `FloatingPanelContent` | `FloatingPanelContent.svelte` |
-| `FloatingPanelControl` | `FloatingPanelControl.svelte` |
-| `FloatingPanelDragIndicator` | `FloatingPanelDragIndicator.svelte` |
-| `FloatingPanelDragTrigger` | `FloatingPanelDragTrigger.svelte` |
-| `FloatingPanelFooter` | `FloatingPanelFooter.svelte` |
-| `FloatingPanelHeader` | `FloatingPanelHeader.svelte` |
-| `FloatingPanelPositioner` | `FloatingPanelPositioner.svelte` |
-| `FloatingPanelResizeTrigger` | `FloatingPanelResizeTrigger.svelte` |
-| `FloatingPanelResizeTriggerGroup` | `FloatingPanelResizeTriggerGroup.svelte` |
-| `FloatingPanelRootProvider` | `FloatingPanelRootProvider.svelte` |
-| `FloatingPanelStageTrigger` | `FloatingPanelStageTrigger.svelte` |
-| `FloatingPanelTitle` | `FloatingPanelTitle.svelte` |
-| `FloatingPanelTrigger` | `FloatingPanelTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { FloatingPanel } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `FloatingPanel` | `FloatingPanel.svelte` | `—` |
+| `FloatingPanelBody` | `FloatingPanelBody.svelte` | `—` |
+| `FloatingPanelCloseIcon` | `FloatingPanelCloseIcon.svelte` | `—` |
+| `FloatingPanelCloseTrigger` | `FloatingPanelCloseTrigger.svelte` | `—` |
+| `FloatingPanelContent` | `FloatingPanelContent.svelte` | `—` |
+| `FloatingPanelControl` | `FloatingPanelControl.svelte` | `—` |
+| `FloatingPanelDragIndicator` | `FloatingPanelDragIndicator.svelte` | `none (aria-hidden)` |
+| `FloatingPanelDragTrigger` | `FloatingPanelDragTrigger.svelte` | `—` |
+| `FloatingPanelFooter` | `FloatingPanelFooter.svelte` | `—` |
+| `FloatingPanelHeader` | `FloatingPanelHeader.svelte` | `—` |
+| `FloatingPanelPositioner` | `FloatingPanelPositioner.svelte` | `—` |
+| `FloatingPanelResizeTrigger` | `FloatingPanelResizeTrigger.svelte` | `—` |
+| `FloatingPanelResizeTriggerGroup` | `FloatingPanelResizeTriggerGroup.svelte` | `—` |
+| `FloatingPanelRootProvider` | `FloatingPanelRootProvider.svelte` | `—` |
+| `FloatingPanelStageTrigger` | `FloatingPanelStageTrigger.svelte` | `none (aria-hidden)` |
+| `FloatingPanelTitle` | `FloatingPanelTitle.svelte` | `—` |
+| `FloatingPanelTrigger` | `FloatingPanelTrigger.svelte` | `—` |
 
 `FloatingPanel`, `FloatingPanelRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `dialog`, `separator`.
 
 ## Props
 
@@ -125,6 +142,10 @@ accepts the native props of `Omit<HTMLProps<'button'>, 'type'>`, `PolymorphicPro
 | `FloatingPanelTitle` | `floating-panel` | `title` | `floating-panel-title` |
 | `FloatingPanelTrigger` | `floating-panel` | `trigger` | `floating-panel-trigger` |
 
+## Keyboard
+
+Keys handled by this family: `PageDown`, `PageUp`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
+
 ## Generated ids
 
 - `float:${id}:content`
@@ -137,9 +158,9 @@ accepts the native props of `Omit<HTMLProps<'button'>, 'type'>`, `PolymorphicPro
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,16 +10,33 @@ Scroll logos or announcements in a continuous loop.
 
 Port of `moduix/packages/svelte/src/components/marquee` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Marquee` | `Marquee.svelte` |
-| `MarqueeContent` | `MarqueeContent.svelte` |
-| `MarqueeEdge` | `MarqueeEdge.svelte` |
-| `MarqueeItem` | `MarqueeItem.svelte` |
-| `MarqueeRootProvider` | `MarqueeRootProvider.svelte` |
-| `MarqueeViewport` | `MarqueeViewport.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Marquee } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Marquee` | `Marquee.svelte` | `region` |
+| `MarqueeContent` | `MarqueeContent.svelte` | `—` |
+| `MarqueeEdge` | `MarqueeEdge.svelte` | `—` |
+| `MarqueeItem` | `MarqueeItem.svelte` | `—` |
+| `MarqueeRootProvider` | `MarqueeRootProvider.svelte` | `—` |
+| `MarqueeViewport` | `MarqueeViewport.svelte` | `—` |
+
+ARIA roles rendered by this family: `region`.
 
 ## Props
 
@@ -78,10 +95,16 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `MarqueeRootProvider` | `marquee` | `root` | `marquee-root-provider` |
 | `MarqueeViewport` | `marquee` | `viewport` | `marquee-viewport` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-marquee-edge-color`
-- `--moduix-marquee-edge-size`
+| variable | default |
+| --- | --- |
+| `--moduix-marquee-edge-color` | `var(--moduix-background)` |
+| `--moduix-marquee-edge-size` | `20%` |
+
+## Keyboard
+
+Keys handled by this family: `end`, `start`, `top`.
 
 ## Generated ids
 
@@ -89,9 +112,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

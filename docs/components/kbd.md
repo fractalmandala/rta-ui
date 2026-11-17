@@ -10,12 +10,29 @@ Show a keyboard key or a shortcut inline with the surrounding text.
 
 Port of `moduix/packages/svelte/src/components/kbd` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Kbd` | `Kbd.svelte` |
-| `KbdGroup` | `KbdGroup.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Kbd } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Kbd` | `Kbd.svelte` | `—` |
+| `KbdGroup` | `KbdGroup.svelte` | `group` |
+
+ARIA roles rendered by this family: `group`.
 
 ## Props
 
@@ -28,20 +45,26 @@ Every part accepts its native element props plus `class`, `style`, `ref` and `as
 | `Kbd` | `kbd` | `root` | `kbd-root` |
 | `KbdGroup` | `kbd` | `group` | `kbd-group` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-kbd-bg`
-- `--moduix-kbd-border-color`
-- `--moduix-kbd-border-width`
-- `--moduix-kbd-color`
-- `--moduix-kbd-height`
-- `--moduix-kbd-padding-x`
-- `--moduix-kbd-radius`
-- `--moduix-kbd-shadow`
+| variable | default |
+| --- | --- |
+| `--moduix-kbd-bg` | `var(--moduix-muted)` |
+| `--moduix-kbd-border-color` | `var(--moduix-border)` |
+| `--moduix-kbd-border-width` | `var(--moduix-border-width-sm)` |
+| `--moduix-kbd-color` | `var(--moduix-foreground)` |
+| `--moduix-kbd-height` | `var(--moduix-size-xs)` |
+| `--moduix-kbd-padding-x` | `var(--moduix-spacing-2)` |
+| `--moduix-kbd-radius` | `var(--moduix-radius-sm)` |
+| `--moduix-kbd-shadow` | `inset 0 -1px 0 color-mix(in oklab, currentColor 12%, transparent)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

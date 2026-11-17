@@ -10,17 +10,34 @@ Stack sections that open and close to show related content.
 
 Port of `moduix/packages/svelte/src/components/accordion` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Accordion` | `Accordion.svelte` |
-| `AccordionItem` | `AccordionItem.svelte` |
-| `AccordionItemBody` | `AccordionItemBody.svelte` |
-| `AccordionItemContent` | `AccordionItemContent.svelte` |
-| `AccordionItemIndicator` | `AccordionItemIndicator.svelte` |
-| `AccordionItemTrigger` | `AccordionItemTrigger.svelte` |
-| `AccordionRootProvider` | `AccordionRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Accordion } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Accordion` | `Accordion.svelte` | `—` |
+| `AccordionItem` | `AccordionItem.svelte` | `—` |
+| `AccordionItemBody` | `AccordionItemBody.svelte` | `—` |
+| `AccordionItemContent` | `AccordionItemContent.svelte` | `region` |
+| `AccordionItemIndicator` | `AccordionItemIndicator.svelte` | `none (aria-hidden)` |
+| `AccordionItemTrigger` | `AccordionItemTrigger.svelte` | `—` |
+| `AccordionRootProvider` | `AccordionRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `region`.
 
 ## Props
 
@@ -74,19 +91,25 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `AccordionItemTrigger` | `accordion` | `item-trigger` | `accordion-item-trigger` |
 | `AccordionRootProvider` | `accordion` | `root` | `accordion-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-accordion-icon-size`
-- `--moduix-accordion-item-body-gap`
-- `--moduix-accordion-item-body-padding`
-- `--moduix-accordion-item-border-color`
-- `--moduix-accordion-item-content-color`
-- `--moduix-accordion-item-content-font-size`
-- `--moduix-accordion-trigger-bg-hover`
-- `--moduix-accordion-trigger-font-size`
-- `--moduix-accordion-trigger-gap`
-- `--moduix-accordion-trigger-padding-x`
-- `--moduix-accordion-trigger-padding-y`
+| variable | default |
+| --- | --- |
+| `--moduix-accordion-icon-size` | `var(--moduix-spacing-3)` |
+| `--moduix-accordion-item-body-gap` | `var(--moduix-spacing-3)` |
+| `--moduix-accordion-item-body-padding` | `var(--moduix-spacing-3)` |
+| `--moduix-accordion-item-border-color` | `var(--moduix-border)` |
+| `--moduix-accordion-item-content-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-accordion-item-content-font-size` | `var(--moduix-text-md)` |
+| `--moduix-accordion-trigger-bg-hover` | `var(--moduix-muted)` |
+| `--moduix-accordion-trigger-font-size` | `var(--moduix-text-md)` |
+| `--moduix-accordion-trigger-gap` | `var(--moduix-spacing-4)` |
+| `--moduix-accordion-trigger-padding-x` | `var(--moduix-spacing-3)` |
+| `--moduix-accordion-trigger-padding-y` | `var(--moduix-spacing-2)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -97,9 +120,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,18 +10,33 @@ Preview a profile or link in a card when its trigger is hovered.
 
 Port of `moduix/packages/svelte/src/components/hover-card` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `HoverCard` | `HoverCard.svelte` |
-| `HoverCardArrow` | `HoverCardArrow.svelte` |
-| `HoverCardArrowTip` | `HoverCardArrowTip.svelte` |
-| `HoverCardBody` | `HoverCardBody.svelte` |
-| `HoverCardContent` | `HoverCardContent.svelte` |
-| `HoverCardPositioner` | `HoverCardPositioner.svelte` |
-| `HoverCardRootProvider` | `HoverCardRootProvider.svelte` |
-| `HoverCardTrigger` | `HoverCardTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { HoverCard } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `HoverCard` | `HoverCard.svelte` | `—` |
+| `HoverCardArrow` | `HoverCardArrow.svelte` | `—` |
+| `HoverCardArrowTip` | `HoverCardArrowTip.svelte` | `—` |
+| `HoverCardBody` | `HoverCardBody.svelte` | `—` |
+| `HoverCardContent` | `HoverCardContent.svelte` | `—` |
+| `HoverCardPositioner` | `HoverCardPositioner.svelte` | `—` |
+| `HoverCardRootProvider` | `HoverCardRootProvider.svelte` | `—` |
+| `HoverCardTrigger` | `HoverCardTrigger.svelte` | `—` |
 
 `HoverCard`, `HoverCardRootProvider` render no element of their own: they create the state and provide it to the other parts.
 
@@ -80,6 +95,10 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `HoverCardPositioner` | `hover-card` | `positioner` | `hover-card-positioner` |
 | `HoverCardTrigger` | `hover-card` | `trigger` | `hover-card-trigger` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `hover-card:${id}:arrow`
@@ -90,9 +109,9 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

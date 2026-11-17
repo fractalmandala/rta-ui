@@ -10,15 +10,32 @@ Split a layout into panels that users resize by dragging a handle.
 
 Port of `moduix/packages/svelte/src/components/splitter` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Splitter` | `Splitter.svelte` |
-| `SplitterPanel` | `SplitterPanel.svelte` |
-| `SplitterResizeTrigger` | `SplitterResizeTrigger.svelte` |
-| `SplitterResizeTriggerIndicator` | `SplitterResizeTriggerIndicator.svelte` |
-| `SplitterRootProvider` | `SplitterRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Splitter } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Splitter` | `Splitter.svelte` | `—` |
+| `SplitterPanel` | `SplitterPanel.svelte` | `—` |
+| `SplitterResizeTrigger` | `SplitterResizeTrigger.svelte` | `—` |
+| `SplitterResizeTriggerIndicator` | `SplitterResizeTriggerIndicator.svelte` | `—` |
+| `SplitterRootProvider` | `SplitterRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `separator`.
 
 ## Props
 
@@ -81,10 +98,16 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `SplitterResizeTriggerIndicator` | `splitter` | `resize-trigger-indicator` | `splitter-resize-trigger-indicator` |
 | `SplitterRootProvider` | `splitter` | `root` | `splitter-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-splitter-resize-trigger-line-color`
-- `--moduix-splitter-resize-trigger-size`
+| variable | default |
+| --- | --- |
+| `--moduix-splitter-resize-trigger-line-color` | `var(--moduix-border)` |
+| `--moduix-splitter-resize-trigger-size` | `var(--moduix-spacing-2-5)` |
+
+## Keyboard
+
+Keys handled by this family: `Enter`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -93,9 +116,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,29 +10,44 @@ Pick or drop files with type, size, and count checks.
 
 Port of `moduix/packages/svelte/src/components/file-upload` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `FileUpload` | `FileUpload.svelte` |
-| `FileUploadClearTrigger` | `FileUploadClearTrigger.svelte` |
-| `FileUploadContext` | `FileUploadContext.svelte` |
-| `FileUploadDropzone` | `FileUploadDropzone.svelte` |
-| `FileUploadDropzoneIcon` | `FileUploadDropzoneIcon.svelte` |
-| `FileUploadHiddenInput` | `FileUploadHiddenInput.svelte` |
-| `FileUploadItem` | `FileUploadItem.svelte` |
-| `FileUploadItemDeleteTrigger` | `FileUploadItemDeleteTrigger.svelte` |
-| `FileUploadItemGroup` | `FileUploadItemGroup.svelte` |
-| `FileUploadItemMetadata` | `FileUploadItemMetadata.svelte` |
-| `FileUploadItemName` | `FileUploadItemName.svelte` |
-| `FileUploadItemPreview` | `FileUploadItemPreview.svelte` |
-| `FileUploadItemPreviewIcon` | `FileUploadItemPreviewIcon.svelte` |
-| `FileUploadItemPreviewImage` | `FileUploadItemPreviewImage.svelte` |
-| `FileUploadItemSizeText` | `FileUploadItemSizeText.svelte` |
-| `FileUploadItems` | `FileUploadItems.svelte` |
-| `FileUploadLabel` | `FileUploadLabel.svelte` |
-| `FileUploadRootProvider` | `FileUploadRootProvider.svelte` |
-| `FileUploadTrigger` | `FileUploadTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { FileUpload } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `FileUpload` | `FileUpload.svelte` | `—` |
+| `FileUploadClearTrigger` | `FileUploadClearTrigger.svelte` | `—` |
+| `FileUploadContext` | `FileUploadContext.svelte` | `—` |
+| `FileUploadDropzone` | `FileUploadDropzone.svelte` | `—` |
+| `FileUploadDropzoneIcon` | `FileUploadDropzoneIcon.svelte` | `none (aria-hidden)` |
+| `FileUploadHiddenInput` | `FileUploadHiddenInput.svelte` | `—` |
+| `FileUploadItem` | `FileUploadItem.svelte` | `—` |
+| `FileUploadItemDeleteTrigger` | `FileUploadItemDeleteTrigger.svelte` | `none (aria-hidden)` |
+| `FileUploadItemGroup` | `FileUploadItemGroup.svelte` | `—` |
+| `FileUploadItemMetadata` | `FileUploadItemMetadata.svelte` | `—` |
+| `FileUploadItemName` | `FileUploadItemName.svelte` | `—` |
+| `FileUploadItemPreview` | `FileUploadItemPreview.svelte` | `—` |
+| `FileUploadItemPreviewIcon` | `FileUploadItemPreviewIcon.svelte` | `none (aria-hidden)` |
+| `FileUploadItemPreviewImage` | `FileUploadItemPreviewImage.svelte` | `—` |
+| `FileUploadItemSizeText` | `FileUploadItemSizeText.svelte` | `—` |
+| `FileUploadItems` | `FileUploadItems.svelte` | `—` |
+| `FileUploadLabel` | `FileUploadLabel.svelte` | `—` |
+| `FileUploadRootProvider` | `FileUploadRootProvider.svelte` | `—` |
+| `FileUploadTrigger` | `FileUploadTrigger.svelte` | `—` |
 
 `FileUploadContext` renders no element of its own: it creates the state and provides it to the other parts.
 
@@ -139,6 +154,10 @@ accepts the native props of `HTMLProps<'div'>`, and adds to `FileUploadRootProvi
 | `FileUploadRootProvider` | `file-upload` | `root` | `file-upload-root-provider` |
 | `FileUploadTrigger` | `file-upload` | `trigger` | `file-upload-trigger` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `file:${id}`
@@ -154,9 +173,9 @@ accepts the native props of `HTMLProps<'div'>`, and adds to `FileUploadRootProvi
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

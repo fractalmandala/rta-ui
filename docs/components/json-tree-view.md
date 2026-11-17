@@ -10,13 +10,28 @@ Inspect JSON and JavaScript values in an expandable tree.
 
 Port of `moduix/packages/svelte/src/components/json-tree-view` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `JsonTreeView` | `JsonTreeView.svelte` |
-| `JsonTreeViewRootProvider` | `JsonTreeViewRootProvider.svelte` |
-| `JsonTreeViewTree` | `JsonTreeViewTree.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { JsonTreeView } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `JsonTreeView` | `JsonTreeView.svelte` | `—` |
+| `JsonTreeViewRootProvider` | `JsonTreeViewRootProvider.svelte` | `—` |
+| `JsonTreeViewTree` | `JsonTreeViewTree.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -59,9 +74,13 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `JsonTreeViewRootProvider` | `json-tree-view` | `root` | `json-tree-view-root-provider` |
 | `JsonTreeViewTree` | `json-tree-view` | `tree` | `json-tree-view-tree` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

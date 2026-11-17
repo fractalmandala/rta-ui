@@ -10,22 +10,39 @@ Show brief notifications that stack and dismiss on their own.
 
 Port of `moduix/packages/svelte/src/components/toast` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Toast` | `Toast.svelte` |
-| `ToastActionTrigger` | `ToastActionTrigger.svelte` |
-| `ToastCloseTrigger` | `ToastCloseTrigger.svelte` |
-| `ToastContext` | `ToastContext.svelte` |
-| `ToastDescription` | `ToastDescription.svelte` |
-| `ToastIcon` | `ToastIcon.svelte` |
-| `ToastProgress` | `ToastProgress.svelte` |
-| `ToastTitle` | `ToastTitle.svelte` |
-| `ToastToaster` | `ToastToaster.svelte` |
-| `ToastViewport` | `ToastViewport.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Toast } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Toast` | `Toast.svelte` | `status` |
+| `ToastActionTrigger` | `ToastActionTrigger.svelte` | `—` |
+| `ToastCloseTrigger` | `ToastCloseTrigger.svelte` | `—` |
+| `ToastContext` | `ToastContext.svelte` | `—` |
+| `ToastDescription` | `ToastDescription.svelte` | `—` |
+| `ToastIcon` | `ToastIcon.svelte` | `none (aria-hidden)` |
+| `ToastProgress` | `ToastProgress.svelte` | `presentation` |
+| `ToastTitle` | `ToastTitle.svelte` | `—` |
+| `ToastToaster` | `ToastToaster.svelte` | `—` |
+| `ToastViewport` | `ToastViewport.svelte` | `region` |
 
 `ToastContext` renders no element of its own: it creates the state and provides it to the other parts.
+
+ARIA roles rendered by this family: `presentation`, `region`, `status`.
 
 ## Props
 
@@ -76,12 +93,18 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'children'>`, `Omit<Polymorp
 | `ToastToaster` | `—` | `—` | `toast-toaster` |
 | `ToastViewport` | `toast` | `group` | `—` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-toast-bg`
-- `--moduix-toast-border-color`
-- `--moduix-toast-color`
-- `--moduix-toast-description-color`
+| variable | default |
+| --- | --- |
+| `--moduix-toast-bg` | `var(--_toast-bg)` |
+| `--moduix-toast-border-color` | `var(--_toast-border-color)` |
+| `--moduix-toast-color` | `var(--_toast-color)` |
+| `--moduix-toast-description-color` | `var(--moduix-muted-foreground)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -90,9 +113,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

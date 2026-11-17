@@ -10,20 +10,37 @@ Enter a number with step buttons, limits, and locale formatting.
 
 Port of `moduix/packages/svelte/src/components/number-input` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `NumberInput` | `NumberInput.svelte` |
-| `NumberInputControl` | `NumberInputControl.svelte` |
-| `NumberInputDecrementTrigger` | `NumberInputDecrementTrigger.svelte` |
-| `NumberInputField` | `NumberInputField.svelte` |
-| `NumberInputIncrementTrigger` | `NumberInputIncrementTrigger.svelte` |
-| `NumberInputInput` | `NumberInputInput.svelte` |
-| `NumberInputLabel` | `NumberInputLabel.svelte` |
-| `NumberInputRootProvider` | `NumberInputRootProvider.svelte` |
-| `NumberInputScrubber` | `NumberInputScrubber.svelte` |
-| `NumberInputValueText` | `NumberInputValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { NumberInput } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `NumberInput` | `NumberInput.svelte` | `—` |
+| `NumberInputControl` | `NumberInputControl.svelte` | `—` |
+| `NumberInputDecrementTrigger` | `NumberInputDecrementTrigger.svelte` | `none (aria-hidden)` |
+| `NumberInputField` | `NumberInputField.svelte` | `—` |
+| `NumberInputIncrementTrigger` | `NumberInputIncrementTrigger.svelte` | `none (aria-hidden)` |
+| `NumberInputInput` | `NumberInputInput.svelte` | `—` |
+| `NumberInputLabel` | `NumberInputLabel.svelte` | `—` |
+| `NumberInputRootProvider` | `NumberInputRootProvider.svelte` | `—` |
+| `NumberInputScrubber` | `NumberInputScrubber.svelte` | `—` |
+| `NumberInputValueText` | `NumberInputValueText.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`, `presentation`, `spinbutton`.
 
 ## Props
 
@@ -87,11 +104,17 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'size'>`, `PolymorphicProps<
 | `NumberInputScrubber` | `number-input` | `scrubber` | `number-input-scrubber` |
 | `NumberInputValueText` | `number-input` | `value-text` | `number-input-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-number-input-control-height`
-- `--moduix-number-input-input-width`
-- `--moduix-number-input-radius`
+| variable | default |
+| --- | --- |
+| `--moduix-number-input-control-height` | `var(--_number-input-height)` |
+| `--moduix-number-input-input-width` | `6rem` |
+| `--moduix-number-input-radius` | `var(--moduix-radius-md)` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Home`, `PageDown`, `PageUp`, `↑SpaceArrowUp`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -105,9 +128,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

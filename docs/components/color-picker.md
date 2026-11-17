@@ -10,39 +10,56 @@ Choose a color with an area, channel sliders, inputs, and swatches.
 
 Port of `moduix/packages/svelte/src/components/color-picker` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `ColorPicker` | `ColorPicker.svelte` |
-| `ColorPickerArea` | `ColorPickerArea.svelte` |
-| `ColorPickerAreaBackground` | `ColorPickerAreaBackground.svelte` |
-| `ColorPickerAreaThumb` | `ColorPickerAreaThumb.svelte` |
-| `ColorPickerChannelInput` | `ColorPickerChannelInput.svelte` |
-| `ColorPickerChannelSlider` | `ColorPickerChannelSlider.svelte` |
-| `ColorPickerChannelSliderLabel` | `ColorPickerChannelSliderLabel.svelte` |
-| `ColorPickerChannelSliderThumb` | `ColorPickerChannelSliderThumb.svelte` |
-| `ColorPickerChannelSliderTrack` | `ColorPickerChannelSliderTrack.svelte` |
-| `ColorPickerChannelSliderValueText` | `ColorPickerChannelSliderValueText.svelte` |
-| `ColorPickerContent` | `ColorPickerContent.svelte` |
-| `ColorPickerControl` | `ColorPickerControl.svelte` |
-| `ColorPickerEyeDropperTrigger` | `ColorPickerEyeDropperTrigger.svelte` |
-| `ColorPickerFormatSelect` | `ColorPickerFormatSelect.svelte` |
-| `ColorPickerFormatTrigger` | `ColorPickerFormatTrigger.svelte` |
-| `ColorPickerHiddenInput` | `ColorPickerHiddenInput.svelte` |
-| `ColorPickerLabel` | `ColorPickerLabel.svelte` |
-| `ColorPickerPositioner` | `ColorPickerPositioner.svelte` |
-| `ColorPickerRootProvider` | `ColorPickerRootProvider.svelte` |
-| `ColorPickerSliders` | `ColorPickerSliders.svelte` |
-| `ColorPickerSwatch` | `ColorPickerSwatch.svelte` |
-| `ColorPickerSwatchGroup` | `ColorPickerSwatchGroup.svelte` |
-| `ColorPickerSwatchIndicator` | `ColorPickerSwatchIndicator.svelte` |
-| `ColorPickerSwatchTrigger` | `ColorPickerSwatchTrigger.svelte` |
-| `ColorPickerTransparencyGrid` | `ColorPickerTransparencyGrid.svelte` |
-| `ColorPickerTrigger` | `ColorPickerTrigger.svelte` |
-| `ColorPickerValueSwatch` | `ColorPickerValueSwatch.svelte` |
-| `ColorPickerValueText` | `ColorPickerValueText.svelte` |
-| `ColorPickerView` | `ColorPickerView.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { ColorPicker } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `ColorPicker` | `ColorPicker.svelte` | `—` |
+| `ColorPickerArea` | `ColorPickerArea.svelte` | `group` |
+| `ColorPickerAreaBackground` | `ColorPickerAreaBackground.svelte` | `—` |
+| `ColorPickerAreaThumb` | `ColorPickerAreaThumb.svelte` | `slider` |
+| `ColorPickerChannelInput` | `ColorPickerChannelInput.svelte` | `—` |
+| `ColorPickerChannelSlider` | `ColorPickerChannelSlider.svelte` | `presentation` |
+| `ColorPickerChannelSliderLabel` | `ColorPickerChannelSliderLabel.svelte` | `—` |
+| `ColorPickerChannelSliderThumb` | `ColorPickerChannelSliderThumb.svelte` | `slider` |
+| `ColorPickerChannelSliderTrack` | `ColorPickerChannelSliderTrack.svelte` | `group` |
+| `ColorPickerChannelSliderValueText` | `ColorPickerChannelSliderValueText.svelte` | `—` |
+| `ColorPickerContent` | `ColorPickerContent.svelte` | `—` |
+| `ColorPickerControl` | `ColorPickerControl.svelte` | `—` |
+| `ColorPickerEyeDropperTrigger` | `ColorPickerEyeDropperTrigger.svelte` | `none (aria-hidden)` |
+| `ColorPickerFormatSelect` | `ColorPickerFormatSelect.svelte` | `none (aria-hidden)` |
+| `ColorPickerFormatTrigger` | `ColorPickerFormatTrigger.svelte` | `—` |
+| `ColorPickerHiddenInput` | `ColorPickerHiddenInput.svelte` | `—` |
+| `ColorPickerLabel` | `ColorPickerLabel.svelte` | `—` |
+| `ColorPickerPositioner` | `ColorPickerPositioner.svelte` | `—` |
+| `ColorPickerRootProvider` | `ColorPickerRootProvider.svelte` | `—` |
+| `ColorPickerSliders` | `ColorPickerSliders.svelte` | `—` |
+| `ColorPickerSwatch` | `ColorPickerSwatch.svelte` | `—` |
+| `ColorPickerSwatchGroup` | `ColorPickerSwatchGroup.svelte` | `group` |
+| `ColorPickerSwatchIndicator` | `ColorPickerSwatchIndicator.svelte` | `none (aria-hidden)` |
+| `ColorPickerSwatchTrigger` | `ColorPickerSwatchTrigger.svelte` | `—` |
+| `ColorPickerTransparencyGrid` | `ColorPickerTransparencyGrid.svelte` | `—` |
+| `ColorPickerTrigger` | `ColorPickerTrigger.svelte` | `—` |
+| `ColorPickerValueSwatch` | `ColorPickerValueSwatch.svelte` | `—` |
+| `ColorPickerValueText` | `ColorPickerValueText.svelte` | `—` |
+| `ColorPickerView` | `ColorPickerView.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`, `presentation`, `slider`.
 
 ## Props
 
@@ -200,16 +217,22 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `ColorPickerValueText` | `color-picker` | `value-text` | `color-picker-value-text` |
 | `ColorPickerView` | `color-picker` | `view` | `color-picker-view` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-color-picker-area-height`
-- `--moduix-color-picker-channel-slider-height`
-- `--moduix-color-picker-content-width`
-- `--moduix-color-picker-radius`
-- `--moduix-color-picker-swatch-size`
-- `--moduix-color-picker-thumb-size`
-- `--moduix-color-picker-trigger-size`
-- `--moduix-color-picker-width`
+| variable | default |
+| --- | --- |
+| `--moduix-color-picker-area-height` | `10rem` |
+| `--moduix-color-picker-channel-slider-height` | `var(--moduix-spacing-3)` |
+| `--moduix-color-picker-content-width` | `16rem` |
+| `--moduix-color-picker-radius` | `var(--moduix-radius-md)` |
+| `--moduix-color-picker-swatch-size` | `var(--moduix-size-sm)` |
+| `--moduix-color-picker-thumb-size` | `var(--moduix-spacing-4)` |
+| `--moduix-color-picker-trigger-size` | `var(--moduix-size-md)` |
+| `--moduix-color-picker-width` | `16rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Escape`, `Home`, `PageDown`, `PageUp`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -228,9 +251,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

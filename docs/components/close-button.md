@@ -10,11 +10,26 @@ Dismiss a notification, card, or overlay with an accessible icon button.
 
 Port of `moduix/packages/svelte/src/components/close-button` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `CloseButton` | `CloseButton.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { CloseButton } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `CloseButton` | `CloseButton.svelte` | `—` |
 
 ## Props
 
@@ -35,23 +50,29 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | --- | --- | --- | --- |
 | — | — | — | — |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-close-button-bg`
-- `--moduix-close-button-bg-hover`
-- `--moduix-close-button-color`
-- `--moduix-close-button-color-hover`
-- `--moduix-close-button-disabled-opacity`
-- `--moduix-close-button-focus-ring-color`
-- `--moduix-close-button-focus-ring-offset`
-- `--moduix-close-button-focus-ring-width`
-- `--moduix-close-button-icon-size`
-- `--moduix-close-button-radius`
-- `--moduix-close-button-size`
+| variable | default |
+| --- | --- |
+| `--moduix-close-button-bg` | `transparent` |
+| `--moduix-close-button-bg-hover` | `var(--moduix-muted)` |
+| `--moduix-close-button-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-close-button-color-hover` | `var(--moduix-foreground)` |
+| `--moduix-close-button-disabled-opacity` | `var(--moduix-opacity-disabled)` |
+| `--moduix-close-button-focus-ring-color` | `var(--moduix-ring)` |
+| `--moduix-close-button-focus-ring-offset` | `var(--moduix-focus-ring-offset)` |
+| `--moduix-close-button-focus-ring-width` | `var(--moduix-focus-ring-width)` |
+| `--moduix-close-button-icon-size` | `var(--moduix-spacing-4)` |
+| `--moduix-close-button-radius` | `var(--moduix-radius-sm)` |
+| `--moduix-close-button-size` | `var(--moduix-spacing-7)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

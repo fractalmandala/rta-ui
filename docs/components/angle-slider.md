@@ -10,21 +10,38 @@ Pick an angle from 0 to 360 degrees on a circular dial.
 
 Port of `moduix/packages/svelte/src/components/angle-slider` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `AngleSlider` | `AngleSlider.svelte` |
-| `AngleSliderControl` | `AngleSliderControl.svelte` |
-| `AngleSliderDial` | `AngleSliderDial.svelte` |
-| `AngleSliderHiddenInput` | `AngleSliderHiddenInput.svelte` |
-| `AngleSliderLabel` | `AngleSliderLabel.svelte` |
-| `AngleSliderMarker` | `AngleSliderMarker.svelte` |
-| `AngleSliderMarkerGroup` | `AngleSliderMarkerGroup.svelte` |
-| `AngleSliderMarks` | `AngleSliderMarks.svelte` |
-| `AngleSliderRootProvider` | `AngleSliderRootProvider.svelte` |
-| `AngleSliderThumb` | `AngleSliderThumb.svelte` |
-| `AngleSliderValueText` | `AngleSliderValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { AngleSlider } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `AngleSlider` | `AngleSlider.svelte` | `—` |
+| `AngleSliderControl` | `AngleSliderControl.svelte` | `presentation` |
+| `AngleSliderDial` | `AngleSliderDial.svelte` | `—` |
+| `AngleSliderHiddenInput` | `AngleSliderHiddenInput.svelte` | `—` |
+| `AngleSliderLabel` | `AngleSliderLabel.svelte` | `—` |
+| `AngleSliderMarker` | `AngleSliderMarker.svelte` | `—` |
+| `AngleSliderMarkerGroup` | `AngleSliderMarkerGroup.svelte` | `—` |
+| `AngleSliderMarks` | `AngleSliderMarks.svelte` | `—` |
+| `AngleSliderRootProvider` | `AngleSliderRootProvider.svelte` | `—` |
+| `AngleSliderThumb` | `AngleSliderThumb.svelte` | `slider` |
+| `AngleSliderValueText` | `AngleSliderValueText.svelte` | `—` |
+
+ARIA roles rendered by this family: `presentation`, `slider`.
 
 ## Props
 
@@ -130,13 +147,19 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `AngleSliderThumb` | `angle-slider` | `thumb` | `angle-slider-thumb` |
 | `AngleSliderValueText` | `angle-slider` | `value-text` | `angle-slider-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-angle-slider-indicator-bg`
-- `--moduix-angle-slider-ring-thickness`
-- `--moduix-angle-slider-size`
-- `--moduix-angle-slider-thumb-size`
-- `--moduix-angle-slider-track-bg`
+| variable | default |
+| --- | --- |
+| `--moduix-angle-slider-indicator-bg` | `var(--moduix-primary)` |
+| `--moduix-angle-slider-ring-thickness` | `var(--moduix-spacing-2)` |
+| `--moduix-angle-slider-size` | `9rem` |
+| `--moduix-angle-slider-thumb-size` | `var(--moduix-spacing-4)` |
+| `--moduix-angle-slider-track-bg` | `var(--moduix-muted)` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Home`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -149,9 +172,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,16 +10,31 @@ Turn a link or text into a QR code that users can scan or download.
 
 Port of `moduix/packages/svelte/src/components/qr-code` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `QrCode` | `QrCode.svelte` |
-| `QrCodeDownloadTrigger` | `QrCodeDownloadTrigger.svelte` |
-| `QrCodeFrame` | `QrCodeFrame.svelte` |
-| `QrCodeOverlay` | `QrCodeOverlay.svelte` |
-| `QrCodePattern` | `QrCodePattern.svelte` |
-| `QrCodeRootProvider` | `QrCodeRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { QrCode } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `QrCode` | `QrCode.svelte` | `—` |
+| `QrCodeDownloadTrigger` | `QrCodeDownloadTrigger.svelte` | `—` |
+| `QrCodeFrame` | `QrCodeFrame.svelte` | `—` |
+| `QrCodeOverlay` | `QrCodeOverlay.svelte` | `—` |
+| `QrCodePattern` | `QrCodePattern.svelte` | `—` |
+| `QrCodeRootProvider` | `QrCodeRootProvider.svelte` | `—` |
 
 ## Props
 
@@ -66,9 +81,15 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `QrCodePattern` | `qr-code` | `pattern` | `qr-code-pattern` |
 | `QrCodeRootProvider` | `qr-code` | `root` | `qr-code-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-qr-code-size`
+| variable | default |
+| --- | --- |
+| `--moduix-qr-code-size` | `8rem` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -78,9 +99,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

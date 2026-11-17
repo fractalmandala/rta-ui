@@ -8,6 +8,11 @@ export default defineConfig({
     sveltekit({
       compilerOptions: { runes: true },
       adapter: adapter(),
+      prerender: {
+        // The gallery demos use placeholder anchors (`href="#analytics"`) inside the docs previews,
+        // so an in-page link with no target is expected rather than a build error.
+        handleMissingId: 'warn',
+      },
     }),
     svelteTesting(),
   ],

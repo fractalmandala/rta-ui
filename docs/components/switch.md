@@ -10,16 +10,31 @@ Turn a setting on or off with an immediate effect.
 
 Port of `moduix/packages/svelte/src/components/switch` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Switch` | `Switch.svelte` |
-| `SwitchControl` | `SwitchControl.svelte` |
-| `SwitchHiddenInput` | `SwitchHiddenInput.svelte` |
-| `SwitchLabel` | `SwitchLabel.svelte` |
-| `SwitchRootProvider` | `SwitchRootProvider.svelte` |
-| `SwitchThumb` | `SwitchThumb.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Switch } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Switch` | `Switch.svelte` | `—` |
+| `SwitchControl` | `SwitchControl.svelte` | `—` |
+| `SwitchHiddenInput` | `SwitchHiddenInput.svelte` | `—` |
+| `SwitchLabel` | `SwitchLabel.svelte` | `—` |
+| `SwitchRootProvider` | `SwitchRootProvider.svelte` | `—` |
+| `SwitchThumb` | `SwitchThumb.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -51,17 +66,22 @@ accepts the native props of `HTMLProps<'label'>`, `PolymorphicProps<'label'>`, `
 | `SwitchRootProvider` | `switch` | `root` | `switch-root-provider` |
 | `SwitchThumb` | `switch` | `thumb` | `switch-thumb` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-switch-bg`
-- `--moduix-switch-bg-checked`
-- `--moduix-switch-border-color`
-- `--moduix-switch-gap`
-- `--moduix-switch-thumb-bg`
+| variable | default |
+| --- | --- |
+| `--moduix-switch-bg-checked` | `var(--moduix-primary)` |
+| `--moduix-switch-border-color` | `transparent` |
+| `--moduix-switch-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-switch-thumb-bg` | `white` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,18 +10,33 @@ Copy a value to the clipboard with a trigger that confirms the copy.
 
 Port of `moduix/packages/svelte/src/components/clipboard` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Clipboard` | `Clipboard.svelte` |
-| `ClipboardControl` | `ClipboardControl.svelte` |
-| `ClipboardIndicator` | `ClipboardIndicator.svelte` |
-| `ClipboardInput` | `ClipboardInput.svelte` |
-| `ClipboardLabel` | `ClipboardLabel.svelte` |
-| `ClipboardRootProvider` | `ClipboardRootProvider.svelte` |
-| `ClipboardTrigger` | `ClipboardTrigger.svelte` |
-| `ClipboardValueText` | `ClipboardValueText.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Clipboard } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Clipboard` | `Clipboard.svelte` | `—` |
+| `ClipboardControl` | `ClipboardControl.svelte` | `—` |
+| `ClipboardIndicator` | `ClipboardIndicator.svelte` | `—` |
+| `ClipboardInput` | `ClipboardInput.svelte` | `—` |
+| `ClipboardLabel` | `ClipboardLabel.svelte` | `—` |
+| `ClipboardRootProvider` | `ClipboardRootProvider.svelte` | `—` |
+| `ClipboardTrigger` | `ClipboardTrigger.svelte` | `—` |
+| `ClipboardValueText` | `ClipboardValueText.svelte` | `—` |
 
 ## Props
 
@@ -66,17 +81,23 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `ClipboardTrigger` | `clipboard` | `trigger` | `clipboard-trigger` |
 | `ClipboardValueText` | `clipboard` | `value-text` | `clipboard-value-text` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-clipboard-border-color`
-- `--moduix-clipboard-control-gap`
-- `--moduix-clipboard-gap`
-- `--moduix-clipboard-height`
-- `--moduix-clipboard-icon-size`
-- `--moduix-clipboard-input-bg`
-- `--moduix-clipboard-radius`
-- `--moduix-clipboard-trigger-bg`
-- `--moduix-clipboard-trigger-bg-hover`
+| variable | default |
+| --- | --- |
+| `--moduix-clipboard-border-color` | `var(--moduix-border)` |
+| `--moduix-clipboard-control-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-clipboard-gap` | `var(--moduix-spacing-1-5)` |
+| `--moduix-clipboard-height` | `var(--moduix-size-md)` |
+| `--moduix-clipboard-icon-size` | `var(--moduix-spacing-4)` |
+| `--moduix-clipboard-input-bg` | `var(--moduix-background)` |
+| `--moduix-clipboard-radius` | `var(--moduix-radius-md)` |
+| `--moduix-clipboard-trigger-bg` | `var(--moduix-background)` |
+| `--moduix-clipboard-trigger-bg-hover` | `var(--moduix-accent)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -84,9 +105,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

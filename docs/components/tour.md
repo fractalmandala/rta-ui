@@ -10,31 +10,48 @@ Walk users through a product with steps anchored to page elements.
 
 Port of `moduix/packages/svelte/src/components/tour` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Tour` | `Tour.svelte` |
-| `TourActionList` | `TourActionList.svelte` |
-| `TourActions` | `TourActions.svelte` |
-| `TourActionTrigger` | `TourActionTrigger.svelte` |
-| `TourArrow` | `TourArrow.svelte` |
-| `TourArrowTip` | `TourArrowTip.svelte` |
-| `TourBackdrop` | `TourBackdrop.svelte` |
-| `TourBody` | `TourBody.svelte` |
-| `TourCloseIcon` | `TourCloseIcon.svelte` |
-| `TourCloseTrigger` | `TourCloseTrigger.svelte` |
-| `TourContent` | `TourContent.svelte` |
-| `TourContext` | `TourContext.svelte` |
-| `TourControl` | `TourControl.svelte` |
-| `TourDescription` | `TourDescription.svelte` |
-| `TourPositioner` | `TourPositioner.svelte` |
-| `TourProgressBar` | `TourProgressBar.svelte` |
-| `TourProgressText` | `TourProgressText.svelte` |
-| `TourSpotlight` | `TourSpotlight.svelte` |
-| `TourTitle` | `TourTitle.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Tour } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Tour` | `Tour.svelte` | `—` |
+| `TourActionList` | `TourActionList.svelte` | `—` |
+| `TourActions` | `TourActions.svelte` | `—` |
+| `TourActionTrigger` | `TourActionTrigger.svelte` | `—` |
+| `TourArrow` | `TourArrow.svelte` | `—` |
+| `TourArrowTip` | `TourArrowTip.svelte` | `—` |
+| `TourBackdrop` | `TourBackdrop.svelte` | `—` |
+| `TourBody` | `TourBody.svelte` | `—` |
+| `TourCloseIcon` | `TourCloseIcon.svelte` | `—` |
+| `TourCloseTrigger` | `TourCloseTrigger.svelte` | `—` |
+| `TourContent` | `TourContent.svelte` | `dialog` |
+| `TourContext` | `TourContext.svelte` | `—` |
+| `TourControl` | `TourControl.svelte` | `—` |
+| `TourDescription` | `TourDescription.svelte` | `—` |
+| `TourPositioner` | `TourPositioner.svelte` | `—` |
+| `TourProgressBar` | `TourProgressBar.svelte` | `progressbar` |
+| `TourProgressText` | `TourProgressText.svelte` | `—` |
+| `TourSpotlight` | `TourSpotlight.svelte` | `—` |
+| `TourTitle` | `TourTitle.svelte` | `—` |
 
 `Tour`, `TourActions`, `TourContext` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `dialog`, `progressbar`.
 
 ## Props
 
@@ -113,15 +130,19 @@ accepts the native props of `HTMLProps<'button'>`, `Omit<PolymorphicProps<'butto
 | `TourSpotlight` | `tour` | `spotlight` | `tour-spotlight` |
 | `TourTitle` | `tour` | `title` | `tour-title` |
 
+## Keyboard
+
+Keys handled by this family: `Enter`, `dismiss`, `next`, `prev`, `skip`, `←SpaceArrowLeft`, `→SpaceArrowRight`.
+
 ## Generated ids
 
 - `width: ${id}%;`
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,11 +10,26 @@ Signal a short wait in buttons, rows, and compact states.
 
 Port of `moduix/packages/svelte/src/components/spinner` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Spinner` | `Spinner.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Spinner } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Spinner` | `Spinner.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -33,15 +48,21 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | --- | --- | --- | --- |
 | `Spinner` | `spinner` | `root` | `spinner-root` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-spinner-ring-border-width`
-- `--moduix-spinner-ring-track-color`
-- `--moduix-spinner-size`
+| variable | default |
+| --- | --- |
+| `--moduix-spinner-ring-border-width` | `var(--moduix-border-width-md)` |
+| `--moduix-spinner-ring-track-color` | `color-mix(in oklab, currentColor 22%, transparent)` |
+| `--moduix-spinner-size` | `var(--_spinner-size)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

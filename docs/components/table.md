@@ -10,22 +10,37 @@ Present rows of data with headers, captions, and numeric columns.
 
 Port of `moduix/packages/svelte/src/components/table` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Table` | `Table.svelte` |
-| `TableBody` | `TableBody.svelte` |
-| `TableCaption` | `TableCaption.svelte` |
-| `TableCell` | `TableCell.svelte` |
-| `TableColumn` | `TableColumn.svelte` |
-| `TableColumnGroup` | `TableColumnGroup.svelte` |
-| `TableColumnHeader` | `TableColumnHeader.svelte` |
-| `TableEmpty` | `TableEmpty.svelte` |
-| `TableFooter` | `TableFooter.svelte` |
-| `TableHeader` | `TableHeader.svelte` |
-| `TableRow` | `TableRow.svelte` |
-| `TableScrollArea` | `TableScrollArea.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Table } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Table` | `Table.svelte` | `—` |
+| `TableBody` | `TableBody.svelte` | `—` |
+| `TableCaption` | `TableCaption.svelte` | `—` |
+| `TableCell` | `TableCell.svelte` | `—` |
+| `TableColumn` | `TableColumn.svelte` | `—` |
+| `TableColumnGroup` | `TableColumnGroup.svelte` | `—` |
+| `TableColumnHeader` | `TableColumnHeader.svelte` | `—` |
+| `TableEmpty` | `TableEmpty.svelte` | `—` |
+| `TableFooter` | `TableFooter.svelte` | `—` |
+| `TableHeader` | `TableHeader.svelte` | `—` |
+| `TableRow` | `TableRow.svelte` | `—` |
+| `TableScrollArea` | `TableScrollArea.svelte` | `—` |
 
 ## Props
 
@@ -86,18 +101,23 @@ accepts the native props of `HTMLProps<'td'>`, `PolymorphicProps<'td'>`, `RefAtt
 | `TableRow` | `table` | `row` | `table-row` |
 | `TableScrollArea` | `table` | `scroll-area` | `table-scroll-area` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-table-bg`
-- `--moduix-table-border-color`
-- `--moduix-table-cell-padding-x`
-- `--moduix-table-cell-padding-y`
-- `--moduix-table-row-bg-hover`
-- `--moduix-table-row-bg-striped`
+| variable | default |
+| --- | --- |
+| `--moduix-table-bg` | `var(--moduix-card)` |
+| `--moduix-table-border-color` | `var(--moduix-border)` |
+| `--moduix-table-cell-padding-x` | `var(--moduix-spacing-4)` |
+| `--moduix-table-cell-padding-y` | `var(--moduix-spacing-3)` |
+| `--moduix-table-row-bg-hover` | `var(--moduix-muted)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

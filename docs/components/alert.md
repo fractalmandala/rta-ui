@@ -10,16 +10,31 @@ Show an inline status message with a title, description, and actions.
 
 Port of `moduix/packages/svelte/src/components/alert` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Alert` | `Alert.svelte` |
-| `AlertActions` | `AlertActions.svelte` |
-| `AlertContent` | `AlertContent.svelte` |
-| `AlertDescription` | `AlertDescription.svelte` |
-| `AlertIndicator` | `AlertIndicator.svelte` |
-| `AlertTitle` | `AlertTitle.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Alert } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Alert` | `Alert.svelte` | `—` |
+| `AlertActions` | `AlertActions.svelte` | `—` |
+| `AlertContent` | `AlertContent.svelte` | `—` |
+| `AlertDescription` | `AlertDescription.svelte` | `—` |
+| `AlertIndicator` | `AlertIndicator.svelte` | `none (aria-hidden)` |
+| `AlertTitle` | `AlertTitle.svelte` | `—` |
 
 ## Props
 
@@ -42,17 +57,23 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `AlertIndicator` | `alert` | `indicator` | `alert-indicator` |
 | `AlertTitle` | `alert` | `title` | `alert-title` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-alert-bg`
-- `--moduix-alert-border-color`
-- `--moduix-alert-color`
-- `--moduix-alert-description-color`
-- `--moduix-alert-indicator-color`
+| variable | default |
+| --- | --- |
+| `--moduix-alert-bg` | `var(--_alert-bg)` |
+| `--moduix-alert-border-color` | `var(--_alert-border-color)` |
+| `--moduix-alert-color` | `var(--_alert-color)` |
+| `--moduix-alert-description-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-alert-indicator-color` | `var(--_alert-indicator-color)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

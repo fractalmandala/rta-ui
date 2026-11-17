@@ -10,13 +10,28 @@ Animate between two icons or labels when a control changes state.
 
 Port of `moduix/packages/svelte/src/components/swap` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Swap` | `Swap.svelte` |
-| `SwapIndicator` | `SwapIndicator.svelte` |
-| `SwapRootProvider` | `SwapRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Swap } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Swap` | `Swap.svelte` | `—` |
+| `SwapIndicator` | `SwapIndicator.svelte` | `—` |
+| `SwapRootProvider` | `SwapRootProvider.svelte` | `—` |
 
 ## Props
 
@@ -54,13 +69,19 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `SwapIndicator` | `swap` | `indicator` | `swap-indicator` |
 | `SwapRootProvider` | `swap` | `root` | `swap-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-swap-transition`
+| variable | default |
+| --- | --- |
+| `--moduix-swap-transition` | `var(--moduix-transition-slow)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

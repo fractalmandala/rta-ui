@@ -10,11 +10,26 @@ Pick from a short list with the browser’s own select.
 
 Port of `moduix/packages/svelte/src/components/native-select` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `NativeSelect` | `NativeSelect.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { NativeSelect } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `NativeSelect` | `NativeSelect.svelte` | `none (aria-hidden)` |
 
 ## Props
 
@@ -35,9 +50,13 @@ accepts the native props of `Omit<HTMLProps<'select'>, 'value'>`.
 | --- | --- | --- | --- |
 | `NativeSelect` | `native-select` | `control` | `native-select-control` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

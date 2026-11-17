@@ -10,16 +10,31 @@ Show and hide one region of content with a trigger.
 
 Port of `moduix/packages/svelte/src/components/collapsible` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Collapsible` | `Collapsible.svelte` |
-| `CollapsibleBody` | `CollapsibleBody.svelte` |
-| `CollapsibleContent` | `CollapsibleContent.svelte` |
-| `CollapsibleIndicator` | `CollapsibleIndicator.svelte` |
-| `CollapsibleRootProvider` | `CollapsibleRootProvider.svelte` |
-| `CollapsibleTrigger` | `CollapsibleTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Collapsible } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Collapsible` | `Collapsible.svelte` | `—` |
+| `CollapsibleBody` | `CollapsibleBody.svelte` | `—` |
+| `CollapsibleContent` | `CollapsibleContent.svelte` | `—` |
+| `CollapsibleIndicator` | `CollapsibleIndicator.svelte` | `—` |
+| `CollapsibleRootProvider` | `CollapsibleRootProvider.svelte` | `—` |
+| `CollapsibleTrigger` | `CollapsibleTrigger.svelte` | `—` |
 
 ## Props
 
@@ -62,17 +77,23 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `CollapsibleRootProvider` | `collapsible` | `root` | `collapsible-root-provider` |
 | `CollapsibleTrigger` | `collapsible` | `trigger` | `collapsible-trigger` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-collapsible-body-gap`
-- `--moduix-collapsible-body-padding`
-- `--moduix-collapsible-content-color`
-- `--moduix-collapsible-content-font-size`
-- `--moduix-collapsible-indicator-size`
-- `--moduix-collapsible-trigger-font-size`
-- `--moduix-collapsible-trigger-gap`
-- `--moduix-collapsible-trigger-padding-x`
-- `--moduix-collapsible-trigger-padding-y`
+| variable | default |
+| --- | --- |
+| `--moduix-collapsible-body-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-collapsible-body-padding` | `0` |
+| `--moduix-collapsible-content-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-collapsible-content-font-size` | `var(--moduix-text-sm)` |
+| `--moduix-collapsible-indicator-size` | `var(--moduix-spacing-3)` |
+| `--moduix-collapsible-trigger-font-size` | `var(--moduix-text-sm)` |
+| `--moduix-collapsible-trigger-gap` | `var(--moduix-spacing-2)` |
+| `--moduix-collapsible-trigger-padding-x` | `0` |
+| `--moduix-collapsible-trigger-padding-y` | `var(--moduix-spacing-1)` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -82,9 +103,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

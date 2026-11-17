@@ -10,17 +10,34 @@ Connect a label, helper text, and error message to one form control.
 
 Port of `moduix/packages/svelte/src/components/field` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Field` | `Field.svelte` |
-| `FieldErrorText` | `FieldErrorText.svelte` |
-| `FieldHelperText` | `FieldHelperText.svelte` |
-| `FieldItem` | `FieldItem.svelte` |
-| `FieldLabel` | `FieldLabel.svelte` |
-| `FieldRequiredIndicator` | `FieldRequiredIndicator.svelte` |
-| `FieldRootProvider` | `FieldRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Field } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Field` | `Field.svelte` | `—` |
+| `FieldErrorText` | `FieldErrorText.svelte` | `—` |
+| `FieldHelperText` | `FieldHelperText.svelte` | `—` |
+| `FieldItem` | `FieldItem.svelte` | `—` |
+| `FieldLabel` | `FieldLabel.svelte` | `—` |
+| `FieldRequiredIndicator` | `FieldRequiredIndicator.svelte` | `—` |
+| `FieldRootProvider` | `FieldRootProvider.svelte` | `—` |
+
+ARIA roles rendered by this family: `group`.
 
 ## Props
 
@@ -72,6 +89,10 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'id'>`, `PolymorphicProps<'d
 | `FieldRequiredIndicator` | `field` | `required-indicator` | `field-required-indicator` |
 | `FieldRootProvider` | `field` | `root` | `field-root-provider` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `field::${id}`
@@ -84,9 +105,9 @@ accepts the native props of `Omit<HTMLProps<'div'>, 'id'>`, `PolymorphicProps<'d
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

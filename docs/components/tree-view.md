@@ -10,33 +10,50 @@ Browse folders, files, and other nested data in an expandable tree.
 
 Port of `moduix/packages/svelte/src/components/tree-view` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `TreeViewContext` | `TreeViewContext.svelte` |
-| `TreeViewNodeContext` | `TreeViewNodeContext.svelte` |
-| `TreeViewNodeProvider` | `TreeViewNodeProvider.svelte` |
-| `TreeView` | `TreeView.svelte` |
-| `TreeViewBranch` | `TreeViewBranch.svelte` |
-| `TreeViewBranchContent` | `TreeViewBranchContent.svelte` |
-| `TreeViewBranchControl` | `TreeViewBranchControl.svelte` |
-| `TreeViewBranchIndentGuide` | `TreeViewBranchIndentGuide.svelte` |
-| `TreeViewBranchIndicator` | `TreeViewBranchIndicator.svelte` |
-| `TreeViewBranchText` | `TreeViewBranchText.svelte` |
-| `TreeViewBranchTrigger` | `TreeViewBranchTrigger.svelte` |
-| `TreeViewItem` | `TreeViewItem.svelte` |
-| `TreeViewItemIndicator` | `TreeViewItemIndicator.svelte` |
-| `TreeViewItemText` | `TreeViewItemText.svelte` |
-| `TreeViewLabel` | `TreeViewLabel.svelte` |
-| `TreeViewNode` | `TreeViewNode.svelte` |
-| `TreeViewNodeCheckbox` | `TreeViewNodeCheckbox.svelte` |
-| `TreeViewNodeCheckboxIndicator` | `TreeViewNodeCheckboxIndicator.svelte` |
-| `TreeViewNodeRenameInput` | `TreeViewNodeRenameInput.svelte` |
-| `TreeViewRootProvider` | `TreeViewRootProvider.svelte` |
-| `TreeViewTree` | `TreeViewTree.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { TreeViewContext } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `TreeViewContext` | `TreeViewContext.svelte` | `—` |
+| `TreeViewNodeContext` | `TreeViewNodeContext.svelte` | `—` |
+| `TreeViewNodeProvider` | `TreeViewNodeProvider.svelte` | `—` |
+| `TreeView` | `TreeView.svelte` | `—` |
+| `TreeViewBranch` | `TreeViewBranch.svelte` | `—` |
+| `TreeViewBranchContent` | `TreeViewBranchContent.svelte` | `—` |
+| `TreeViewBranchControl` | `TreeViewBranchControl.svelte` | `—` |
+| `TreeViewBranchIndentGuide` | `TreeViewBranchIndentGuide.svelte` | `—` |
+| `TreeViewBranchIndicator` | `TreeViewBranchIndicator.svelte` | `—` |
+| `TreeViewBranchText` | `TreeViewBranchText.svelte` | `—` |
+| `TreeViewBranchTrigger` | `TreeViewBranchTrigger.svelte` | `—` |
+| `TreeViewItem` | `TreeViewItem.svelte` | `—` |
+| `TreeViewItemIndicator` | `TreeViewItemIndicator.svelte` | `—` |
+| `TreeViewItemText` | `TreeViewItemText.svelte` | `—` |
+| `TreeViewLabel` | `TreeViewLabel.svelte` | `—` |
+| `TreeViewNode` | `TreeViewNode.svelte` | `—` |
+| `TreeViewNodeCheckbox` | `TreeViewNodeCheckbox.svelte` | `—` |
+| `TreeViewNodeCheckboxIndicator` | `TreeViewNodeCheckboxIndicator.svelte` | `—` |
+| `TreeViewNodeRenameInput` | `TreeViewNodeRenameInput.svelte` | `—` |
+| `TreeViewRootProvider` | `TreeViewRootProvider.svelte` | `—` |
+| `TreeViewTree` | `TreeViewTree.svelte` | `—` |
 
 `TreeViewContext`, `TreeViewNodeContext`, `TreeViewNodeProvider`, `TreeViewNode` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `button`, `checkbox`, `group`, `tree`, `treeitem`.
 
 ## Props
 
@@ -125,10 +142,16 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `TreeViewRootProvider` | `tree-view` | `root` | `tree-view-root-provider` |
 | `TreeViewTree` | `tree-view` | `tree` | `tree-view-tree` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-tree-view-indent`
-- `--moduix-tree-view-width`
+| variable | default |
+| --- | --- |
+| `--moduix-tree-view-indent` | `var(--moduix-spacing-4)` |
+| `--moduix-tree-view-width` | `20rem` |
+
+## Keyboard
+
+Keys handled by this family: `End`, `Enter`, `Escape`, `Home`, `Space`, `a`, `←SpaceArrowLeft`, `↑SpaceArrowUp`, `→SpaceArrowRight`, `↓SpaceArrowDown`.
 
 ## Generated ids
 
@@ -140,9 +163,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

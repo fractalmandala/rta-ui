@@ -10,17 +10,34 @@ Scroll overflowing content with styled scrollbars that match the theme.
 
 Port of `moduix/packages/svelte/src/components/scroll-area` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `ScrollArea` | `ScrollArea.svelte` |
-| `ScrollAreaContent` | `ScrollAreaContent.svelte` |
-| `ScrollAreaCorner` | `ScrollAreaCorner.svelte` |
-| `ScrollAreaRootProvider` | `ScrollAreaRootProvider.svelte` |
-| `ScrollAreaScrollbar` | `ScrollAreaScrollbar.svelte` |
-| `ScrollAreaThumb` | `ScrollAreaThumb.svelte` |
-| `ScrollAreaViewport` | `ScrollAreaViewport.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { ScrollArea } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `ScrollArea` | `ScrollArea.svelte` | `—` |
+| `ScrollAreaContent` | `ScrollAreaContent.svelte` | `—` |
+| `ScrollAreaCorner` | `ScrollAreaCorner.svelte` | `—` |
+| `ScrollAreaRootProvider` | `ScrollAreaRootProvider.svelte` | `—` |
+| `ScrollAreaScrollbar` | `ScrollAreaScrollbar.svelte` | `—` |
+| `ScrollAreaThumb` | `ScrollAreaThumb.svelte` | `—` |
+| `ScrollAreaViewport` | `ScrollAreaViewport.svelte` | `—` |
+
+ARIA roles rendered by this family: `presentation`.
 
 ## Props
 
@@ -70,15 +87,21 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `ScrollAreaThumb` | `scroll-area` | `thumb` | `scroll-area-thumb` |
 | `ScrollAreaViewport` | `scroll-area` | `viewport` | `scroll-area-viewport` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-scroll-area-fade-size`
-- `--moduix-scroll-area-scrollbar-size`
-- `--moduix-scroll-area-thumb-bg`
+| variable | default |
+| --- | --- |
+| `--moduix-scroll-area-fade-size` | `var(--moduix-spacing-10)` |
+| `--moduix-scroll-area-scrollbar-size` | `var(--moduix-spacing-1)` |
+| `--moduix-scroll-area-thumb-bg` | `var(--moduix-border)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+Keys handled by this family: `bottom`, `left`, `right`, `top`.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

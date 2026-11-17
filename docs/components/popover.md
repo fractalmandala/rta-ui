@@ -10,28 +10,45 @@ Show interactive content in a panel anchored to a trigger.
 
 Port of `moduix/packages/svelte/src/components/popover` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Popover` | `Popover.svelte` |
-| `PopoverAnchor` | `PopoverAnchor.svelte` |
-| `PopoverArrow` | `PopoverArrow.svelte` |
-| `PopoverArrowTip` | `PopoverArrowTip.svelte` |
-| `PopoverBody` | `PopoverBody.svelte` |
-| `PopoverCloseIcon` | `PopoverCloseIcon.svelte` |
-| `PopoverCloseTrigger` | `PopoverCloseTrigger.svelte` |
-| `PopoverContent` | `PopoverContent.svelte` |
-| `PopoverDescription` | `PopoverDescription.svelte` |
-| `PopoverFooter` | `PopoverFooter.svelte` |
-| `PopoverHeader` | `PopoverHeader.svelte` |
-| `PopoverIndicator` | `PopoverIndicator.svelte` |
-| `PopoverPositioner` | `PopoverPositioner.svelte` |
-| `PopoverRootProvider` | `PopoverRootProvider.svelte` |
-| `PopoverTitle` | `PopoverTitle.svelte` |
-| `PopoverTrigger` | `PopoverTrigger.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Popover } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Popover` | `Popover.svelte` | `—` |
+| `PopoverAnchor` | `PopoverAnchor.svelte` | `—` |
+| `PopoverArrow` | `PopoverArrow.svelte` | `—` |
+| `PopoverArrowTip` | `PopoverArrowTip.svelte` | `—` |
+| `PopoverBody` | `PopoverBody.svelte` | `—` |
+| `PopoverCloseIcon` | `PopoverCloseIcon.svelte` | `—` |
+| `PopoverCloseTrigger` | `PopoverCloseTrigger.svelte` | `—` |
+| `PopoverContent` | `PopoverContent.svelte` | `dialog` |
+| `PopoverDescription` | `PopoverDescription.svelte` | `—` |
+| `PopoverFooter` | `PopoverFooter.svelte` | `—` |
+| `PopoverHeader` | `PopoverHeader.svelte` | `—` |
+| `PopoverIndicator` | `PopoverIndicator.svelte` | `—` |
+| `PopoverPositioner` | `PopoverPositioner.svelte` | `—` |
+| `PopoverRootProvider` | `PopoverRootProvider.svelte` | `—` |
+| `PopoverTitle` | `PopoverTitle.svelte` | `—` |
+| `PopoverTrigger` | `PopoverTrigger.svelte` | `—` |
 
 `Popover`, `PopoverRootProvider` render no element of their own: they create the state and provide it to the other parts.
+
+ARIA roles rendered by this family: `dialog`.
 
 ## Props
 
@@ -102,10 +119,9 @@ accepts the native props of `HTMLProps<'button'>`, `PolymorphicProps<'button'>`,
 | `PopoverTitle` | `popover` | `title` | `popover-title` |
 | `PopoverTrigger` | `popover` | `trigger` | `popover-trigger` |
 
-Custom properties read by this family’s CSS Module:
+## Keyboard
 
-- `--moduix-popover`
-- `--moduix-popover-foreground`
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -121,9 +137,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

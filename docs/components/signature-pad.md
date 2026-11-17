@@ -10,19 +10,36 @@ Capture a handwritten signature with a mouse, pen, or finger.
 
 Port of `moduix/packages/svelte/src/components/signature-pad` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `SignaturePad` | `SignaturePad.svelte` |
-| `SignaturePadCanvas` | `SignaturePadCanvas.svelte` |
-| `SignaturePadClearTrigger` | `SignaturePadClearTrigger.svelte` |
-| `SignaturePadControl` | `SignaturePadControl.svelte` |
-| `SignaturePadGuide` | `SignaturePadGuide.svelte` |
-| `SignaturePadHiddenInput` | `SignaturePadHiddenInput.svelte` |
-| `SignaturePadLabel` | `SignaturePadLabel.svelte` |
-| `SignaturePadRootProvider` | `SignaturePadRootProvider.svelte` |
-| `SignaturePadSegment` | `SignaturePadSegment.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { SignaturePad } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `SignaturePad` | `SignaturePad.svelte` | `—` |
+| `SignaturePadCanvas` | `SignaturePadCanvas.svelte` | `—` |
+| `SignaturePadClearTrigger` | `SignaturePadClearTrigger.svelte` | `—` |
+| `SignaturePadControl` | `SignaturePadControl.svelte` | `application` |
+| `SignaturePadGuide` | `SignaturePadGuide.svelte` | `—` |
+| `SignaturePadHiddenInput` | `SignaturePadHiddenInput.svelte` | `—` |
+| `SignaturePadLabel` | `SignaturePadLabel.svelte` | `—` |
+| `SignaturePadRootProvider` | `SignaturePadRootProvider.svelte` | `—` |
+| `SignaturePadSegment` | `SignaturePadSegment.svelte` | `—` |
+
+ARIA roles rendered by this family: `application`.
 
 ## Props
 
@@ -73,15 +90,21 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `SignaturePadRootProvider` | `signature-pad` | `root` | `signature-pad-root-provider` |
 | `SignaturePadSegment` | `signature-pad` | `segment` | `signature-pad-segment` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-signature-pad-bg`
-- `--moduix-signature-pad-border-color`
-- `--moduix-signature-pad-guide-color`
-- `--moduix-signature-pad-height`
-- `--moduix-signature-pad-radius`
-- `--moduix-signature-pad-stroke-color`
-- `--moduix-signature-pad-width`
+| variable | default |
+| --- | --- |
+| `--moduix-signature-pad-bg` | `var(--moduix-background)` |
+| `--moduix-signature-pad-border-color` | `var(--moduix-border)` |
+| `--moduix-signature-pad-guide-color` | `var(--moduix-border)` |
+| `--moduix-signature-pad-height` | `10rem` |
+| `--moduix-signature-pad-radius` | `var(--moduix-radius-md)` |
+| `--moduix-signature-pad-stroke-color` | `currentColor` |
+| `--moduix-signature-pad-width` | `17.5rem` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Generated ids
 
@@ -89,9 +112,9 @@ Custom properties read by this family’s CSS Module:
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

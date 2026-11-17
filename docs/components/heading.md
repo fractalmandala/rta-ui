@@ -10,11 +10,26 @@ Title a page or section with the right level and visual size.
 
 Port of `moduix/packages/svelte/src/components/heading` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Heading` | `Heading.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Heading } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Heading` | `Heading.svelte` | `—` |
 
 ## Props
 
@@ -33,6 +48,10 @@ accepts the native props of `HTMLProps<'h1'>`, `PolymorphicProps<'h1'>`, `RefAtt
 | part file | `data-scope` | `data-part` | `data-slot` |
 | --- | --- | --- | --- |
 | `Heading` | `heading` | `root` | `heading-root` |
+
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
 
 ## Notes
 

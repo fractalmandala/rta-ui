@@ -10,19 +10,34 @@ Switch between a few options in a compact segmented control.
 
 Port of `moduix/packages/svelte/src/components/segment-group` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `SegmentGroup` | `SegmentGroup.svelte` |
-| `SegmentGroupIndicator` | `SegmentGroupIndicator.svelte` |
-| `SegmentGroupItem` | `SegmentGroupItem.svelte` |
-| `SegmentGroupItemControl` | `SegmentGroupItemControl.svelte` |
-| `SegmentGroupItemHiddenInput` | `SegmentGroupItemHiddenInput.svelte` |
-| `SegmentGroupItems` | `SegmentGroupItems.svelte` |
-| `SegmentGroupItemText` | `SegmentGroupItemText.svelte` |
-| `SegmentGroupLabel` | `SegmentGroupLabel.svelte` |
-| `SegmentGroupRootProvider` | `SegmentGroupRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { SegmentGroup } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `SegmentGroup` | `SegmentGroup.svelte` | `—` |
+| `SegmentGroupIndicator` | `SegmentGroupIndicator.svelte` | `—` |
+| `SegmentGroupItem` | `SegmentGroupItem.svelte` | `—` |
+| `SegmentGroupItemControl` | `SegmentGroupItemControl.svelte` | `—` |
+| `SegmentGroupItemHiddenInput` | `SegmentGroupItemHiddenInput.svelte` | `—` |
+| `SegmentGroupItems` | `SegmentGroupItems.svelte` | `—` |
+| `SegmentGroupItemText` | `SegmentGroupItemText.svelte` | `—` |
+| `SegmentGroupLabel` | `SegmentGroupLabel.svelte` | `—` |
+| `SegmentGroupRootProvider` | `SegmentGroupRootProvider.svelte` | `—` |
 
 ## Props
 
@@ -96,17 +111,23 @@ accepts the native props of `HTMLProps<'div'>`, `PolymorphicProps<'div'>`, `RefA
 | `SegmentGroupLabel` | `segment-group` | `label` | `segment-group-label` |
 | `SegmentGroupRootProvider` | `segment-group` | `root` | `segment-group-root-provider` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-segment-group-bg`
-- `--moduix-segment-group-border-color`
-- `--moduix-segment-group-indicator-bg`
-- `--moduix-segment-group-item-color`
-- `--moduix-segment-group-item-color-checked`
+| variable | default |
+| --- | --- |
+| `--moduix-segment-group-bg` | `var(--moduix-muted)` |
+| `--moduix-segment-group-border-color` | `var(--moduix-border)` |
+| `--moduix-segment-group-indicator-bg` | `var(--moduix-background)` |
+| `--moduix-segment-group-item-color` | `var(--moduix-muted-foreground)` |
+| `--moduix-segment-group-item-color-checked` | `var(--moduix-foreground)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

@@ -10,15 +10,30 @@ Show a selected value, filter, or assignment as a removable token.
 
 Port of `moduix/packages/svelte/src/components/tag` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Tag` | `Tag.svelte` |
-| `TagCloseTrigger` | `TagCloseTrigger.svelte` |
-| `TagEndElement` | `TagEndElement.svelte` |
-| `TagLabel` | `TagLabel.svelte` |
-| `TagStartElement` | `TagStartElement.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Tag } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Tag` | `Tag.svelte` | `—` |
+| `TagCloseTrigger` | `TagCloseTrigger.svelte` | `—` |
+| `TagEndElement` | `TagEndElement.svelte` | `—` |
+| `TagLabel` | `TagLabel.svelte` | `—` |
+| `TagStartElement` | `TagStartElement.svelte` | `—` |
 
 ## Props
 
@@ -41,15 +56,21 @@ accepts the native props of `HTMLProps<'span'>`, `PolymorphicProps<'span'>`, `Re
 | `TagLabel` | `tag` | `label` | `tag-label` |
 | `TagStartElement` | `tag` | `start-element` | `tag-start-element` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-tag-bg`
-- `--moduix-tag-border-color`
-- `--moduix-tag-color`
+| variable | default |
+| --- | --- |
+| `--moduix-tag-bg` | `var(--moduix-primary)` |
+| `--moduix-tag-border-color` | `transparent` |
+| `--moduix-tag-color` | `var(--moduix-primary-foreground)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

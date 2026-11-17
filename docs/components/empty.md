@@ -10,16 +10,31 @@ Fill an empty list or first-run screen with a message and next steps.
 
 Port of `moduix/packages/svelte/src/components/empty` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Empty` | `Empty.svelte` |
-| `EmptyActions` | `EmptyActions.svelte` |
-| `EmptyContent` | `EmptyContent.svelte` |
-| `EmptyDescription` | `EmptyDescription.svelte` |
-| `EmptyIcon` | `EmptyIcon.svelte` |
-| `EmptyTitle` | `EmptyTitle.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Empty } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Empty` | `Empty.svelte` | `—` |
+| `EmptyActions` | `EmptyActions.svelte` | `—` |
+| `EmptyContent` | `EmptyContent.svelte` | `—` |
+| `EmptyDescription` | `EmptyDescription.svelte` | `—` |
+| `EmptyIcon` | `EmptyIcon.svelte` | `—` |
+| `EmptyTitle` | `EmptyTitle.svelte` | `—` |
 
 ## Props
 
@@ -36,18 +51,23 @@ Every part accepts its native element props plus `class`, `style`, `ref` and `as
 | `EmptyIcon` | `empty` | `icon` | `empty-icon` |
 | `EmptyTitle` | `empty` | `title` | `empty-title` |
 
-Custom properties read by this family’s CSS Module:
+### CSS variables
 
-- `--moduix-empty-bg`
-- `--moduix-empty-border-color`
-- `--moduix-empty-border-width`
-- `--moduix-empty-color`
-- `--moduix-empty-padding`
-- `--moduix-empty-radius`
+| variable | default |
+| --- | --- |
+| `--moduix-empty-border-color` | `var(--moduix-border)` |
+| `--moduix-empty-border-width` | `var(--moduix-border-width-sm)` |
+| `--moduix-empty-color` | `var(--moduix-card-foreground)` |
+| `--moduix-empty-padding` | `var(--moduix-spacing-8)` |
+| `--moduix-empty-radius` | `var(--moduix-radius-xl)` |
 
-## Usage
+## Keyboard
 
-The gallery demo, verbatim:
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
+## Overview example source
+
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">

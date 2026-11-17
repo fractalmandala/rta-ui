@@ -10,15 +10,30 @@ Group related form controls under one legend with shared state.
 
 Port of `moduix/packages/svelte/src/components/fieldset` with the same public parts and a byte-identical CSS Module, rebuilt on `src/lib/internal` instead of Ark UI.
 
-## Parts
+## Installation
 
-| export | file |
-| --- | --- |
-| `Fieldset` | `Fieldset.svelte` |
-| `FieldsetErrorText` | `FieldsetErrorText.svelte` |
-| `FieldsetHelperText` | `FieldsetHelperText.svelte` |
-| `FieldsetLegend` | `FieldsetLegend.svelte` |
-| `FieldsetRootProvider` | `FieldsetRootProvider.svelte` |
+```sh
+pnpm add rta-ui
+```
+
+`rta-ui` ships one flat export surface, plus the tokens in `rta-ui/style.css`:
+
+```svelte
+<script lang="ts">
+	import { Fieldset } from 'rta-ui';
+	import 'rta-ui/style.css';
+</script>
+```
+
+## Anatomy
+
+| export | file | role |
+| --- | --- | --- |
+| `Fieldset` | `Fieldset.svelte` | `—` |
+| `FieldsetErrorText` | `FieldsetErrorText.svelte` | `—` |
+| `FieldsetHelperText` | `FieldsetHelperText.svelte` | `—` |
+| `FieldsetLegend` | `FieldsetLegend.svelte` | `—` |
+| `FieldsetRootProvider` | `FieldsetRootProvider.svelte` | `—` |
 
 ## Props
 
@@ -49,6 +64,10 @@ accepts the native props of `Omit<HTMLProps<'fieldset'>, 'disabled'>`, `Polymorp
 | `FieldsetLegend` | `fieldset` | `legend` | `fieldset-legend` |
 | `FieldsetRootProvider` | `fieldset` | `root` | `fieldset-root-provider` |
 
+## Keyboard
+
+No keys are intercepted: the family keeps the native keyboard behaviour of the elements it renders.
+
 ## Generated ids
 
 - `fieldset::${id}::error-text`
@@ -57,9 +76,9 @@ accepts the native props of `Omit<HTMLProps<'fieldset'>, 'disabled'>`, `Polymorp
 
 Every id is overridable through the `ids` prop.
 
-## Usage
+## Overview example source
 
-The gallery demo, verbatim:
+The component above is this file, unchanged:
 
 ```svelte
 <script lang="ts">
