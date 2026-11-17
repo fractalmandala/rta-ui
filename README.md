@@ -55,7 +55,7 @@ on the composed element:
 <Button {asChild}>Docs</Button>
 ```
 
-## Components (88)
+## Components (87)
 
 **Pure:** alert, aspect-ratio, avatar, badge, bleed, breadcrumbs, button, card, close-button, container,
 empty, heading, highlight, image, input, input-group, kbd, list, marquee, progress-circular,
@@ -72,7 +72,7 @@ popover, sidebar, split-button, toast, tooltip, tour
 
 **Collections:** combobox, json-tree-view, listbox, select, toc, tree-view
 
-**Data and media:** carousel, chart, color-picker, date-input, date-picker, file-upload, image-cropper
+**Data and media:** carousel, color-picker, date-input, date-picker, file-upload, image-cropper
 
 Plus the internal `Element` primitive behind all of them, and the shared `src/lib/internal`
 foundation they build on: positioning (`position.ts`, `positioning.svelte.ts`), presence, portal,
@@ -121,9 +121,8 @@ pnpm check && pnpm test && pnpm parity && pnpm build && pnpm build:docs
 
 ## Known gaps
 
-- **`chart`** keeps moduix's public parts but has its own mark set (`lineY`, `barY`, `areaY`,
-  `point`) and scales. It is not a port of the TanStack mark DSL: no stacked transforms, polar
-  marks, brushing or focus strategies, and `motion` is accepted without animating.
+- **`chart` is not ported.** moduix's chart is a host for the TanStack mark DSL, and this package
+  refuses that dependency, so the family is omitted rather than shipped as a lookalike.
 - **`date-picker` / `date-input`** support the Gregorian calendar and the runtime time zone only.
 - **`drawer`** does not implement nested drawers, so the `--nested-drawers` CSS blocks stay inert.
 - **`carousel`** translates a clipped track instead of using native scroll snapping, so `snapType`

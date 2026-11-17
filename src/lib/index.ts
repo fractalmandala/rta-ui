@@ -9,7 +9,6 @@ export * from './components/breadcrumbs/index.js';
 export * from './components/button/index.js';
 export * from './components/card/index.js';
 export * from './components/carousel/index.js';
-export * from './components/chart/index.js';
 export * from './components/checkbox/index.js';
 export * from './components/clipboard/index.js';
 export * from './components/close-button/index.js';

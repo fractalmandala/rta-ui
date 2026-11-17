@@ -9,7 +9,7 @@ import { getTabbables, type InteractOutsideEvent } from '../../internal/layers.s
 import { mergeProps } from '../../internal/mergeProps';
 import type { Placement, PositionOptions } from '../../internal/positioning.svelte';
 import { createPresence } from '../../internal/presence.svelte';
-import { createMenuTypeahead } from './menu.typeahead.svelte';
+import { createTypeahead } from '../../internal/collection';
 
 export type MenuInteractOutsideEvent = InteractOutsideEvent;
 export type MenuFocusOutsideEvent = InteractOutsideEvent;
@@ -260,7 +260,7 @@ export function createMenu(getProps: () => UseMenuProps, uid: string) {
 	const currentPlacement = () => placement;
 	const side = () => placement?.split('-')[0];
 
-	const typeahead = createMenuTypeahead({
+	const typeahead = createTypeahead({
 		getItems: () =>
 			itemElements().map((element) => ({
 				value: element.dataset.value ?? '',

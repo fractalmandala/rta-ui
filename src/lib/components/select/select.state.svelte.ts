@@ -1,5 +1,6 @@
 import {
 	createCollection,
+	createTypeahead,
 	isPrintableKey,
 	type CollectionItem,
 	type CollectionNode
@@ -229,59 +230,6 @@ function normalizeValue(value: SelectValue | undefined): string[] {
 	return value === '' ? [] : [value];
 }
 
-const TYPEAHEAD_TIMEOUT = 350;
-
-// Zag accumulates typed keys in `keysSoFar` and collapses a repeated single character, so that
-// "aa" cycles through the items starting with "a" instead of narrowing to a miss.
-function createSearch<T extends CollectionItem>(getNodes: () => CollectionNode<T>[]) {
-	let keysSoFar = $state('');
-	let timer: ReturnType<typeof setTimeout> | undefined;
-
-	function reset() {
-		if (timer !== undefined) clearTimeout(timer);
-		timer = undefined;
-		keysSoFar = '';
-	}
-
-	function update(next: string) {
-		if (timer !== undefined) clearTimeout(timer);
-		keysSoFar = next;
-		timer = setTimeout(() => reset(), TYPEAHEAD_TIMEOUT);
-	}
-
-	function match(text: string, currentValue: string | null | undefined): string | undefined {
-		const nodes = getNodes();
-		if (!nodes.length) return undefined;
-		const currentIndex =
-			currentValue != null ? nodes.findIndex((node) => node.value === currentValue) : -1;
-		const singleKey = text.length === 1;
-		const query = text.toLowerCase();
-		for (let index = 0; index < nodes.length; index++) {
-			const node = nodes[(currentIndex + index + 1) % nodes.length];
-			if (!node) continue;
-			if (singleKey && node.value === currentValue) continue;
-			if (node.disabled) continue;
-			if (node.label.toLowerCase().startsWith(query)) return node.value;
-		}
-		return undefined;
-	}
-
-	return {
-		get keysSoFar() {
-			return keysSoFar;
-		},
-		search(key: string, currentValue?: string | null): string | undefined {
-			const combined = keysSoFar + key;
-			const repeated =
-				combined.length > 1 && Array.from(combined).every((char) => char === combined[0]);
-			const value = match(repeated ? (combined[0] as string) : combined, currentValue);
-			update(combined);
-			return value;
-		},
-		clear: reset
-	};
-}
-
 /** Builds the collection Ark expects from a plain item array. */
 export function createSelectCollection<T extends CollectionItem = CollectionItem>(
 	options: SelectCollectionOptions<T>
@@ -290,7 +238,10 @@ export function createSelectCollection<T extends CollectionItem = CollectionItem
 	const toValue = options.itemToValue ?? ((item: T) => item.value);
 	const toString = options.itemToString ?? ((item: T) => item.label ?? item.value);
 	const toDisabled = options.isItemDisabled ?? ((item: T) => Boolean(item.disabled));
-	const search = createSearch<T>(() => collection.items);
+	const search = createTypeahead({
+		getItems: () =>
+			collection.items.map((node) => ({ value: node.value, label: node.label, disabled: node.disabled }))
+	});
 
 	const nodes = (): CollectionNode<T>[] => collection.items;
 
@@ -341,7 +292,7 @@ export function createSelectCollection<T extends CollectionItem = CollectionItem
 		getItemDisabled: toDisabled,
 		getNextValue: (value, amount = 1, loop = false) => step(value, Math.abs(amount), loop),
 		getPreviousValue: (value, amount = 1, loop = false) => step(value, -Math.abs(amount), loop),
-		search: (key, currentValue) => search.search(key, currentValue),
+		search: (key: string, currentValue?: string | null) => search.onKey(key, currentValue),
 		stringifyItem(item) {
 			return item == null ? undefined : toString(item);
 		},
@@ -400,15 +351,14 @@ export function createSelect<T extends CollectionItem = CollectionItem>(
 		getProps().ids?.itemGroupLabel?.(id) ?? `select:${uid}:optgroup-label:${id}`;
 
 	const collection = (): SelectCollection<T> => getProps().collection ?? fallback;
-	const typeahead = createSearch<T>(() =>
-		collection().items.map((item, index) => ({
-			item,
-			value: collection().getItemValue(item),
-			label: collection().getItemLabel(item),
-			disabled: collection().getItemDisabled(item),
-			index
-		}))
-	);
+	const typeahead = createTypeahead({
+		getItems: () =>
+			collection().items.map((item) => ({
+				value: collection().getItemValue(item),
+				label: collection().getItemLabel(item),
+				disabled: collection().getItemDisabled(item)
+			}))
+	});
 
 	const dir = () => getProps().dir ?? undefined;
 	const disabled = () => Boolean(getProps().disabled);
@@ -625,8 +575,8 @@ export function createSelect<T extends CollectionItem = CollectionItem>(
 				return;
 			case ' ':
 				event.preventDefault();
-				if (typeahead.keysSoFar !== '') {
-					const next = typeahead.search(event.key, highlighted);
+				if (typeahead.typing) {
+					const next = typeahead.onKey(event.key, highlighted);
 					if (next != null) setHighlighted(next);
 					return;
 				}
@@ -639,7 +589,7 @@ export function createSelect<T extends CollectionItem = CollectionItem>(
 		if (target && target instanceof Element && isEditable(target)) return;
 		if (isPrintableKey(event)) {
 			event.preventDefault();
-			const next = typeahead.search(event.key, highlighted);
+			const next = typeahead.onKey(event.key, highlighted);
 			if (next != null) setHighlighted(next);
 		}
 	}
@@ -704,8 +654,8 @@ export function createSelect<T extends CollectionItem = CollectionItem>(
 			case ' ':
 				event.preventDefault();
 				if (open()) return;
-				if (typeahead.keysSoFar !== '') {
-					const next = typeahead.search(event.key, values()[0]);
+				if (typeahead.typing) {
+					const next = typeahead.onKey(event.key, values()[0]);
 					if (next != null) commit([next]);
 					return;
 				}
@@ -719,7 +669,7 @@ export function createSelect<T extends CollectionItem = CollectionItem>(
 		if (isPrintableKey(event)) {
 			event.preventDefault();
 			const multipleSelection = multiple();
-			const next = typeahead.search(event.key, multipleSelection ? null : values()[0]);
+			const next = typeahead.onKey(event.key, multipleSelection ? null : values()[0]);
 			if (next != null && !multipleSelection) commit([next]);
 		}
 	}

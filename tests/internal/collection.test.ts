@@ -45,12 +45,13 @@ describe('typeahead', () => {
 		vi.useRealTimers();
 	});
 
-	test('a typed sequence narrows to the label prefix', () => {
+	test('keys accumulate into a prefix that can advance past the current item', () => {
 		vi.useFakeTimers();
 		const typeahead = createTypeahead({ getItems: () => items });
 		expect(typeahead.onKey('a')).toBe('apple');
-		expect(typeahead.onKey('p', 'apple')).toBe('apple');
-		expect(typeahead.onKey('r', 'apple')).toBe('apricot');
+		// Zag scans from the item after the current one, so "ap" reaches apricot rather than apple.
+		expect(typeahead.onKey('p', 'apple')).toBe('apricot');
+		expect(typeahead.onKey('r', 'apricot')).toBe('apricot');
 		vi.useRealTimers();
 	});
 

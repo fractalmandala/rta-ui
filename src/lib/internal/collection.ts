@@ -93,71 +93,94 @@ export function createCollection<T extends CollectionItem>(options: CollectionOp
 
 export type CollectionApi<T extends CollectionItem> = ReturnType<typeof createCollection<T>>;
 
-export interface TypeaheadOptions<T extends CollectionItem> {
-	getItems: () => { value: string; label: string; disabled?: boolean }[];
+export interface TypeaheadItem {
+	value: string;
+	label: string;
+	disabled?: boolean;
+}
+
+export interface TypeaheadOptions {
+	getItems: () => TypeaheadItem[];
+	/** Defaults to enabled; families pass their `typeahead` prop here. */
 	enabled?: () => boolean;
+	/** How long the accumulated keys stay meaningful, in milliseconds. */
 	timeout?: number;
 }
 
-// Zag's typeahead: printable characters build a search string that resets after `timeout`. A
-// repeated single character cycles through the items that start with it.
-export function createTypeahead<T extends { value: string; label: string; disabled?: boolean }>(
-	options: TypeaheadOptions<T>
-) {
-	// Plain variable, not `$state`: this module is a `.ts`, and callers hold the highlighted value in
-	// their own reactive state. `search` is exposed for tests and debugging only.
+export interface TypeaheadApi {
+	/** The keys typed inside the current window, exposed for tests and debugging. */
+	readonly search: string;
+	/** Whether a search string is currently buffered. */
+	readonly typing: boolean;
+	/** Feed one printable key; returns the value to highlight, if any. */
+	onKey(key: string, current?: string | null): string | undefined;
+	clear(): void;
+}
+
+// Zag's `match`: a plain case-insensitive prefix test, deliberately not collation-aware.
+const matches = (label: string, query: string) => label.toLowerCase().startsWith(query.toLowerCase());
+
+/**
+ * Zag's typeahead, shared by every collection family. Printable keys accumulate into a search string
+ * that resets after `timeout`; the scan starts just past the current item and wraps, so a repeated
+ * character cycles through its matches instead of sticking; disabled items are skipped.
+ */
+export function createTypeahead(options: TypeaheadOptions): TypeaheadApi {
+	// A plain variable, not `$state`: this is a `.ts` module, and callers keep the highlighted value
+	// in their own reactive state.
 	let search = '';
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
-	function clear() {
+	const clear = () => {
 		search = '';
 		if (timer !== undefined) clearTimeout(timer);
 		timer = undefined;
-	}
+	};
 
-	function schedule() {
+	const schedule = () => {
 		if (timer !== undefined) clearTimeout(timer);
-		timer = setTimeout(() => {
-			search = '';
-			timer = undefined;
-		}, options.timeout ?? 350);
-	}
+		timer = setTimeout(clear, options.timeout ?? 350);
+	};
 
-	function match(query: string, current?: string): string | undefined {
-		const items = options.getItems().filter((item) => !item.disabled);
+	function match(query: string, current?: string | null): string | undefined {
+		const items = options.getItems();
 		if (!items.length) return undefined;
-		const lower = query.toLowerCase();
-		const repeated = query.length > 1 && new Set(lower).size === 1;
 
-		if (repeated) {
-			const prefix = lower[0];
-			const candidates = items.filter((item) => item.label.toLowerCase().startsWith(prefix));
-			if (!candidates.length) return undefined;
-			const index = candidates.findIndex((item) => item.value === current);
-			return candidates[(index + 1) % candidates.length]?.value;
+		const currentIndex = current == null ? -1 : items.findIndex((item) => item.value === current);
+		const singleKey = query.length === 1;
+
+		for (let offset = 0; offset < items.length; offset += 1) {
+			const item = items[(currentIndex + offset + 1) % items.length];
+			if (!item) continue;
+			if (singleKey && item.value === current) continue;
+			if (item.disabled) continue;
+			if (matches(item.label, query)) return item.value;
 		}
-
-		const found = items.find((item) => item.label.toLowerCase().startsWith(lower));
-		return found?.value;
+		return undefined;
 	}
 
 	return {
 		get search() {
 			return search;
 		},
-		/** Feed a key press; returns the value to highlight, if any. */
-		onKey(key: string, current?: string): string | undefined {
+		get typing() {
+			return search.length > 0;
+		},
+		onKey(key, current) {
 			if (options.enabled?.() === false) return undefined;
 			if (key.length !== 1 || key === ' ') return undefined;
-			// A repeated character keeps its own search string so `match` cycles through its matches.
+
 			search += key;
 			schedule();
-			const result = match(search, current);
-			if (result === undefined) {
-				search = key;
-				return match(key, current);
-			}
-			return result;
+
+			// One character repeated collapses to that character, which is what makes "aa" cycle.
+			const repeated = search.length > 1 && Array.from(search).every((char) => char === search[0]);
+			const query = repeated ? (search[0] as string) : search;
+			const result = match(query, current);
+			if (result !== undefined) return result;
+
+			search = key;
+			return match(key, current);
 		},
 		clear
 	};

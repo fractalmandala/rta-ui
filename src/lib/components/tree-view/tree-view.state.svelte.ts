@@ -1,3 +1,4 @@
+import { createTypeahead } from '../../internal/collection';
 import { createContext } from '../../internal/context';
 import { dataAttr } from '../../internal/dom';
 import {
@@ -206,51 +207,6 @@ function isEditableElement(target: EventTarget | null): boolean {
 
 function isAnchorElement(target: EventTarget | null): boolean {
 	return (target as HTMLElement | null)?.matches?.('a[href]') ?? false;
-}
-
-// `internal/collection.ts#createTypeahead` calls `$state` from a plain `.ts` module, which throws
-// `rune_outside_svelte` at runtime, so the search buffer lives here. Matching follows Zag's
-// getByText: search forward from the focused node, wrap, and cycle when one character repeats.
-function createTreeTypeahead(getItems: () => { value: string; label: string }[]) {
-	let search = '';
-	let timer: ReturnType<typeof setTimeout> | undefined;
-
-	function clear() {
-		search = '';
-		if (timer !== undefined) clearTimeout(timer);
-		timer = undefined;
-	}
-
-	function match(query: string, current?: string): string | undefined {
-		const items = getItems();
-		if (!items.length) return undefined;
-		const currentIndex = current == null ? -1 : items.findIndex((item) => item.value === current);
-		const ordered =
-			currentIndex < 0
-				? items
-				: [...items.slice(currentIndex), ...items.slice(0, currentIndex)];
-		const text = query.toLowerCase();
-		const candidates = text.length === 1 ? ordered.filter((item) => item.value !== current) : ordered;
-		return candidates.find((item) => item.label.toLowerCase().startsWith(text))?.value;
-	}
-
-	return {
-		get typing() {
-			return search.length > 0;
-		},
-		onKey(key: string, current?: string): string | undefined {
-			if (key.length !== 1 || key === ' ') return undefined;
-			const next = search + key;
-			search = next.length > 1 && new Set(next).size === 1 ? key : next;
-			if (timer !== undefined) clearTimeout(timer);
-			timer = setTimeout(clear, 350);
-			const result = match(search, current);
-			if (result !== undefined) return result;
-			search = key;
-			return match(key, current);
-		},
-		clear
-	};
 }
 
 function raf(callback: () => void): void {
@@ -680,7 +636,7 @@ export function createTreeView<T extends TreeNode = TreeNode>(
 		);
 	}
 
-	const typeahead = createTreeTypeahead(typeaheadItems);
+	const typeahead = createTypeahead({ getItems: typeaheadItems });
 
 	const isTypingAhead = () => typeahead.typing;
 

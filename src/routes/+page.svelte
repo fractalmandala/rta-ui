@@ -67,7 +67,6 @@
   import DatePickerDemo from './demos/DatePicker.svelte';
   import DateInputDemo from './demos/DateInput.svelte';
   import ColorPickerDemo from './demos/ColorPicker.svelte';
-  import ChartDemo from './demos/Chart.svelte';
   import FloatingPanelDemo from './demos/FloatingPanel.svelte';
   import CommandPaletteDemo from './demos/CommandPalette.svelte';
   import ToastDemo from './demos/Toast.svelte';
@@ -115,7 +114,6 @@
       title: 'Content',
       demos: [
         { name: 'Carousel', note: 'Slides with autoplay, loops and swipe.', component: CarouselDemo },
-        { name: 'Chart', note: 'Line, bar and area marks with axes and a tooltip.', component: ChartDemo },
         { name: 'Card', note: 'Header, action, media, body and footer parts.', component: CardDemo },
         { name: 'List', note: 'Ordered, unordered and muted lists with indicators.', component: ListDemo },
         { name: 'Table', note: 'Caption, header, body, footer and a scroll area.', component: TableDemo },
@@ -210,7 +208,7 @@
 <main>
   <header>
     <h1>rta ui</h1>
-    <p>Eighty-eight dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
+    <p>Eighty-seven dependency-free Svelte 5 components. Ark-compatible parts, CSS Modules styling.</p>
   </header>
 
   <nav>

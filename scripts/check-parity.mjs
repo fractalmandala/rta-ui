@@ -79,11 +79,6 @@ const ACCEPTED = {
     reason:
       'the hidden input is an Ark internal upstream; here it is a public part so form submission stays reachable',
   },
-  chart: {
-    removed: ['slot:chart-tooltip-text'],
-    reason:
-      'the tooltip body is always structured rows here, so there is no plain-text tooltip slot to emit',
-  },
   lightbox: {
     added: [
       'slot:lightbox-caption',
@@ -101,11 +96,7 @@ const ACCEPTED = {
       'upstream relies on the carousel for navigation chrome; here the gallery navigation, thumbnails and zoom are public parts of the lightbox itself',
   },
   sidebar: {
-    added: [
-      'slot:sidebar-input',
-      'slot:sidebar-rail',
-      'slot:sidebar-separator',
-    ],
+    added: ['slot:sidebar-input', 'slot:sidebar-rail', 'slot:sidebar-separator'],
     reason:
       'the cookie input, the edge rail and the separator are upstream internals; here they are public parts so a sidebar can be composed explicitly',
   },

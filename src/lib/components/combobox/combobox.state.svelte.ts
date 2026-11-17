@@ -1,4 +1,9 @@
-import { createCollection, isPrintableKey, type CollectionItem } from '../../internal/collection';
+import {
+	createCollection,
+	createTypeahead,
+	isPrintableKey,
+	type CollectionItem
+} from '../../internal/collection';
 import { createContext } from '../../internal/context';
 import { dataAttr } from '../../internal/dom';
 import {
@@ -276,54 +281,6 @@ function toggleValue(values: string[], value: string): string[] {
 	return values.includes(value) ? values.filter((entry) => entry !== value) : values.concat(value);
 }
 
-// `internal/collection.ts` is a plain `.ts` module, so its `$state`-based `createTypeahead` throws
-// `rune_outside_svelte` at runtime; the search buffer lives here instead.
-function createComboboxTypeahead(
-	getItems: () => { value: string; label: string; disabled: boolean }[]
-) {
-	let search = '';
-	let timer: ReturnType<typeof setTimeout> | undefined;
-
-	function clear() {
-		search = '';
-		if (timer !== undefined) clearTimeout(timer);
-		timer = undefined;
-	}
-
-	function schedule() {
-		if (timer !== undefined) clearTimeout(timer);
-		timer = setTimeout(clear, 350);
-	}
-
-	function match(query: string, current?: string): string | undefined {
-		const items = getItems().filter((item) => !item.disabled);
-		if (!items.length) return undefined;
-		const lower = query.toLowerCase();
-		if (query.length > 1 && new Set(lower).size === 1) {
-			const prefix = lower[0];
-			const candidates = items.filter((item) => item.label.toLowerCase().startsWith(prefix));
-			if (!candidates.length) return undefined;
-			const index = candidates.findIndex((item) => item.value === current);
-			return candidates[(index + 1) % candidates.length]?.value;
-		}
-		return items.find((item) => item.label.toLowerCase().startsWith(lower))?.value;
-	}
-
-	return {
-		onKey(key: string, current?: string): string | undefined {
-			if (key.length !== 1 || key === ' ') return undefined;
-			const next = search + key;
-			search = next.length > 1 && new Set(next.toLowerCase()).size === 1 ? key : next;
-			schedule();
-			const result = match(search, current);
-			if (result !== undefined) return result;
-			search = key;
-			return match(key, current);
-		},
-		clear
-	};
-}
-
 function getModifiers(event: {
 	shiftKey: boolean;
 	ctrlKey: boolean;
@@ -405,7 +362,7 @@ export function createCombobox(props: () => UseComboboxProps, uid: string): Comb
 		isItemDisabled: toDisabled
 	});
 
-	const typeahead = createComboboxTypeahead(() => collection.items);
+	const typeahead = createTypeahead({ getItems: () => collection.items });
 
 	const initialValue = prop('value') ?? prop('defaultValue') ?? [];
 
